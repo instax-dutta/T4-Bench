@@ -13,11 +13,12 @@ then visit `http://127.0.0.1:8000/`.
 ## Stack
 - HTML + CSS + vanilla JavaScript. No framework, no web fonts, no chart library, no build step.
 - One generated `data.js` (~6 KB) read from the unified benchmark CSV/JSON files.
-- Four short pre-rendered clips (MP4, ~140 KB total) with poster frames. Videos load only when scrolled into view and pause offscreen.
+- Eight short pre-rendered diagrams (MP4) with poster frames, wrapped in an `<mx-clip>` web component that lazy-loads, plays in view and pauses offscreen.
 - Total deployable size: about 660 KB including posters, clips and storyboards.
 
 ## Data pipeline
 ```
+python3 ../scripts/extract_ruffbench.py
 python3 scripts/build_data.py
 python3 scripts/check_data.py   # asserts headline numbers match the rows
 ```
@@ -32,7 +33,7 @@ reads:
 and writes `data.js`. Re-run it if the source data changes.
 
 ## Animations
-Source scenes are in `manim/scenes.py`. Render with the local virtual environment:
+Source scenes are in `manim/scenes.py` (eight diagrams covering every chart category). Render with the local virtual environment:
 ```
 cd manim
 ../.venv/bin/manimgx render scenes.py ImageRace -r 960x540 -o ../assets/image-race.mp4

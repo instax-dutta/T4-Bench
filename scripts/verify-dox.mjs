@@ -46,7 +46,7 @@ for (const child of children) {
   }
 }
 if (children.length < 3) failures.push(`only ${children.length} AGENTS.md found`);
-if (rails !== 3) failures.push(`expected 3 nested project rails, found ${rails}`);
+if (rails !== 4) failures.push(`expected 4 nested project rails, found ${rails}`);
 
 if (failures.length) {
   console.error(`DOX FAIL:\n  - ${failures.join('\n  - ')}`);

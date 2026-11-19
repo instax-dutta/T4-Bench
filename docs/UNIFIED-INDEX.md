@@ -10,6 +10,7 @@ folders remain untouched; this is a sorted, read-mostly copy.
 |---|---|---|
 | Image models | `benchmarks/image-models/docs/BENCHMARK-RESULTS.md` | `benchmarks/image-models/benchmark/results.csv`, `optimization-results.csv`, `server-archive/` |
 | Video generation | `benchmarks/video-generation/docs/BENCHMARK-RESULTS.md` | `benchmarks/video-generation/benchmark/results.csv`, `server-archive/` |
+| LLM / agents / training | `benchmarks/llm-and-training/README.md` | `benchmarks/llm-and-training/extracted.json`, `sources/` |
 | MiniMax-H3-Image | `benchmarks/minimax-h3-image/docs/BENCHMARK-RESULTS.md` | `benchmarks/minimax-h3-image/benchmark/results-summary.csv`, `server-archive/` |
 
 ## Cross-project verdicts
@@ -19,6 +20,9 @@ into one score.
 
 | Task | Winner | Measured result | Protocol |
 |---|---|---|---|
+| Chat, fastest | LFM2.5-8B-A1B | 119 tokens/second | warm Ollama, Q4_K_M, 32K context |
+| Agent, best small | Spark 4B | 3/3 agent tasks passed | native tool protocol, one T4 each |
+| Fine-tuning, leanest | Unsloth NF4 | 7.1 GB vs 14.9 GB stock | 8B QLoRA, same data and seed |
 | Image, best of both | FLUX.2 klein 4B | 374 images/hour, CLIP 0.3924 | 1024x1024, batch 4 per GPU on both T4s, fixed prompt/seeds |
 | Image, highest alignment runner-up | SDXL 1.0 base | CLIP 0.3894, 107 images/hour | same engine and resolution |
 | Video, best of both | LTX-Video 2B 0.9.8 distilled | 27 s per warm 49-frame clip at 4 steps, ~11 GiB VRAM, CLIP 0.215-0.234 | 768x512, warm process, fixed prompt |

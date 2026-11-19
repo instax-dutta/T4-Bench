@@ -150,3 +150,62 @@ class MemoryWall(m.Scene):
         note.to_corner(m.DR, buff=0.5)
         self.play(m.FadeIn(note))
         self.wait(0.6)
+
+
+def hbars(scene, items, maxv, width=7.6, y0=1.1, step=0.78, note=None):
+    """Draw a ranked horizontal bar chart with labels and value annotations."""
+    for i, (name, value, label, col) in enumerate(items):
+        y = y0 - i * step
+        w = value / maxv * width
+        bar = m.Rectangle(width=w, height=0.42, color=col, fill_color=col,
+                          fill_opacity=1, stroke_width=0)
+        bar.move_to([-5.6 + w / 2, y, 0])
+        scene.play(m.GrowFromEdge(bar, m.LEFT), run_time=0.35)
+        txt = m.Text(name, font_size=17, weight="BOLD").set_color(MUTED)
+        txt.move_to([-5.6, y + 0.36, 0]).align_to([-5.6, 0, 0], m.LEFT)
+        val = m.Text(label, font_size=20, weight="BOLD").set_color(col)
+        val.move_to([-5.6 + w + 0.85, y, 0])
+        scene.add(txt, val)
+    if note:
+        n = m.Text(note, font_size=16).set_color(MUTED)
+        n.to_corner(m.DR, buff=0.55)
+        scene.play(m.FadeIn(n))
+
+
+class LlmSpeed(m.Scene):
+    def construct(self):
+        header(self, "01 / CHAT MODELS", "Replies per second, warm model")
+        hbars(self, [("LFM 8B A1B", 119, "119", VERM), ("Spark 1.7B", 100, "100", TEAL),
+                     ("Qwen Coder 30B", 71, "71", GREEN), ("Spark 4B", 54, "54", TEAL),
+                     ("Gemma 4 12B", 21, "21", INK), ("Qwen 27B", 13, "13", MUTED)],
+              130, note="higher is better · one or two T4s")
+
+
+class ToolEval(m.Scene):
+    def construct(self):
+        header(self, "02 / TOOL USE", "How well the model used tools")
+        hbars(self, [("Overall quality", 73, "73", VERM), ("Responsiveness", 74, "74", TEAL),
+                     ("Deployability", 73, "73", GREEN), ("Weakest category", 33, "33", MUTED)],
+              100, note="15 tasks · score out of 100")
+
+
+class AgentTasks(m.Scene):
+    def construct(self):
+        header(self, "03 / AGENTS", "Agent tasks completed")
+        hbars(self, [("Spark 1.7B", 2, "2 of 3", TEAL), ("Spark 4B", 3, "3 of 3", VERM)],
+              3, width=5.5, note="same tasks, one T4 each")
+
+
+class TernarySpeed(m.Scene):
+    def construct(self):
+        header(self, "04 / LONG CONTEXT", "Ternary 27B reply speed")
+        hbars(self, [("One T4", 15.1, "15.1", TEAL), ("Two T4s", 22.9, "22.9", VERM)],
+              25, width=5.5, note="tokens per second · higher is better")
+
+
+class TuneMemory(m.Scene):
+    def construct(self):
+        header(self, "05 / FINE-TUNING", "Memory used to train an 8B model")
+        hbars(self, [("Unsloth", 7.1, "7.1 GB", GREEN), ("Soup + Unsloth", 7.1, "7.1 GB", TEAL),
+                     ("Stock transformers", 14.9, "14.9 GB", MUTED), ("Stock, blocked", 14.8, "OOM", VERM)],
+              16, note="same model, data and settings")

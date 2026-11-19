@@ -1,179 +1,189 @@
 (function () {
   const D = window.BENCH_DATA;
-  const $ = (s, r) => (r || document).querySelector(s);
-  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const $ = s => document.querySelector(s);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    new URLSearchParams(location.search).get('reduced') === '1';
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
-  const colors = { 'flux2-klein-4b': 'var(--verm)', 'qwen-image-2.1-viggle-4step': 'var(--teal)', 'z-image-turbo': 'var(--green)', 'sdxl': 'var(--ink)' };
-  const videoColors = { 'cog_s50_f49': 'var(--ink)', 'ltx2b_s8_f121': 'var(--verm)', 'ltx_multi3': 'var(--teal)', 'ltx_multi3_s4_f49': 'var(--green)' };
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    || new URLSearchParams(location.search).get('reduced') === '1';
 
-  function fillMachine() {
-    const facts = [['GPUs', D.server.gpus + '× ' + D.server.gpu], ['Architecture', D.server.arch],
-      ['Host RAM', D.server.ramGiB + ' GB'], ['CUDA', D.server.cuda], ['PyTorch', D.server.torch]];
-    const dl = $('#machine-facts');
-    facts.forEach(([k, v]) => { dl.append(el('dt', '', k), el('dd', '', v)); });
-    $('#hero-image-name').textContent = D.winners.image;
-    $('#hero-image-number').textContent = D.winners.imageThroughput;
-    $('#strip-image').textContent = D.winners.imageThroughput;
-    $('#strip-video').textContent = D.winners.steadyClipSeconds;
-    const ratio = D.winners.cogSeconds / D.winners.steadyClipSeconds;
-    $('#strip-ratio').textContent = Math.round(ratio) + '×';
-    $('#strip-ratio-label').textContent = Math.round(ratio) + '× slower CogVideoX for the same 49 frames';
+  function countUp(node, value, decimals, suffix) {
+    if (reduced) { node.textContent = value.toFixed(decimals) + suffix; return; }
+    const t0 = performance.now(), dur = 650;
+    const step = now => {
+      const p = Math.max(0, Math.min(1, (now - t0) / dur));
+      const e = 1 - Math.pow(1 - p, 3);
+      node.textContent = (value * e).toFixed(decimals) + (p === 1 ? suffix : '');
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   function barRow(name, value, display, max, color) {
     const row = el('div', 'bar-row');
     row.append(el('div', 'bar-name', name));
-    const track = el('div', 'bar-track');
-    const fill = el('div', 'bar-fill');
+    const track = el('div', 'bar-track'), fill = el('div', 'bar-fill');
     fill.style.setProperty('--bar-color', color);
     fill.dataset.value = String(Math.min(100, value / max * 100));
     track.append(fill);
     const val = el('div', 'bar-value', reduced ? display : '0');
-    val.dataset.num = String(value);
     const m = display.match(/\.(\d+)/);
-    val.dataset.decimals = String(m ? m[1].length : 0);
-    val.dataset.suffix = display.replace(/[0-9.]/g, '').trim();
+    const decimals = m ? m[1].length : 0;
+    const suffix = display.replace(/[0-9.]/g, '').trim();
     row.append(track, val);
+    row._anim = () => {
+      fill.style.width = fill.dataset.value + '%';
+      countUp(val, value, decimals, suffix ? ' ' + suffix : '');
+    };
     return row;
   }
-  function countTo(node, target, decimals) {
-    if (reduced) { node.textContent = target.toFixed(decimals) + (node.dataset.suffix ? ' ' + node.dataset.suffix : ''); return; }
-    const start = performance.now(), dur = 720;
-    function step(now) {
-      const p = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      node.textContent = (target * eased).toFixed(decimals) + (p === 1 && node.dataset.suffix ? ' ' + node.dataset.suffix : '');
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  function animateBars(container) {
-    $$('.bar-row', container).forEach((row, i) => {
-      const fill = $('.bar-fill', row), val = $('.bar-value', row);
-      const run = () => {
-        fill.style.width = fill.dataset.value + '%';
-        countTo(val, Number(val.dataset.num), Number(val.dataset.decimals));
-      };
-      if (reduced) run(); else setTimeout(run, i * 70);
+
+  function bars(id, items, max, color, display) {
+    const c = $(id); if (!c) return;
+    c.innerHTML = '';
+    items.forEach((it, i) => {
+      const row = barRow(it.label, it.value, display ? display(it.value, it) : String(it.value),
+                         max, color(it, i));
+      c.append(row);
+      if (reduced) row._anim(); else setTimeout(row._anim, i * 60);
     });
   }
-  function renderImageBars() {
-    const c = $('#image-bars'); c.innerHTML = '';
-    const metrics = {
-      throughput: { get: m => m.bestThroughput, max: 400, fmt: v => v + ' img/h', note: 'Best measured configuration for each model on both GPUs.' },
-      clip: { get: m => m.qualityScore, max: 100, fmt: v => v + ' pts', note: 'A simple 0-100 score for how well the picture matches the prompt. Higher is better.' },
-      vram: { get: m => Math.round(m.peakVramMiB / 1024), max: 8, fmt: v => v + ' GB', note: 'Graphics memory used on one GPU. Lower leaves more room to work.' }
-    };
-    const metric = metrics[$('.tabs button[aria-selected=true]').dataset.metric];
-    D.imageModels.forEach(m => {
-      const v = metric.get(m);
-      c.append(barRow(m.name, v, metric.fmt(v), metric.max, colors[m.id] || 'var(--ink)'));
-    });
-    $('#image-note').textContent = metric.note;
-    animateBars(c);
-  }
-  function renderQualityBars() {
-    const c = $('#quality-bars'); c.innerHTML = '';
-    D.imageModels.slice().sort((a, b) => b.qualityScore - a.qualityScore).forEach(m => {
-      c.append(barRow(m.name, m.qualityScore, m.qualityScore + ' pts', 100,
-        colors[m.id] || 'var(--ink)'));
-    });
-    animateBars(c);
-  }
-  function renderVideoBars() {
-    const c = $('#video-bars'); c.innerHTML = '';
-    D.videoModels.forEach(m => {
-      const label = m.model + ' · ' + m.frames + 'f' + (m.clips > 1 ? ' · ' + m.clips + ' clips' : '');
-      c.append(barRow(label, m.perClip, m.perClip + ' s/clip', 1100,
-        videoColors[m.id] || 'var(--ink)'));
-    });
-    c.append(el('p', 'chart-note', 'Shorter is better. Warm rows show the median per-clip time; the total wall time for the three-clip runs is in the table.'));
-    animateBars(c);
-  }
-  function renderH3Bars() {
-    const c = $('#h3-bars'); c.innerHTML = '';
-    const items = [['BF16', 126.0, 'var(--ink)'], ['FP8', 64.1, 'var(--amber)'],
-      ['4-bit', 33.1, 'var(--green)'], ['One T4', 15, 'var(--verm)']];
-    items.forEach(([n, v, col]) => c.append(barRow(n, v, v + ' GB', 140, col)));
-    animateBars(c);
-  }
+
   function table(id, headers, rows) {
-    const t = $(id); t.innerHTML = '';
-    const thead = el('thead'), tr = el('tr');
-    headers.forEach((h, i) => { const th = el('th', i ? 'num' : '', h); tr.append(th); });
-    thead.append(tr); t.append(thead);
-    const tb = el('tbody');
-    rows.forEach(r => { const row = el('tr'); r.forEach((v, i) => row.append(el('td', i ? 'num' : '', String(v)))); tb.append(row); });
-    t.append(tb);
+    const t = $(id); if (!t) return;
+    t.innerHTML = '';
+    const h = el('tr'); headers.forEach(x => h.append(el('th', '', x)));
+    t.append(el('thead')); t.querySelector('thead').append(h);
+    const body = el('tbody');
+    rows.forEach(r => { const tr = el('tr'); r.forEach((v, i) => tr.append(el('td', i ? 'num' : '', v))); body.append(tr); });
+    t.append(body);
   }
-  function renderTables() {
-    table('#image-table', ['Model', 'Steps', 'Seconds per image', 'Images per hour', 'Graphics memory', 'Quality score'],
-      D.imageModels.map(m => [m.name, m.steps, m.coldMedian, m.bestThroughput, Math.round(m.peakVramMiB/1024) + ' GB', m.qualityScore]));
-    table('#video-table', ['Configuration', 'Frames', 'Clips', 'Seconds per clip', 'Total seconds', 'Graphics memory', 'Quality score'],
-      D.videoModels.map(m => [m.model, m.frames, m.clips, m.perClip, m.wall, Math.round(m.peakVramMiB/1024) + ' GB', m.qualityScore]));
-    table('#h3-table', ['Model precision', 'Memory needed (GB)', 'Fits on one T4'],
-      D.h3.weightsGiB.map(w => [w.name, w.gib, w.gib <= 15 ? 'yes' : 'no']));
+
+  function pctScore(s) {
+    const str = String(s);
+    if (str.includes('/') && str.split('/').length === 2) { const [a, b] = str.split('/').map(Number); return Math.round(a / b * 100); }
+    if (str.includes('%')) return Number(str.replace(/[^0-9.]/g, ''));
+    return null;
   }
-  function renderNotes() {
-    $('#verdicts').textContent = 'Image: ' + D.winners.image + ' is both fastest (' + D.winners.imageThroughput +
-      ' images/hour) and best at following the prompt (' + Math.round(D.winners.imageClip * 100) + '/100). Video: the small LTX 2B model is the practical winner at ' +
-      D.winners.steadyClipSeconds + ' seconds per short clip. CogVideoX follows the prompt slightly better but takes about 38 times longer.';
-    const ul = $('#limits'); D.limitations.forEach(t => ul.append(el('li', '', t)));
-    $('#sources').textContent = 'Authoritative tables: benchmarks/image-models/benchmark, benchmarks/video-generation/benchmark, benchmarks/minimax-h3-image/benchmark.';
-  }
-  function moveIndicator() {
-    const tabs = $('.tabs'), active = $('.tabs button[aria-selected=true]'), ind = $('.tab-indicator');
-    if (!active) return;
-    ind.style.width = active.offsetWidth + 'px';
-    ind.style.transform = 'translateX(' + active.offsetLeft + 'px)';
-  }
-  function initTabs() {
-    const params = new URLSearchParams(location.search);
-    const requested = params.get('metric') || (['throughput', 'clip', 'vram'].includes(params.get('state')) ? params.get('state') : null);
-    if (requested) {
-      const match = $$('.tabs button').find(b => b.dataset.metric === requested);
-      if (match) {
-        $$('.tabs button').forEach(x => x.setAttribute('aria-selected', 'false'));
-        match.setAttribute('aria-selected', 'true');
-      }
-    }
-    $$('.tabs button').forEach(b => b.addEventListener('click', () => {
-      $$('.tabs button').forEach(x => x.setAttribute('aria-selected', 'false'));
-      b.setAttribute('aria-selected', 'true');
-      moveIndicator(); renderImageBars();
+
+  function render() {
+    const hot = 'var(--hot)', cool = 'var(--cool)', green = 'var(--green)', ink = 'var(--ink)';
+    $('#machine').textContent = '2× Tesla T4 15 GB · 31 GB RAM · 4 CPU cores · CUDA 13 · PyTorch 2.11 · sm_75 Turing (no BF16 or FP8 hardware)';
+
+    const answers = [
+      { label: 'Fastest chat model', name: 'LFM2.5-8B-A1B', big: '119', unit: 'tokens / second' },
+      { label: 'Best small agent', name: 'Spark 4B', big: '3/3', unit: 'agent tasks passed' },
+      { label: 'Leanest fine-tune', name: 'Unsloth NF4', big: '7.1', unit: 'GB graphics memory' },
+      { label: 'Fastest image model', name: 'FLUX.2 klein 4B', big: '374', unit: 'images / hour' },
+    ];
+    answers.forEach(a => {
+      const d = el('div', 'answer');
+      d.append(el('div', 'label', a.label), el('strong', '', a.name),
+        el('span', 'big', a.big), el('span', 'unit', ' ' + a.unit));
+      $('#answers').append(d);
+    });
+
+    // Chat models
+    const llm = D.llm.slice().sort((a, b) => b.decodeTokS - a.decodeTokS);
+    bars('#llm-bars', llm.map(m => ({ label: m.model, value: m.decodeTokS, m })),
+      130, (it, i) => i === 0 ? hot : cool, v => v + ' tok/s');
+    table('#llm-table', ['Model', 'Reply speed (tok/s)', 'Prompt speed (tok/s)', 'Graphics memory', 'GPUs'],
+      llm.map(m => [m.model, m.decodeTokS, m.prefillTokS || '—', m.vramGB + ' GB', m.gpus]));
+    $('#llm-verdict').textContent = 'LFM2.5-8B-A1B replies about 9× faster than the largest dense model, while using only one of the two GPUs.';
+
+    bars('#concurrency-bars', D.agentConcurrency.map(x => ({ label: x.agents + ' agent' + (x.agents > 1 ? 's' : ''), value: x.agents === 1 ? 71 : 108, extra: x.aggregate })),
+      120, (it, i) => i ? green : cool, (v, it) => it.extra);
+    bars('#tooleval-bars', D.toolEval.map(x => ({ label: x.metric, value: pctScore(x.score) || 0, raw: x.score }))
+        .filter(x => x.value > 0), 100, (it, i) => i === 3 ? hot : cool,
+        (v, it) => it.raw);
+
+    // Agents
+    const sparkTasks = D.spark.tasks.map(t => ({ label: t.task.split(' ')[0] + ' ' + t.task.split(' ')[1],
+      value: (t.small.match(/PASS/g) || []).length, large: (t.large.match(/PASS/g) || []).length }));
+    bars('#spark-bars', [
+      { label: 'Spark 1.7B', value: 2, hint: 'two tasks passed' },
+      { label: 'Spark 4B', value: 3, hint: 'three tasks passed' }
+    ], 3, (it, i) => i ? hot : cool, (v, it) => it.hint);
+    const tb = D.ternary;
+    bars('#ternary-bars', [
+      { label: 'Ternary 27B · one T4', value: tb.singleT4[0].tg128, hint: 'one GPU' },
+      { label: 'Ternary 27B · two T4s', value: tb.dualT4[0].tg128, hint: 'two GPUs' }
+    ], 25, (it, i) => i ? green : cool, v => v + ' tok/s');
+    table('#spark-table', ['Agent task', 'Spark 1.7B', 'Spark 4B'], D.spark.tasks.map(t => [t.task, t.small, t.large]));
+
+    // Fine-tuning
+    const tune = D.fineTuning.results.map(r => ({
+      label: r.arm.replace(/`/g, '').replace('soup ', ''),
+      value: Math.round(r.peakMiB / 1024 * 10) / 10, raw: r
     }));
-    window.addEventListener('resize', moveIndicator);
-    moveIndicator();
+    bars('#tune-bars', tune, 16, (it, i) => i < 2 ? green : hot,
+      (v, it) => it.raw.result === 'OOM' ? 'OOM' : v + ' GB');
+    table('#tune-table', ['Method', 'Result', 'Graphics memory', 'Training loss'],
+      D.fineTuning.results.map(r => [r.arm.replace(/`/g, ''), r.result, Math.round(r.peakMiB/1024*10)/10 + ' GB',
+        r.loss === null ? '—' : r.loss]));
+    $('#tune-verdict').textContent = 'Unsloth uses 7.1 GB. The stock method needs 14.9 GB and runs out of memory with the import blocked. Quality is the same.';
+
+    // Images
+    bars('#image-bars', D.imageModels.map(m => ({ label: m.name, value: m.bestThroughput })),
+      400, (it, i) => i === 0 ? hot : cool, v => v + ' img/h');
+    table('#image-table', ['Model', 'Seconds per image', 'Images per hour', 'Graphics memory', 'Quality score'],
+      D.imageModels.map(m => [m.name, m.coldMedian, m.bestThroughput, Math.round(m.peakVramMiB/1024) + ' GB', m.qualityScore]));
+
+    // Video
+    bars('#video-bars', D.videoModels.map(m => ({ label: m.model + ' · ' + m.frames + 'f', value: m.perClip })),
+      120, (it, i) => i === 0 ? ink : hot, v => v + ' s');
+    table('#video-table', ['Configuration', 'Frames', 'Seconds per clip', 'Total seconds', 'Graphics memory', 'Quality score'],
+      D.videoModels.map(m => [m.model, m.frames, m.perClip, m.wall, Math.round(m.peakVramMiB/1024) + ' GB', m.qualityScore]));
+
+    // H3
+    bars('#h3-bars', D.h3.weightsGiB.map(w => ({ label: w.name, value: w.gib })),
+      140, (it, i) => i === 3 ? hot : [ink, 'var(--amber)', green][i] || cool,
+      v => v + ' GB');
+    table('#h3-table', ['Model precision', 'Memory needed (GB)', 'Fits one T4'],
+      D.h3.weightsGiB.map(w => [w.name, w.gib, w.gib <= 15 ? 'yes' : 'no']));
+
+    $('#verdicts').textContent = 'On this machine, small and clever beats big: a 6B image model outruns a 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, and a smaller text encoder is the difference between a video model running or being killed.';
+    $('#limits').innerHTML = '';
+    D.limitations.forEach(t => { const li = el('li', '', t); $('#limits').append(li); });
+    $('#sources').textContent = 'Source reports: ' + D.sourceFiles.join(', ') + '. Image and video tables are in their own benchmark folders.';
   }
-  function initTableHints() {
-    $$('.table-wrap').forEach(w => {
-      const h = el('p', 'table-hint', 'Swipe table sideways for all columns →');
+
+  function initHints() {
+    document.querySelectorAll('.table-wrap').forEach(w => {
+      const h = el('p', 'table-hint', 'Swipe sideways for every column →');
       w.after(h);
     });
   }
-  function initReplay() {
-    $$('.replay').forEach(b => b.addEventListener('click', () => {
-      const name = b.dataset.replay;
-      const v = $$('.lazy-video').find(x => (x.dataset.src || '').indexOf(name) >= 0);
-      if (v) { v.currentTime = 0; if (!reduced) v.play().catch(() => {}); }
-    }));
-  }
-  function initClips() {
-    const vids = $$('.lazy-video');
-    if (!('IntersectionObserver' in window)) {
-      vids.forEach(v => { v.src = v.dataset.src; if (!reduced) v.play().catch(() => {}); });
-      return;
-    }
-    const io = new IntersectionObserver(entries => entries.forEach(e => {
-      const v = e.target;
-      if (e.isIntersecting) {
+  class MxClip extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      this.dataset.ready = '1';
+      const v = document.createElement('video');
+      v.className = 'mx-video';
+      v.muted = true; v.playsInline = true; v.preload = 'none';
+      v.poster = this.getAttribute('poster');
+      v.dataset.src = this.getAttribute('src');
+      v.setAttribute('aria-label', this.getAttribute('caption') || 'Benchmark diagram');
+      const btn = document.createElement('button');
+      btn.className = 'mx-replay'; btn.type = 'button'; btn.textContent = 'Replay';
+      const cap = document.createElement('div');
+      cap.className = 'mx-cap'; cap.textContent = this.getAttribute('caption') || '';
+      this.append(btn, v, cap);
+      btn.addEventListener('click', () => {
         if (!v.src) v.src = v.dataset.src;
+        v.currentTime = 0;
         if (!reduced) v.play().catch(() => {});
-      } else if (!v.paused) v.pause();
-    }), { threshold: 0.35 });
-    vids.forEach(v => io.observe(v));
+      });
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(es => es.forEach(e => {
+          if (e.isIntersecting) {
+            if (!v.src) v.src = v.dataset.src;
+            if (!reduced) v.play().catch(() => {});
+          } else if (!v.paused) v.pause();
+        }), { threshold: .35 });
+        io.observe(this);
+      } else { v.src = v.dataset.src; }
+    }
   }
-  fillMachine(); initTabs(); renderImageBars(); renderVideoBars(); renderH3Bars(); renderTables(); renderQualityBars(); renderNotes(); initTableHints(); initReplay(); initClips();
+  if (!customElements.get('mx-clip')) customElements.define('mx-clip', MxClip);
+
+  render(); initHints();
 })();

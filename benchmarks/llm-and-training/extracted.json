@@ -1,0 +1,240 @@
+{
+  "sourceFiles": [
+    "2x Tesla T4 Kaggle Benchmarks.md",
+    "Soup vs Unsloth Fine-Tuning Benchmark Tesla T4 2026.md",
+    "Spark X2.5 Agentic Benchmark Report.md",
+    "Ternary Bonsai 2 27B Benchmark Report.md"
+  ],
+  "hardware": "2x NVIDIA Tesla T4 15 GB, 31 GB RAM, 4 vCPU, Kaggle",
+  "llmScoreboard": [
+    {
+      "model": "LiquidAI LFM2.5-8B-A1B",
+      "sizeGB": 4.9,
+      "vramGB": 5.7,
+      "decodeTokS": 119.0,
+      "prefillTokS": 800.0,
+      "gpus": "1x T4"
+    },
+    {
+      "model": "XHToken Spark-X2.5-1.7B",
+      "sizeGB": 1.1,
+      "vramGB": 1.3,
+      "decodeTokS": 100.0,
+      "prefillTokS": null,
+      "gpus": "1x T4"
+    },
+    {
+      "model": "XHToken Spark-X2.5-4B",
+      "sizeGB": 2.5,
+      "vramGB": 3.7,
+      "decodeTokS": 54.0,
+      "prefillTokS": 1385.0,
+      "gpus": "1x T4"
+    },
+    {
+      "model": "Qwen3-Coder-30B-A3B",
+      "sizeGB": 18.0,
+      "vramGB": 22.0,
+      "decodeTokS": 71.0,
+      "prefillTokS": 165.0,
+      "gpus": "2x T4 split"
+    },
+    {
+      "model": "google Gemma 4 12B IT",
+      "sizeGB": 6.7,
+      "vramGB": 8.1,
+      "decodeTokS": 21.0,
+      "prefillTokS": 144.0,
+      "gpus": "1x T4"
+    },
+    {
+      "model": "Qwen3.8-27B",
+      "sizeGB": 16.0,
+      "vramGB": 17.7,
+      "decodeTokS": 13.0,
+      "prefillTokS": 52.0,
+      "gpus": "2x T4 split"
+    }
+  ],
+  "agentConcurrency": [
+    {
+      "agents": 1.0,
+      "perAgent": "71 tok/s",
+      "aggregate": "11 tok/s (load-dominated wall)"
+    },
+    {
+      "agents": 2.0,
+      "perAgent": "56 + 52 tok/s",
+      "aggregate": "**92 tok/s** over 2.3s wall"
+    }
+  ],
+  "toolEval": [
+    {
+      "metric": "Passed / partial / failed",
+      "score": "9 / 4 / 2"
+    },
+    {
+      "metric": "Points",
+      "score": "22/30"
+    },
+    {
+      "metric": "Quality",
+      "score": "73/100"
+    },
+    {
+      "metric": "Responsiveness",
+      "score": "74/100 (median turn 1.5s)"
+    },
+    {
+      "metric": "Deployability",
+      "score": "73/100"
+    },
+    {
+      "metric": "Weakest category",
+      "score": "Multi-Step Chains (33%)"
+    },
+    {
+      "metric": "Safety",
+      "score": "1 warning (TC-08: batched tools before reading results)"
+    }
+  ],
+  "fineTuning": {
+    "results": [
+      {
+        "arm": "`unsloth_native`",
+        "result": "completed",
+        "peakMiB": 7111.0,
+        "loss": 0.829
+      },
+      {
+        "arm": "`soup` `backend: unsloth`",
+        "result": "completed",
+        "peakMiB": 7109.0,
+        "loss": 0.8044
+      },
+      {
+        "arm": "`soup` `backend: transformers` (unsloth installed)",
+        "result": "completed",
+        "peakMiB": 14867.0,
+        "loss": 0.8058
+      },
+      {
+        "arm": "`soup` `backend: transformers` (unsloth blocked)",
+        "result": "**OOM**",
+        "peakMiB": 14817.0,
+        "loss": null
+      }
+    ],
+    "quality": [
+      {
+        "adapter": "unsloth",
+        "loss": 1.03731
+      },
+      {
+        "adapter": "soup transformers",
+        "loss": 1.0405
+      }
+    ],
+    "steps": [
+      {
+        "arm": "`unsloth_native`",
+        "step": "**8.65 s**",
+        "note": "precise, via TrainerCallback"
+      },
+      {
+        "arm": "`soup` arms",
+        "step": "~9-10 s (upper bound)",
+        "note": "whole-process span / 50, includes ~36 s model load"
+      }
+    ]
+  },
+  "spark": {
+    "inference": [
+      {
+        "metric": "Load time (safetensors → CUDA)",
+        "small": "20s",
+        "large": "8.5s"
+      },
+      {
+        "metric": "VRAM, BF16, idle",
+        "small": "3.4GB",
+        "large": "8.2GB"
+      },
+      {
+        "metric": "VRAM under agentic load",
+        "small": "~4.8GB, stable",
+        "large": "~10-12GB, OOMs in long sessions"
+      },
+      {
+        "metric": "Throughput (thinking on, T4)",
+        "small": "~16 tok/s",
+        "large": "~12 tok/s"
+      },
+      {
+        "metric": "Trivial-Q thinking length",
+        "small": "179 tokens (verbose)",
+        "large": "54 tokens (decisive)"
+      }
+    ],
+    "tasks": [
+      {
+        "task": "**T1** implement `median()` to pass 5 pytest tests",
+        "small": "PASS — 5 steps, 1 tool error, ran tests",
+        "large": "PASS — 4 steps, 0 errors, ran tests"
+      },
+      {
+        "task": "**T2** debug repo (binary-search off-by-one across 2 files), 7 tests",
+        "small": "PASS — 3 steps, 5 errors, ran tests",
+        "large": "PASS — 14 steps, 9 errors, **never ran the suite itself** (final state correct at step limit — verification gap)"
+      },
+      {
+        "task": "**T3** implement LRU cache from spec from scratch, 5 tests",
+        "small": "**FAIL** — 3 tool steps + 17 no-call turns, never wrote a working file",
+        "large": "PASS — 5 steps, 1 error, ran tests"
+      },
+      {
+        "task": "Agentic score",
+        "small": "**2/3**",
+        "large": "**3/3**"
+      }
+    ]
+  },
+  "ternary": {
+    "singleT4": [
+      {
+        "packing": "PQ2_0",
+        "pp512": 293.9,
+        "tg128": 15.1
+      },
+      {
+        "packing": "PTQ1_0",
+        "pp512": 200.3,
+        "tg128": 15.4
+      }
+    ],
+    "dualT4": [
+      {
+        "packing": "PQ2_0",
+        "pp512": 313.0,
+        "tg128": 22.9
+      }
+    ],
+    "context": [
+      {
+        "context": "4k",
+        "vram": "~7.2 GB (single T4)",
+        "notes": "weights only + tiny KV"
+      },
+      {
+        "context": "64k",
+        "vram": "**12.4 GB** (6.15 + 6.29 split)",
+        "notes": "opencode server config"
+      },
+      {
+        "context": "262144 (full)",
+        "vram": "**26.2 GB** (13.0 + 13.2 split)",
+        "notes": "loads and serves on 2xT4"
+      }
+    ]
+  }
+}

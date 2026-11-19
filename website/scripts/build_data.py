@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT.parent  # ai-benchmarks
+EXTRA = json.load(open(BASE / "benchmarks/llm-and-training/extracted.json", encoding="utf-8"))
 OUT = ROOT / "data.js"
 
 
@@ -131,6 +132,13 @@ data = {
                     if m["id"] == "ltx_multi3_s4_f49"), 27.4),
                 "cogSeconds": next((m["wall"] for m in video_models
                     if m["id"] == "cog_s50_f49"), 1053.0)},
+    "llm": EXTRA["llmScoreboard"],
+    "agentConcurrency": EXTRA["agentConcurrency"],
+    "toolEval": EXTRA["toolEval"],
+    "fineTuning": EXTRA["fineTuning"],
+    "spark": EXTRA["spark"],
+    "ternary": EXTRA["ternary"],
+    "sourceFiles": EXTRA["sourceFiles"],
     "limitations": [
         "The 0–100 quality score comes from an image-text model. It is not a human beauty rating.",
         "Image results are square 1024px pictures; video results are short clips at each model's usual size.",

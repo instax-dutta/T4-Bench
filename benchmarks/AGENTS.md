@@ -2,6 +2,7 @@
 Hold the three completed benchmark projects intact, sorted by subject, with their original contracts and data preserved.
 
 ## Ownership
+- `benchmarks/llm-and-training/**` - LLM inference, agent, long-context and fine-tuning campaigns on the same 2x T4 machine. Owned by its nested `AGENTS.md`.
 - `benchmarks/minimax-h3-image/**` - MiniMax-H3-Image on 2x T4: quant/engine research, feasibility, benchmark plan, measured results and server archive. Owned by its nested `AGENTS.md`.
 - `benchmarks/image-models/**` - Z-Image-Turbo, Qwen-Image 2.1 Viggle 4-step, SDXL and FLUX.2 klein 4B: baseline and throughput optimization. Owned by its nested `AGENTS.md`.
 - `benchmarks/video-generation/**` - CogVideoX-2b, LTX 2B distilled and the abandoned LTX 13B attempt. Owned by its nested `AGENTS.md`.
@@ -20,6 +21,7 @@ Hold the three completed benchmark projects intact, sorted by subject, with thei
 - Each nested project has its own unlazy ledger and verification scripts.
 
 ## Child DOX Index
+- `benchmarks/llm-and-training/AGENTS.md` - LLM, agent and training benchmarks
 - `benchmarks/minimax-h3-image/AGENTS.md` - H3 quant/engine benchmark
 - `benchmarks/image-models/AGENTS.md` - four image-generation models benchmark
 - `benchmarks/video-generation/AGENTS.md` - video-generation benchmark

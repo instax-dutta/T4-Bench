@@ -2,7 +2,8 @@
 
 ## Category and first screen
 This is a benchmark data atlas, not a product landing page. The visitor arrives
-to answer one question: **which model should I run on this exact 2x T4 machine?**
+to answer one task-based question: which model should they run for chat, agents,
+fine-tuning, images or video on this exact 2x T4 machine?
 The first screen therefore shows the headline answers, the machine and the
 three metric scales; it does not open with a slogan or a feature list.
 
@@ -19,18 +20,20 @@ three metric scales; it does not open with a slogan or a feature list.
   flat dark fields, hairline rules and one signal colour, because the content is a measured record, not a product demo.
 - **Generation engine:** a laboratory notebook and an analogue chart recorder:
   ruled paper, tabular numbers, one red annotation pen.
-- **First-screen skeleton:** a compact masthead (one line), a two-column lead
-  (verdict + machine facts), then a full-width chart band. First row of charts
-  is visible without scrolling on a laptop.
+- **First-screen skeleton:** a compact masthead, a two-column lead (question +
+  four answer cards), then task-based sections. Each section uses the same
+  grammar: one plain-language bar chart, one table, one short verdict, and an
+  animated diagram in a web component.
 - **Page structure:** masthead -> verdict strip -> image section -> video
   section -> H3 memory-wall section -> method and caveats -> sources.
 - **Typography:** system UI stack for prose, monospace stack for every number
   and label. Display numerals 56-72px; body 15-17px; chart labels 12-13px.
 - **Colour:** dark field `#0E1110`, light ink `#ECEDE6`, muted `#9AA19A`, rule `#2C322E`,
   signal vermilion `#FF6B4A`, time teal `#4FD1C5`, safe green `#67C77D`.
-- **Primary visual:** familiar horizontal bar charts only. Speed, quality score,
-  memory use and video time each use the same bar form, animated with pre-rendered
-  clips and CSS. No scatter plots or specialist diagnostics are shown to the public.
+- **Primary visual:** familiar horizontal bar charts only, repeated across every
+  campaign. Eight ManimGX diagrams animate the same data and are wrapped in an
+  `<mx-clip>` web component with poster, lazy playback and replay. No scatter
+  plots or specialist diagnostics are shown to the public.
 - **Iconography:** no icon set. Numbers, section indices and rules do the work.
 - **Control grammar:** squared-off 2px-rule sections, 4px radius on small tags,
   selected state is a filled vermilion tab with moving underline.

@@ -28,6 +28,11 @@ if ratio != 38:
 if not all(m["wall"] >= m["perClip"] * m["clips"] * 0.9 for m in data["videoModels"]):
     errs.append("per-clip time exceeds total wall time")
 
+if len(data.get("llm", [])) < 6: errs.append("missing LLM rows")
+if not data.get("fineTuning", {}).get("results"): errs.append("missing fine-tuning rows")
+if len(data.get("spark", {}).get("tasks", [])) < 3: errs.append("missing agent tasks")
+if not data.get("ternary", {}).get("singleT4"): errs.append("missing ternary rows")
+
 if errs:
     raise SystemExit("DATA FAIL: " + "; ".join(errs))
 print(f"DATA OK: {best_img['name']} {best_img['bestThroughput']} img/h; "

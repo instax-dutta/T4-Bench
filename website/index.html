@@ -3,113 +3,144 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Benchmark Atlas — Kaggle 2x T4</title>
-<meta name="description" content="Measured image and video generation benchmarks on two Kaggle Tesla T4 GPUs, with latency, VRAM and quality numbers.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1E9'/%3E%3Crect x='4' y='18' width='6' height='10' fill='%23D6442E'/%3E%3Crect x='13' y='12' width='6' height='16' fill='%231E6E6A'/%3E%3Crect x='22' y='7' width='6' height='21' fill='%23171A17'/%3E%3C/svg%3E">
+<title>T4-Bench — What actually runs on two Kaggle T4s</title>
+<meta name="description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3Crect x='4' y='18' width='6' height='10' fill='%23FF6B4A'/%3E%3Crect x='13' y='12' width='6' height='16' fill='%234FD1C5'/%3E%3Crect x='22' y='7' width='6' height='21' fill='%23ECEDE6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to results</a>
-<header class="masthead">
-  <a class="brand" href="#top">BENCH ATLAS <span>/ 2×T4</span></a>
-  <nav aria-label="Sections">
-    <a href="#image">Image</a><a href="#video">Video</a><a href="#h3">Memory</a><a href="#method">Method</a>
+<a class="skip" href="#main">Skip to benchmarks</a>
+
+<header class="topbar">
+  <a href="#top" class="brand">T4<span>-</span>BENCH</a>
+  <nav aria-label="Benchmark categories">
+    <a href="#llm">Chat</a>
+    <a href="#agents">Agents</a>
+    <a href="#finetune">Training</a>
+    <a href="#image">Images</a>
+    <a href="#video">Video</a>
+    <a href="#method">Method</a>
   </nav>
 </header>
 
 <main id="main">
 <section class="hero" id="top">
-  <div class="hero-lead">
-    <p class="kicker">Measured on one machine · 19 Nov 2026</p>
-    <h1>One machine.<br>Three benchmark campaigns.</h1>
-    <p class="lede">Two Tesla T4s, 31 GB of RAM and no BF16 or FP8 hardware. These are the models that actually ran, and the numbers they produced.</p>
-    <div class="lead-verdict">
-      <span class="tag">Best image model</span>
-      <strong id="hero-image-name">FLUX.2 klein 4B</strong>
-      <span class="big-number" id="hero-image-number">374</span><span class="unit">images / hour</span>
-    </div>
+  <div>
+    <p class="eyebrow">Measured on Kaggle · 2026</p>
+    <h1>What actually runs on<br><em>two Tesla T4s?</em></h1>
+    <p class="intro">Real numbers from image, video, language and training workloads on the same free notebook. No estimates, no marketing claims.</p>
+    <div class="machine" id="machine"></div>
   </div>
-  <aside class="machine" aria-label="Measured machine">
-    <p class="kicker">Test bench</p>
-    <dl id="machine-facts"></dl>
-    <p class="micro">All wall times include model load, generation and output export. Peak VRAM sampled at 1 Hz.</p>
-  </aside>
+  <div class="answers" id="answers" aria-label="Headline answers"></div>
 </section>
 
-<section class="strip" aria-label="Headline results">
-  <div><span class="strip-num" id="strip-image">374</span><span class="strip-label">images/hour, FLUX.2 klein 4B</span></div>
-  <div><span class="strip-num" id="strip-video">27</span><span class="strip-label">seconds per warm 49-frame clip, LTX 2B</span></div>
-  <div><span class="strip-num" id="strip-ratio">—</span><span class="strip-label" id="strip-ratio-label">slower CogVideoX for the same 49 frames</span></div>
+<section class="chapter" id="llm">
+  <div class="chapter-head"><span class="num">01</span><div><h2>Chat &amp; coding models</h2><p>How fast each model replies once it is loaded and warm.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Reply speed</h3><span class="hint">Higher is better · tokens per second</span></div>
+      <div class="bars" id="llm-bars"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Watch the ranking</h3><span class="hint">Diagram from the same data</span></div>
+      <mx-clip src="assets/llm-speed.mp4" poster="assets/llm-speed-poster.jpg" caption="Reply speed, warm model"></mx-clip>
+      <p class="verdict" id="llm-verdict"></p>
+      <p class="small">A token is roughly a word or part of a word.</p>
+    </div>
+  </div>
+  <div class="table-wrap"><table id="llm-table"></table></div>
+  <div class="subgrid">
+    <div class="panel"><div class="panel-head"><h3>Two agents at once</h3><span class="hint">Same box, parallel requests</span></div><div class="bars" id="concurrency-bars"></div></div>
+    <div class="panel"><div class="panel-head"><h3>Tool-use test</h3><span class="hint">15 real tasks · score out of 100</span></div><div class="bars" id="tooleval-bars"></div></div>
+  </div>
+  <div class="clip-row"><mx-clip src="assets/tool-eval.mp4" poster="assets/tool-eval-poster.jpg" caption="Tool-use test, 15 tasks"></mx-clip></div>
 </section>
 
-<section id="image" class="chapter">
-  <div class="chapter-head"><span>01</span><h2>Image generation</h2><p>Four models, one engine, 1024×1024. Switch the metric to see what changes.</p></div>
-  <div class="tabs" role="tablist" aria-label="Image metric">
-    <button role="tab" aria-selected="true" data-metric="throughput">Speed</button>
-    <button role="tab" aria-selected="false" data-metric="clip">Quality score</button>
-    <button role="tab" aria-selected="false" data-metric="vram">Memory used</button>
-    <span class="tab-indicator" aria-hidden="true"></span>
-  </div>
-  <div class="image-grid">
-    <div class="chart-panel">
-      <div id="image-bars" class="bars" aria-live="polite"></div>
-      <p class="chart-note" id="image-note"></p>
+<section class="chapter" id="agents">
+  <div class="chapter-head"><span class="num">02</span><div><h2>Agents &amp; long memory</h2><p>Small models that can use tools and remember long documents.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Agent tasks completed</h3><span class="hint">Out of 3 · higher is better</span></div>
+      <div class="bars" id="spark-bars"></div>
     </div>
-    <figure class="clip">
-      <video class="lazy-video" data-src="assets/image-race.mp4" poster="assets/image-race-poster.jpg" muted playsinline preload="none" aria-label="Animated bar race of image throughput"></video>
-      <figcaption>Throughput race. <button class="replay" type="button" data-replay="image-race">Replay</button> Drawn from the same CSV.</figcaption>
-    </figure>
+    <div class="panel">
+      <div class="panel-head"><h3>Ternary 27B reply speed</h3><span class="hint">Tokens per second · higher is better</span></div>
+      <div class="bars" id="ternary-bars"></div>
+    </div>
   </div>
-  <div class="quality-card">
-    <p class="kicker">Quality, without the jargon</p>
-    <h3>How well each model follows the prompt</h3>
-    <div id="quality-bars" class="bars"></div>
-    <p class="chart-note">A simple 0–100 score from an image-text model. Higher is better. It measures how well the picture matches the words, not whether the picture is beautiful.</p>
+  <div class="clip-row">
+    <mx-clip src="assets/agent-tasks.mp4" poster="assets/agent-tasks-poster.jpg" caption="Agent tasks completed"></mx-clip>
+    <mx-clip src="assets/ternary-speed.mp4" poster="assets/ternary-speed-poster.jpg" caption="Long-context model, one vs two GPUs"></mx-clip>
+  </div>
+  <div class="table-wrap"><table id="spark-table"></table></div>
+  <p class="caption">The larger Spark model finishes more agent tasks, but needs more memory. Adding a second T4 nearly doubles reply speed for the ternary model.</p>
+</section>
+
+<section class="chapter" id="finetune">
+  <div class="chapter-head"><span class="num">03</span><div><h2>Fine-tuning</h2><p>Memory needed to train an 8B model with the same settings.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Memory used</h3><span class="hint">GB · lower is better</span></div>
+      <div class="bars" id="tune-bars"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Watch the memory race</h3><span class="hint">Diagram from the same data</span></div>
+      <mx-clip src="assets/tune-memory.mp4" poster="assets/tune-memory-poster.jpg" caption="Training memory per method"></mx-clip>
+      <p class="verdict" id="tune-verdict"></p>
+      <p class="small">Quality was effectively identical between the two working methods, so memory use is the deciding factor.</p>
+    </div>
+  </div>
+  <div class="table-wrap"><table id="tune-table"></table></div>
+</section>
+
+<section class="chapter" id="image">
+  <div class="chapter-head"><span class="num">04</span><div><h2>Image generation</h2><p>Four models, one engine, 1024×1024 pictures.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Pictures per hour</h3><span class="hint">Higher is better · both GPUs busy</span></div>
+      <div class="bars" id="image-bars"></div>
+    </div>
+    <mx-clip src="assets/image-race.mp4" poster="assets/image-race-poster.jpg" caption="Bar race from the same measurements"></mx-clip>
   </div>
   <div class="table-wrap"><table id="image-table"></table></div>
 </section>
 
-<section id="video" class="chapter">
-  <div class="chapter-head"><span>02</span><h2>Video generation</h2><p>Short clips, cold starts unless marked warm. Latency dominates everything else.</p></div>
-  <div class="image-grid">
-    <div>
-      <div id="video-bars" class="bars" aria-live="polite"></div>
-      <div class="table-wrap"><table id="video-table"></table></div>
+<section class="chapter" id="video">
+  <div class="chapter-head"><span class="num">05</span><div><h2>Video generation</h2><p>Short clips. Wall time includes loading, generating and saving.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Seconds per clip</h3><span class="hint">Lower is better</span></div>
+      <div class="bars" id="video-bars"></div>
     </div>
-    <figure class="clip">
-      <video class="lazy-video" data-src="assets/video-race.mp4" poster="assets/video-race-poster.jpg" muted playsinline preload="none" aria-label="Animated comparison of video generation times"></video>
-      <figcaption>Same frame count, very different wall time. <button class="replay" type="button" data-replay="video-race">Replay</button></figcaption>
-    </figure>
+    <mx-clip src="assets/video-race.mp4" poster="assets/video-race-poster.jpg" caption="Same frame count, different time"></mx-clip>
   </div>
+  <div class="table-wrap"><table id="video-table"></table></div>
 </section>
 
-<section id="h3" class="chapter">
-  <div class="chapter-head"><span>03</span><h2>The memory wall</h2><p>MiniMax-H3-Image needs far more memory than these cards have. Quantization makes it runnable, not fast.</p></div>
-  <div class="image-grid">
-    <div>
-      <div id="h3-bars" class="bars"></div>
-      <p class="chart-note">The bars show how much memory the whole model needs. The measured 4096×4096 run used only the small image model plus a smaller text encoder and peaked at 14.6 GB on the GPU. The large text encoder ran out of memory, so the smaller one is required.</p>
-      <div class="table-wrap"><table id="h3-table"></table></div>
+<section class="chapter" id="h3">
+  <div class="chapter-head"><span class="num">06</span><div><h2>The memory limit</h2><p>Why the largest image model needs tricks to run at all.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Memory needed</h3><span class="hint">GB · one T4 has 15 GB</span></div>
+      <div class="bars" id="h3-bars"></div>
     </div>
-    <figure class="clip">
-      <video class="lazy-video" data-src="assets/memory-wall.mp4" poster="assets/memory-wall-poster.jpg" muted playsinline preload="none" aria-label="Animated memory comparison"></video>
-      <figcaption>Weights in GiB against a single 15 GB T4. <button class="replay" type="button" data-replay="memory-wall">Replay</button></figcaption>
-    </figure>
+    <mx-clip src="assets/memory-wall.mp4" poster="assets/memory-wall-poster.jpg" caption="Weights versus one card"></mx-clip>
   </div>
+  <div class="table-wrap"><table id="h3-table"></table></div>
 </section>
 
-<section id="method" class="chapter">
-  <div class="chapter-head"><span>04</span><h2>How to read this</h2><p>Every figure is a measurement from the archived runs, not an estimate.</p></div>
-  <div class="notes">
-    <div><h3>Verdicts</h3><p id="verdicts"></p></div>
-    <div><h3>Limits</h3><ul id="limits"></ul></div>
+<section class="chapter" id="method">
+  <div class="chapter-head"><span class="num">07</span><div><h2>How to read this</h2><p>Every number comes from a saved run, not an estimate.</p></div></div>
+  <div class="grid-2">
+    <div class="panel"><h3>What we learned</h3><p id="verdicts"></p></div>
+    <div class="panel"><h3>Important limits</h3><ul id="limits"></ul></div>
   </div>
+  <p class="caption" id="sources"></p>
 </section>
 </main>
 
 <footer>
-  <p>Benchmark Atlas · GPU time generously provided by <a href="https://www.kaggle.com/">Kaggle</a> · all charts drawn from the archived measurements</p>
-  <p class="micro" id="sources"></p>
+  <p>GPU time generously provided by <a href="https://www.kaggle.com/">Kaggle</a>. All charts are drawn from the archived measurements in this repository.</p>
 </footer>
 <script src="data.js"></script>
 <script src="app.js"></script>
