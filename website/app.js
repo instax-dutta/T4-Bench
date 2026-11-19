@@ -141,7 +141,7 @@
     $('#verdicts').textContent = 'On this machine, small and clever beats big: a 6B image model outruns a 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, and a smaller text encoder is the difference between a video model running or being killed.';
     $('#limits').innerHTML = '';
     D.limitations.forEach(t => { const li = el('li', '', t); $('#limits').append(li); });
-    $('#sources').textContent = 'Source reports: ' + D.sourceFiles.join(', ') + '. Image and video tables are in their own benchmark folders.';
+    $('#sources').innerHTML = 'Source: personal research and benchmarking notes from <a href="https://blog.sdad.pro/" target="_blank" rel="noopener">blog.sdad.pro</a>.';
   }
 
   function initHints() {

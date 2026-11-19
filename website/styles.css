@@ -83,3 +83,4 @@ mx-clip .mx-replay:hover{border-color:var(--hot);color:var(--hot)}
 @media(max-width:860px){.clip-row{grid-template-columns:1fr}}
 
 .bar-value,td.num,th.num,.answer .big,.machine{font-variant-numeric:tabular-nums}
+.caption a{color:var(--hot)}

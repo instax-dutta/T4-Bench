@@ -1,6 +1,6 @@
 # T4-Bench
 
-Benchmarks of image and video generation models on a Kaggle 2× Tesla T4 notebook, plus a lightweight website that visualises the results.
+Benchmarks of image, video, language and training workloads on a Kaggle 2× Tesla T4 notebook, plus a lightweight website that visualises the results.
 
 **Website:** https://instax-dutta.github.io/T4-Bench/
 
@@ -38,3 +38,5 @@ GitHub Pages deploys `website/` on every push to `main` via `.github/workflows/p
 ## Hardware
 
 2× NVIDIA Tesla T4 (15 GB each, sm_75/Turing, no native BF16 or FP8), 31 GB host RAM, CUDA 13, PyTorch 2.11. GPU access was provided by Kaggle.
+
+Source notes: personal research and benchmarking documents published at https://blog.sdad.pro/.

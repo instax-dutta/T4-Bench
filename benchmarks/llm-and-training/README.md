@@ -19,3 +19,5 @@ The original reports are preserved in `sources/`:
 
 ## Method
 All reports used the same Kaggle machine: 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU. Exact prompts, seeds and versions are in each source report. The website reads only the extracted JSON, not the prose.
+
+Source notes: personal research and benchmarking documents published at https://blog.sdad.pro/.

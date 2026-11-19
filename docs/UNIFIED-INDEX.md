@@ -42,3 +42,5 @@ resolution advantage.
 - https://huggingface.co/jbilcke-hf/LTX-Video-2b-0-9-8-distilled-HFIE
 - https://huggingface.co/THUDM/CogVideoX-2b
 - https://huggingface.co/MiniMaxAI/MiniMax-H3-Image
+
+Source notes: personal research and benchmarking documents published at https://blog.sdad.pro/.
