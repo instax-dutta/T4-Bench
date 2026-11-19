@@ -96,8 +96,6 @@
         (v, it) => it.raw);
 
     // Agents
-    const sparkTasks = D.spark.tasks.map(t => ({ label: t.task.split(' ')[0] + ' ' + t.task.split(' ')[1],
-      value: (t.small.match(/PASS/g) || []).length, large: (t.large.match(/PASS/g) || []).length }));
     bars('#spark-bars', [
       { label: 'Spark 1.7B', value: 2, hint: 'two tasks passed' },
       { label: 'Spark 4B', value: 3, hint: 'three tasks passed' }
