@@ -34,13 +34,14 @@ benchmarks/
   image-models/        Z-Image, Qwen-Image, SDXL, FLUX.2
   video-generation/    CogVideoX, LTX 2B, abandoned LTX 13B
   minimax-h3-image/    quant/engine research and native-resolution test
+  media/               generated images and videos from the original runs
 website/               static site, data module, ManimGX diagrams, GEO assets
 scripts/               extraction and verification tools
 docs/                  cross-project index
 GEO-AUDIT-REPORT.md    generative-engine-optimization audit
 ```
 
-Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs.
+Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs. Generated media is preserved under `benchmarks/media/`. See `DATA-INVENTORY.md` for the complete list.
 
 ## Run the site locally
 
