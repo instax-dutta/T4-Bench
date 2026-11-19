@@ -66,6 +66,7 @@
 
   function render() {
     const hot = 'var(--hot)', cool = 'var(--cool)', green = 'var(--green)', ink = 'var(--ink)';
+    $('#answers').innerHTML = '';
     $('#machine').textContent = '2× Tesla T4 15 GB · 31 GB RAM · 4 CPU cores · CUDA 13 · PyTorch 2.11 · sm_75 Turing (no BF16 or FP8 hardware)';
 
     const answers = [

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All benchmark data — T4-Bench</title>
+<meta name="description" content="Complete measured benchmark tables for image, video, LLM, agent and fine-tuning workloads on Kaggle 2x Tesla T4.">
+<link rel="canonical" href="https://t4b.sdad.pro/benchmarks.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "T4-Bench: Kaggle 2x Tesla T4 benchmark results",
+  "description": "Measured image, video, language, agent and fine-tuning benchmarks on two Kaggle Tesla T4 GPUs.",
+  "url": "https://t4b.sdad.pro/benchmarks.html",
+  "creator": {
+    "@type": "Organization",
+    "name": "T4-Bench",
+    "url": "https://t4b.sdad.pro"
+  },
+  "datePublished": "2026-11-19",
+  "variableMeasured": [
+    "images per hour",
+    "seconds per clip",
+    "tokens per second",
+    "peak graphics memory",
+    "quality score"
+  ]
+}</script></head><body>
+<header class="topbar"><a class="brand" href="/">T4<span>-</span>BENCH</a><nav><a href="/">Home</a><a href="llms.txt">llms.txt</a><a href="llms-full.txt">Full text</a></nav></header>
+<main style="max-width:1160px;margin:0 auto;padding:40px 20px">
+<h1 style="font-family:Georgia,serif;font-size:42px">All benchmark data</h1>
+<p style="color:#AAB3AB">Every number below is measured on the same Kaggle notebook: 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13. Source notes: <a href="https://blog.sdad.pro/" style="color:#FF6B4A">blog.sdad.pro</a>.</p>
+
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Chat and coding models</h2><table><thead><tr><th>Model</th><th>Reply tok/s</th><th>Prompt tok/s</th><th>VRAM GB</th><th>GPUs</th></tr></thead><tbody><tr><td>LiquidAI LFM2.5-8B-A1B</td><td>119.0</td><td>800.0</td><td>5.7</td><td>1x T4</td></tr><tr><td>XHToken Spark-X2.5-1.7B</td><td>100.0</td><td>—</td><td>1.3</td><td>1x T4</td></tr><tr><td>Qwen3-Coder-30B-A3B</td><td>71.0</td><td>165.0</td><td>22.0</td><td>2x T4 split</td></tr><tr><td>XHToken Spark-X2.5-4B</td><td>54.0</td><td>1385.0</td><td>3.7</td><td>1x T4</td></tr><tr><td>google Gemma 4 12B IT</td><td>21.0</td><td>144.0</td><td>8.1</td><td>1x T4</td></tr><tr><td>Qwen3.8-27B</td><td>13.0</td><td>52.0</td><td>17.7</td><td>2x T4 split</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Two-agent concurrency</h2><table><thead><tr><th>Agents</th><th>Per agent</th><th>Aggregate</th></tr></thead><tbody><tr><td>1.0</td><td>71 tok/s</td><td>11 tok/s (load-dominated wall)</td></tr><tr><td>2.0</td><td>56 + 52 tok/s</td><td>**92 tok/s** over 2.3s wall</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Tool-use evaluation</h2><table><thead><tr><th>Metric</th><th>Score</th></tr></thead><tbody><tr><td>Passed / partial / failed</td><td>9 / 4 / 2</td></tr><tr><td>Points</td><td>22/30</td></tr><tr><td>Quality</td><td>73/100</td></tr><tr><td>Responsiveness</td><td>74/100 (median turn 1.5s)</td></tr><tr><td>Deployability</td><td>73/100</td></tr><tr><td>Weakest category</td><td>Multi-Step Chains (33%)</td></tr><tr><td>Safety</td><td>1 warning (TC-08: batched tools before reading results)</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Spark agent tasks</h2><table><thead><tr><th>Task</th><th>1.7B</th><th>4B</th></tr></thead><tbody><tr><td>**T1** implement `median()` to pass 5 pytest tests</td><td>PASS — 5 steps, 1 tool error, ran tests</td><td>PASS — 4 steps, 0 errors, ran tests</td></tr><tr><td>**T2** debug repo (binary-search off-by-one across 2 files), 7 tests</td><td>PASS — 3 steps, 5 errors, ran tests</td><td>PASS — 14 steps, 9 errors, **never ran the suite itself** (final state correct at step limit — verification gap)</td></tr><tr><td>**T3** implement LRU cache from spec from scratch, 5 tests</td><td>**FAIL** — 3 tool steps + 17 no-call turns, never wrote a working file</td><td>PASS — 5 steps, 1 error, ran tests</td></tr><tr><td>Agentic score</td><td>**2/3**</td><td>**3/3**</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Ternary 27B, one T4</h2><table><thead><tr><th>Packing</th><th>Prompt tok/s</th><th>Reply tok/s</th></tr></thead><tbody><tr><td>PQ2_0</td><td>293.9</td><td>15.1</td></tr><tr><td>PTQ1_0</td><td>200.3</td><td>15.4</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Ternary 27B, two T4s</h2><table><thead><tr><th>Packing</th><th>Prompt tok/s</th><th>Reply tok/s</th></tr></thead><tbody><tr><td>PQ2_0</td><td>313.0</td><td>22.9</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Fine-tuning</h2><table><thead><tr><th>Method</th><th>Result</th><th>Peak GB</th><th>Loss</th></tr></thead><tbody><tr><td>unsloth_native</td><td>completed</td><td>6.9</td><td>0.829</td></tr><tr><td>soup backend: unsloth</td><td>completed</td><td>6.9</td><td>0.8044</td></tr><tr><td>soup backend: transformers (unsloth installed)</td><td>completed</td><td>14.5</td><td>0.8058</td></tr><tr><td>soup backend: transformers (unsloth blocked)</td><td>**OOM**</td><td>14.5</td><td>—</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Image generation</h2><table><thead><tr><th>Model</th><th>Seconds/image</th><th>Images/hour</th><th>VRAM GB</th><th>Quality score</th></tr></thead><tbody><tr><td>FLUX.2 klein 4B</td><td>23.7</td><td>374</td><td>4</td><td>39</td></tr><tr><td>Qwen-Image 2.1 Viggle 4-step</td><td>64.0</td><td>150</td><td>6</td><td>38</td></tr><tr><td>Z-Image-Turbo</td><td>47.6</td><td>147</td><td>5</td><td>38</td></tr><tr><td>SDXL 1.0</td><td>63.5</td><td>107</td><td>7</td><td>39</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>Video generation</h2><table><thead><tr><th>Configuration</th><th>Frames</th><th>Seconds/clip</th><th>Total seconds</th><th>VRAM GB</th><th>Quality score</th></tr></thead><tbody><tr><td>cogvideox-2b</td><td>49</td><td>1053.0</td><td>1053.0</td><td>11</td><td>26</td></tr><tr><td>ltx2b-distilled</td><td>121</td><td>131.4</td><td>131.4</td><td>11</td><td>23</td></tr><tr><td>ltx2b-warm3</td><td>121</td><td>49.2</td><td>270.4</td><td>11</td><td>20</td></tr><tr><td>ltx2b-warm3-s4</td><td>49</td><td>27.6</td><td>207.7</td><td>11</td><td>21</td></tr></tbody></table>
+<h2 style='font-family:Georgia,serif;margin-top:38px'>MiniMax-H3 memory</h2><table><thead><tr><th>Precision</th><th>GB</th><th>Fits one T4</th></tr></thead><tbody><tr><td>All BF16</td><td>126.0</td><td>no</td></tr><tr><td>All FP8</td><td>64.1</td><td>no</td></tr><tr><td>All 4-bit</td><td>33.1</td><td>no</td></tr><tr><td>One T4 VRAM</td><td>15.0</td><td>yes</td></tr></tbody></table>
+</main></body></html>

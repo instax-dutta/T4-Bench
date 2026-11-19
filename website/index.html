@@ -5,8 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T4-Bench — What actually runs on two Kaggle T4s</title>
 <meta name="description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook.">
+<link rel="canonical" href="https://t4b.sdad.pro/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="T4-Bench — What actually runs on two Kaggle T4s">
+<meta property="og:description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook.">
+<meta property="og:url" content="https://t4b.sdad.pro/">
+<meta property="og:image" content="https://t4b.sdad.pro/assets/image-race-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="T4-Bench — What actually runs on two Kaggle T4s">
+<meta name="twitter:description" content="Measured benchmarks on Kaggle 2x Tesla T4.">
+<meta name="author" content="T4-Bench">
+<meta name="keywords" content="T4 benchmark, Kaggle T4, image generation benchmark, video generation benchmark, LLM inference benchmark, GPU benchmarks">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3Crect x='4' y='18' width='6' height='10' fill='%23FF6B4A'/%3E%3Crect x='13' y='12' width='6' height='16' fill='%234FD1C5'/%3E%3Crect x='22' y='7' width='6' height='21' fill='%23ECEDE6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "T4-Bench: Kaggle 2x Tesla T4 benchmark results",
+  "description": "Measured image, video, language, agent and fine-tuning benchmarks on two Kaggle Tesla T4 GPUs.",
+  "url": "https://t4b.sdad.pro/",
+  "creator": {
+    "@type": "Organization",
+    "name": "T4-Bench",
+    "url": "https://t4b.sdad.pro/"
+  },
+  "datePublished": "2026-11-19",
+  "variableMeasured": [
+    "images per hour",
+    "seconds per clip",
+    "tokens per second",
+    "peak graphics memory",
+    "quality score"
+  ]
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is T4-Bench?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "T4-Bench is a collection of measured benchmarks of image, video, language, agent and fine-tuning workloads on a Kaggle notebook with two Tesla T4 GPUs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which image model is fastest on two T4s?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FLUX.2 klein 4B, at 374 images per hour at 1024x1024 with batch 4 on each GPU."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which video model is fastest on two T4s?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LTX-Video 2B distilled, at 27.6 seconds per warm 49-frame clip with 4 inference steps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I see all the numbers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The complete tables are at https://t4b.sdad.pro/benchmarks.html and https://t4b.sdad.pro/llms-full.txt."
+      }
+    }
+  ]
+}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to benchmarks</a>
@@ -19,6 +88,7 @@
     <a href="#finetune">Training</a>
     <a href="#image">Images</a>
     <a href="#video">Video</a>
+    <a href="benchmarks.html">Data</a>
     <a href="#method">Method</a>
   </nav>
 </header>
@@ -29,9 +99,14 @@
     <p class="eyebrow">Measured on Kaggle · 2026</p>
     <h1>What actually runs on<br><em>two Tesla T4s?</em></h1>
     <p class="intro">Real numbers from image, video, language and training workloads on the same free notebook. No estimates, no marketing claims.</p>
-    <div class="machine" id="machine"></div>
+    <div class="machine" id="machine">2x Tesla T4 15 GB, 31 GB RAM, 4 CPU cores, CUDA 13, PyTorch 2.11, sm_75 Turing.</div>
   </div>
-  <div class="answers" id="answers" aria-label="Headline answers"></div>
+  <div class="answers" id="answers" aria-label="Headline answers">
+      <div class="answer"><div class="label">Fastest chat model</div><strong>LFM2.5-8B-A1B</strong><span class="big">119</span><span class="unit"> tokens / second</span></div>
+      <div class="answer"><div class="label">Best small agent</div><strong>Spark 4B</strong><span class="big">3/3</span><span class="unit"> agent tasks passed</span></div>
+      <div class="answer"><div class="label">Leanest fine-tune</div><strong>Unsloth NF4</strong><span class="big">7.1</span><span class="unit"> GB graphics memory</span></div>
+      <div class="answer"><div class="label">Fastest image model</div><strong>FLUX.2 klein 4B</strong><span class="big">374</span><span class="unit"> images / hour</span></div>
+    </div>
 </section>
 
 <section class="chapter" id="llm">
@@ -132,7 +207,7 @@
 <section class="chapter" id="method">
   <div class="chapter-head"><span class="num">07</span><div><h2>How to read this</h2><p>Every number comes from a saved run, not an estimate.</p></div></div>
   <div class="grid-2">
-    <div class="panel"><h3>What we learned</h3><p id="verdicts"></p></div>
+    <div class="panel"><h3>What we learned</h3><p id="verdicts">Small and clever beats big on this machine: a 6B image model outruns a 33B one, and an 8B mixture-of-experts chat model outruns a 27B dense one.</p></div>
     <div class="panel"><h3>Important limits</h3><ul id="limits"></ul></div>
   </div>
   <p class="caption" id="sources"></p>

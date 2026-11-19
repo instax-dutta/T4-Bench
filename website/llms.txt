@@ -1,0 +1,29 @@
+# T4-Bench
+
+> Measured benchmarks of image, video, language, agent and fine-tuning workloads on a Kaggle 2x Tesla T4 notebook. Every number in this project is from a real run, not an estimate.
+
+This site exists so people and AI agents can quickly answer one question: what actually runs well on two Kaggle T4 GPUs?
+
+## Key facts
+
+- Hardware: 2x NVIDIA Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13, sm_75 Turing (no BF16 or FP8 hardware).
+- Fastest image model tested: FLUX.2 klein 4B, 374 images/hour at 1024x1024.
+- Fastest video model tested: LTX-Video 2B distilled, 27.6 seconds per warm 49-frame clip.
+- Fastest chat model tested: LFM2.5-8B-A1B, 119 tokens/second, one T4.
+- Best small agent tested: Spark 4B, 3 of 3 agent tasks passed.
+- Leanest fine-tuning method tested: Unsloth NF4, 7.1 GB versus 14.9 GB for stock transformers.
+- Source notes: https://blog.sdad.pro/
+
+## Read the full data
+
+- [Complete benchmark tables](https://t4b.sdad.pro/benchmarks.html) — all models, metrics and units in plain HTML.
+- [Full text for agents](https://t4b.sdad.pro/llms-full.txt) — every table as plain text.
+- [Interactive homepage](https://t4b.sdad.pro/) — visual charts and diagrams.
+
+## Repository
+
+- https://github.com/instax-dutta/T4-Bench
+
+## How to cite
+
+T4-Bench, "Kaggle 2x Tesla T4 benchmark results", 2026. https://t4b.sdad.pro/
