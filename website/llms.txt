@@ -1,8 +1,8 @@
 # T4-Bench
 
-> Measured benchmarks of image, video, language, agent and fine-tuning workloads on a Kaggle 2x Tesla T4 notebook. Every number in this project is from a real run, not an estimate.
+> Measured benchmarks of image, video, language, agent and fine-tuning workloads on a Kaggle 2x Tesla T4 notebook. The figures come from our own runs.
 
-This site exists so people and AI agents can quickly answer one question: what actually runs well on two Kaggle T4 GPUs?
+This site helps people and AI agents answer one question: what runs well on two Kaggle T4 GPUs?
 
 ## Key facts
 
@@ -16,9 +16,9 @@ This site exists so people and AI agents can quickly answer one question: what a
 
 ## Read the full data
 
-- [Complete benchmark tables](https://t4b.sdad.pro/benchmarks.html) — all models, metrics and units in plain HTML.
-- [Full text for agents](https://t4b.sdad.pro/llms-full.txt) — every table as plain text.
-- [Interactive homepage](https://t4b.sdad.pro/) — visual charts and diagrams.
+- [Complete benchmark tables](https://t4b.sdad.pro/benchmarks.html): all models, metrics and units in plain HTML.
+- [Full text for agents](https://t4b.sdad.pro/llms-full.txt): every table as plain text.
+- [Interactive homepage](https://t4b.sdad.pro/): visual charts and diagrams.
 
 ## Repository
 

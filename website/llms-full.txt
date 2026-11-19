@@ -3,13 +3,13 @@
 Source: https://t4b.sdad.pro/benchmarks.html
 Hardware: Kaggle 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13.
 Source notes: https://blog.sdad.pro/
-All numbers are measured, not estimated.
+The figures come from saved runs on the same machine.
 
 ## Chat and coding models
 | Model | Reply tok/s | Prompt tok/s | VRAM GB | GPUs |
 |---|---|---|---|---|
 | LiquidAI LFM2.5-8B-A1B | 119.0 | 800.0 | 5.7 | 1x T4 |
-| XHToken Spark-X2.5-1.7B | 100.0 | — | 1.3 | 1x T4 |
+| XHToken Spark-X2.5-1.7B | 100.0 | n/a | 1.3 | 1x T4 |
 | Qwen3-Coder-30B-A3B | 71.0 | 165.0 | 22.0 | 2x T4 split |
 | XHToken Spark-X2.5-4B | 54.0 | 1385.0 | 3.7 | 1x T4 |
 | google Gemma 4 12B IT | 21.0 | 144.0 | 8.1 | 1x T4 |
@@ -19,7 +19,7 @@ All numbers are measured, not estimated.
 | Agents | Per agent | Aggregate |
 |---|---|---|
 | 1.0 | 71 tok/s | 11 tok/s (load-dominated wall) |
-| 2.0 | 56 + 52 tok/s | **92 tok/s** over 2.3s wall |
+| 2.0 | 56 + 52 tok/s | 92 tok/s over 2.3s wall |
 
 ## Tool-use evaluation
 | Metric | Score |
@@ -35,10 +35,10 @@ All numbers are measured, not estimated.
 ## Spark agent tasks
 | Task | 1.7B | 4B |
 |---|---|---|
-| **T1** implement `median()` to pass 5 pytest tests | PASS — 5 steps, 1 tool error, ran tests | PASS — 4 steps, 0 errors, ran tests |
-| **T2** debug repo (binary-search off-by-one across 2 files), 7 tests | PASS — 3 steps, 5 errors, ran tests | PASS — 14 steps, 9 errors, **never ran the suite itself** (final state correct at step limit — verification gap) |
-| **T3** implement LRU cache from spec from scratch, 5 tests | **FAIL** — 3 tool steps + 17 no-call turns, never wrote a working file | PASS — 5 steps, 1 error, ran tests |
-| Agentic score | **2/3** | **3/3** |
+| T1 implement `median()` to pass 5 pytest tests | PASS, 5 steps, 1 tool error, ran tests | PASS, 4 steps, 0 errors, ran tests |
+| T2 debug repo (binary-search off-by-one across 2 files), 7 tests | PASS, 3 steps, 5 errors, ran tests | PASS, 14 steps, 9 errors, never ran the suite itself (final state correct at step limit, verification gap) |
+| T3 implement LRU cache from spec from scratch, 5 tests | FAIL, 3 tool steps + 17 no-call turns, never wrote a working file | PASS, 5 steps, 1 error, ran tests |
+| Agentic score | 2/3 | 3/3 |
 
 ## Ternary 27B, one T4
 | Packing | Prompt tok/s | Reply tok/s |
@@ -57,7 +57,7 @@ All numbers are measured, not estimated.
 | unsloth_native | completed | 6.9 | 0.829 |
 | soup backend: unsloth | completed | 6.9 | 0.8044 |
 | soup backend: transformers (unsloth installed) | completed | 14.5 | 0.8058 |
-| soup backend: transformers (unsloth blocked) | **OOM** | 14.5 | — |
+| soup backend: transformers (unsloth blocked) | OOM | 14.5 | n/a |
 
 ## Image generation
 | Model | Seconds/image | Images/hour | VRAM GB | Quality score |

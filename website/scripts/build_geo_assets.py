@@ -8,16 +8,23 @@ raw = (ROOT / "data.js").read_text(encoding="utf-8")
 D = json.loads(raw.split("window.BENCH_DATA = ", 1)[1].rsplit(";", 1)[0])
 BASE = "https://t4b.sdad.pro"
 
+def clean(v):
+    t = str(v).replace("**", "")
+    t = t.replace(" — ", ", ").replace("–", "-")
+    if t.strip() == "—" or t.strip() == "-":
+        return "n/a"
+    return t
+
 def table(headers, rows):
-    h = "".join(f"<th>{x}</th>" for x in headers)
-    body = "".join("<tr>" + "".join(f"<td>{v}</td>" for v in r) + "</tr>" for r in rows)
+    h = "".join(f"<th>{clean(x)}</th>" for x in headers)
+    body = "".join("<tr>" + "".join(f"<td>{clean(v)}</td>" for v in r) + "</tr>" for r in rows)
     return f"<table><thead><tr>{h}</tr></thead><tbody>{body}</tbody></table>"
 
 def plain(title, headers, rows):
-    out = [f"\n## {title}", "| " + " | ".join(headers) + " |",
+    out = [f"\n## {title}", "| " + " | ".join(clean(x) for x in headers) + " |",
            "|" + "|".join(["---"] * len(headers)) + "|"]
     for r in rows:
-        out.append("| " + " | ".join(str(x) for x in r) + " |")
+        out.append("| " + " | ".join(clean(x) for x in r) + " |")
     return "\n".join(out)
 
 sections = []
@@ -47,7 +54,7 @@ sections.append(("MiniMax-H3 memory", ["Precision", "GB", "Fits one T4"],
 
 html_parts = ["""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>All benchmark data — T4-Bench</title>
+<title>All benchmark data: T4-Bench</title>
 <meta name="description" content="Complete measured benchmark tables for image, video, LLM, agent and fine-tuning workloads on Kaggle 2x Tesla T4.">
 <link rel="canonical" href="https://t4b.sdad.pro/benchmarks.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3C/svg%3E">
@@ -74,7 +81,7 @@ html_parts.append("</main></body></html>")
 plain_parts = [f"# T4-Bench: full benchmark data\n", f"Source: {BASE}/benchmarks.html",
                "Hardware: Kaggle 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13.",
                "Source notes: https://blog.sdad.pro/",
-               "All numbers are measured, not estimated."]
+               "The figures come from saved runs on the same machine."]
 for title, headers, rows in sections:
     plain_parts.append(plain(title, headers, rows))
 (ROOT / "llms-full.txt").write_text("\n".join(plain_parts) + "\n", encoding="utf-8")

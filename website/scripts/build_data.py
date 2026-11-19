@@ -140,10 +140,11 @@ data = {
     "ternary": EXTRA["ternary"],
     "sourceFiles": EXTRA["sourceFiles"],
     "limitations": [
-        "The 0–100 quality score comes from an image-text model. It is not a human beauty rating.",
-        "Image results are square 1024px pictures; video results are short clips at each model's usual size.",
-        "The larger 13B video model could not be finished: the machine ran out of storage at 57 of 93 GB.",
-        "Each result loads the model fresh unless the row says warm or batched.",
+        "These notes describe how we measured. They are not limits of the T4 GPUs themselves.",
+        "Our 0 to 100 quality score is a similarity check against the prompt. It tells you whether the output followed the words, not whether people like it.",
+        "Images were tested at 1024x1024. Video clips were kept short and used each model's normal preset.",
+        "We stopped the 13B video run halfway through its download. The Kaggle session ran out of writable space at 57 of 93 GB, so this says nothing about the model itself.",
+        "Most timings include a fresh model load. Rows marked warm or batched reuse a model that is already loaded.",
     ],
 }
 

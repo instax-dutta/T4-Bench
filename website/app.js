@@ -87,7 +87,7 @@
     bars('#llm-bars', llm.map(m => ({ label: m.model, value: m.decodeTokS, m })),
       130, (it, i) => i === 0 ? hot : cool, v => v + ' tok/s');
     table('#llm-table', ['Model', 'Reply speed (tok/s)', 'Prompt speed (tok/s)', 'Graphics memory', 'GPUs'],
-      llm.map(m => [m.model, m.decodeTokS, m.prefillTokS || '—', m.vramGB + ' GB', m.gpus]));
+      llm.map(m => [m.model, m.decodeTokS, m.prefillTokS === null || m.prefillTokS === undefined ? 'n/a' : m.prefillTokS, m.vramGB + ' GB', m.gpus]));
     $('#llm-verdict').textContent = 'LFM2.5-8B-A1B replies about 9× faster than the largest dense model, while using only one of the two GPUs.';
 
     bars('#concurrency-bars', D.agentConcurrency.map(x => ({ label: x.agents + ' agent' + (x.agents > 1 ? 's' : ''), value: x.agents === 1 ? 71 : 108, extra: x.aggregate })),
@@ -117,7 +117,7 @@
       (v, it) => it.raw.result === 'OOM' ? 'OOM' : v + ' GB');
     table('#tune-table', ['Method', 'Result', 'Graphics memory', 'Training loss'],
       D.fineTuning.results.map(r => [r.arm.replace(/`/g, ''), r.result, Math.round(r.peakMiB/1024*10)/10 + ' GB',
-        r.loss === null ? '—' : r.loss]));
+        r.loss === null ? 'n/a' : r.loss]));
     $('#tune-verdict').textContent = 'Unsloth uses 7.1 GB. The stock method needs 14.9 GB and runs out of memory with the import blocked. Quality is the same.';
 
     // Images
@@ -139,7 +139,7 @@
     table('#h3-table', ['Model precision', 'Memory needed (GB)', 'Fits one T4'],
       D.h3.weightsGiB.map(w => [w.name, w.gib, w.gib <= 15 ? 'yes' : 'no']));
 
-    $('#verdicts').textContent = 'On this machine, small and clever beats big: a 6B image model outruns a 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, and a smaller text encoder is the difference between a video model running or being killed.';
+    $('#verdicts').textContent = 'Smaller models often win here. A 6B image model outruns the 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, and a smaller text encoder is what lets the video model run at all.';
     $('#limits').innerHTML = '';
     D.limitations.forEach(t => { const li = el('li', '', t); $('#limits').append(li); });
     $('#sources').innerHTML = 'Source: personal research and benchmarking notes from <a href="https://blog.sdad.pro/" target="_blank" rel="noopener">blog.sdad.pro</a>.';

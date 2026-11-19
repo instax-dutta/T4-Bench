@@ -68,11 +68,11 @@ python3 scripts/check_data.py
 
 The site is designed to be readable by people and AI agents:
 
-- `llms.txt` — curated entry point with key facts and links
-- `llms-full.txt` — every measurement as plain text
-- `benchmarks.html` — all tables as static HTML
-- `robots.txt` — explicit access for AI crawlers
-- `sitemap.xml` — site map
+- `llms.txt`: curated entry point with key facts and links
+- `llms-full.txt`: every measurement as plain text
+- `benchmarks.html`: all tables as static HTML
+- `robots.txt`: explicit access for AI crawlers
+- `sitemap.xml`: site map
 - JSON-LD `Dataset` and `FAQPage` structured data on the homepage and data page
 
 See `GEO-AUDIT-REPORT.md` for the baseline audit and the fixes applied.
