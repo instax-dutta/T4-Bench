@@ -1,0 +1,5 @@
+/root/vidbench/run_ltx.sh: line 7:  3830 Killed                  python3 /root/vidbench/run_ltx.py "$O" "$steps" "$frames" "$W" "$H" "$seed" 0 > "$O/run.log" 2>&1
+ltx_dual_g0 ltx2b-distilled 8 121 768x512 42 137 NA NA
+Loading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 14.91s/it][ALoading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 15.70s/it]
+Loading pipeline components...: 100%|██████████| 5/5 [01:42<00:00, 18.24s/it]Loading pipeline components...: 100%|██████████| 5/5 [01:42<00:00, 20.42s/it]
+  0%|          | 0/8 [00:00<?, ?it/s]

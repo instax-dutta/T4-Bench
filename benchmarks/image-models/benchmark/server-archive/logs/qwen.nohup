@@ -1,0 +1,7 @@
+[21:22:00] START qwen 42
+[21:23:04] qwen-image-2.1-viggle-4step,1024x1024,42,4,1.0,,0,64.004,5867
+[21:23:04] START qwen 123
+[21:24:13] qwen-image-2.1-viggle-4step,1024x1024,123,4,1.0,,0,69.303,5867
+[21:24:13] START qwen 999
+[21:25:00] qwen-image-2.1-viggle-4step,1024x1024,999,4,1.0,,0,46.396,5867
+QWEN_BATCH_DONE

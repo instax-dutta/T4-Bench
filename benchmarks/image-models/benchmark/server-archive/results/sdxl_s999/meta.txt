@@ -1,0 +1,1 @@
+model=SDXL_XL steps=30 cfg=7.0 size=1024x1024 seed=999

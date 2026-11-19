@@ -1,0 +1,5 @@
+model_id,model,steps,frames,size,seed,exit_code,wall_s,peak_vram_mib
+cog_s50_f49,cogvideox-2b,50,49,720x480,42,0,1053.0,11301
+ltx2b_s8_f121,ltx2b-distilled,8,121,768x512,42,0,131.392,11032
+ltx_multi3,ltx2b-warm3,8,121,768x512,42/123/999,0,270.421,11033
+ltx_multi3_s4_f49,ltx2b-warm3-s4,4,49,768x512,42/123/999,0,207.661,11033

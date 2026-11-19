@@ -1,0 +1,126 @@
+[06:38:16] START LTX13B
+Fetching 59 files:   0%|          | 0/59 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Still waiting to acquire lock on /root/vidbench/models/LTX13B/.cache/huggingface/.gitignore.lock (elapsed: 0.1 seconds)
+Still waiting to acquire lock on /root/vidbench/models/LTX13B/.cache/huggingface/.gitignore.lock (elapsed: 0.1 seconds)
+Fetching 59 files:   2%|▏         | 1/59 [00:00<00:11,  4.93it/s]Fetching 59 files:   5%|▌         | 3/59 [00:00<00:05, 10.83it/s]Fetching 59 files:   8%|▊         | 5/59 [00:01<00:18,  2.93it/s]Fetching 59 files:  12%|█▏        | 7/59 [00:01<00:11,  4.49it/s]Fetching 59 files:  15%|█▌        | 9/59 [00:01<00:09,  5.35it/s]Fetching 59 files:  19%|█▊        | 11/59 [00:01<00:06,  6.97it/s]Fetching 59 files:  25%|██▌       | 15/59 [00:02<00:03, 11.76it/s]Fetching 59 files:  31%|███       | 18/59 [00:02<00:03, 12.77it/s]Fetching 59 files:  36%|███▌      | 21/59 [00:02<00:02, 15.29it/s]Fetching 59 files:  41%|████      | 24/59 [00:02<00:01, 17.53it/s]Fetching 59 files:  44%|████▍     | 26/59 [00:20<00:01, 17.53it/s]Fetching 59 files:  46%|████▌     | 27/59 [02:05<06:55, 12.97s/it]Fetching 59 files:  47%|████▋     | 28/59 [02:31<07:33, 14.62s/it]Fetching 59 files:  51%|█████     | 30/59 [02:47<06:11, 12.81s/it]Fetching 59 files:  53%|█████▎    | 31/59 [02:56<05:42, 12.24s/it]Fetching 59 files:  59%|█████▉    | 35/59 [03:04<02:56,  7.37s/it]Fetching 59 files:  63%|██████▎   | 37/59 [03:05<02:03,  5.60s/it]Fetching 59 files:  68%|██████▊   | 40/59 [03:05<01:09,  3.63s/it]Fetching 59 files:  71%|███████   | 42/59 [03:06<00:46,  2.76s/it]Fetching 59 files:  75%|███████▍  | 44/59 [03:13<00:44,  2.99s/it]Fetching 59 files:  76%|███████▋  | 45/59 [03:21<00:53,  3.82s/it]Fetching 59 files:  78%|███████▊  | 46/59 [03:21<00:40,  3.14s/it]Fetching 59 files:  80%|███████▉  | 47/59 [03:31<00:54,  4.51s/it]Fetching 59 files:  81%|████████▏ | 48/59 [03:49<01:22,  7.53s/it]Fetching 59 files:  81%|████████▏ | 48/59 [04:18<00:59,  5.40s/it]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+    xet_get(
+    ~~~~~~~^
+        incomplete_path=tmp_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        endpoint=connection_info.endpoint,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        progress_callback=progress.update_progress,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as group:
+    ^
+RuntimeError: Task error: File reconstruction error: IO Error: Read-only file system (os error 30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/bin/hf", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/hf.py", line 173, in main
+    app()
+    ~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/_cli_utils.py", line 132, in invoke
+    return super().invoke(ctx)
+           ~~~~~~~~~~~~~~^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/_framework.py", line 365, in handler
+    return func(**call_kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/download.py", line 228, in download
+    _print_result(run_download())
+                  ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/download.py", line 187, in run_download
+    return snapshot_download(
+        repo_id=repo_id,
+    ...<10 lines>...
+        dry_run=dry_run,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/_snapshot_download.py", line 532, in snapshot_download
+    hf_thread_map(
+    ~~~~~~~~~~~~~^
+        _inner_hf_hub_download,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+    results[future_to_index[future]] = future.result()
+                                       ~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 453, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/concurrent/futures/_base.py", line 402, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/_snapshot_download.py", line 512, in _inner_hf_hub_download
+    hf_hub_download(  # type: ignore
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        repo_id,
+        ^^^^^^^^
+    ...<14 lines>...
+        dry_run=dry_run,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 1026, in hf_hub_download
+    return _hf_hub_download_to_local_dir(
+        # Destination
+    ...<16 lines>...
+        dry_run=dry_run,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 1505, in _hf_hub_download_to_local_dir
+    _download_to_tmp_and_move(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        incomplete_path=paths.incomplete_path(etag),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/huggingface_hub/file_download.py", line 2045, in _download_to_tmp_and_move
+    tmp_path.unlink(missing_ok=True)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/pathlib/_local.py", line 746, in unlink
+    os.unlink(self)
+    ~~~~~~~~~^^^^^^
+OSError: [Errno 30] Read-only file system: '/root/vidbench/models/LTX13B/.cache/huggingface/download/vae/text_encoder/DaGOU-KRMVrY0aYktrsE34tL0Bs=.c831635f83041f83faf0024b39c6ecb21b45d70dd38a63ea5bac6c7c6e5e558c.491fa569.incomplete'
+[06:42:36] DONE LTX13B

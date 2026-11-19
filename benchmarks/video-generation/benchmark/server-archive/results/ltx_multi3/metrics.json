@@ -1,0 +1,14 @@
+{
+  "load_seconds": 99.556,
+  "per_clip_seconds": [
+    73.63,
+    49.245,
+    47.99
+  ],
+  "total_seconds": 270.421,
+  "clips": 3,
+  "frames": 121,
+  "size": "768x512",
+  "steps": 8,
+  "peak_vram_mib": 11033
+}

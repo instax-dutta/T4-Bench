@@ -1,0 +1,96 @@
+┌──────────────────────────────────────────────────────────────────────┐
+│ DiffSynth-Studio Model Downloader Configuration:                     │
+│                                                                      │
+│ [√] Download from https://modelscope.cn/                             │
+│     (default behavior)                                               │
+│ [ ] Download from https://modelscope.ai/                             │
+│     (enabled via `export MODELSCOPE_ENDPOINT=https://modelscope.ai`) │
+│ [ ] Download from https://huggingface.co/                            │
+│     (enabled via `export DIFFSYNTH_DOWNLOAD_SOURCE=HuggingFace`)     │
+│ [ ] Skip download and load only pre-downloaded model files           │
+│     (enabled via `export DIFFSYNTH_SKIP_DOWNLOAD=True`)              │
+└──────────────────────────────────────────────────────────────────────┘
+Loading models from: "/root/bench/models/diffsynth/DiffSynth-Studio__MiniMax-H3-Image-EntroPack/models/dit_extreme_3bpp.safetensors"
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+200 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+2 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+8 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+Loaded model: {
+    "model_name": "minimax_h3_image_dit",
+    "model_class": "diffsynth.models.minimax_h3_image_dit.MiniMaxH3ImageDiTPruned",
+    "extra_kwargs": null
+}
+Loading models from: "/kaggle/working/bench/models/diffsynth/text_encoder/text_encoder_3bpp.safetensors"
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+466 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+Loaded model: {
+    "model_name": "minimax_h3_text_encoder",
+    "model_class": "diffsynth.models.minimax_h3_text_encoder.MiniMaxH3TextEncoder",
+    "extra_kwargs": null
+}
+Loading models from: "/kaggle/working/bench/models/diffsynth/base/pdd_fused_heads.safetensors"
+Loaded model: {
+    "model_name": "minimax_h3_image_pdd_heads",
+    "model_class": "diffsynth.models.minimax_h3_image_dit.MiniMaxH3ImagePDDHeads",
+    "extra_kwargs": null
+}
+Loading models from: "/root/bench/models/diffsynth/DiffSynth-Studio__MiniMax-H3-Image-EntroPack/models/vae_int8.safetensors"
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+98 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant_int8_raw).
+Loaded model: {
+    "model_name": "minimax_h3_image_vae",
+    "model_class": "diffsynth.models.minimax_h3_image_vae.MiniMaxH3ImageVAE",
+    "extra_kwargs": null
+}
+Using minimax_h3_text_encoder from "/kaggle/working/bench/models/diffsynth/text_encoder/text_encoder_3bpp.safetensors".
+Using minimax_h3_image_dit from "/root/bench/models/diffsynth/DiffSynth-Studio__MiniMax-H3-Image-EntroPack/models/dit_extreme_3bpp.safetensors".
+Using minimax_h3_image_pdd_heads from "/kaggle/working/bench/models/diffsynth/base/pdd_fused_heads.safetensors".
+Using minimax_h3_image_vae from "/root/bench/models/diffsynth/DiffSynth-Studio__MiniMax-H3-Image-EntroPack/models/vae_int8.safetensors".
+  0%|          | 0/6 [00:00<?, ?it/s] 17%|█▋        | 1/6 [00:38<03:14, 38.93s/it] 33%|███▎      | 2/6 [00:59<01:52, 28.16s/it] 50%|█████     | 3/6 [01:20<01:14, 24.79s/it] 67%|██████▋   | 4/6 [01:41<00:46, 23.35s/it] 83%|████████▎ | 5/6 [02:02<00:22, 22.68s/it]100%|██████████| 6/6 [02:24<00:00, 22.24s/it]100%|██████████| 6/6 [02:24<00:00, 24.06s/it]
+Traceback (most recent call last):
+  File "/kaggle/working/bench/run_diffsynth.py", line 41, in <module>
+    img = pipe(prompt=prompt, height=H, width=W, seed=seed,
+               min_generation_area=1024, tiling=True)
+  File "/usr/local/lib/python3.13/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/pipelines/minimax_h3_image.py", line 166, in __call__
+    image = self.decode_latents(inputs_shared["latents"], tiling=tiling)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/pipelines/minimax_h3_image.py", line 89, in decode_latents
+    image = self.vae.decode(latents, tiling=tiling)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/models/minimax_h3_image_vae.py", line 367, in decode
+    return self._decode(z) if tiling else self.decoder(self.post_quant_conv(z))
+           ~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/models/minimax_h3_image_vae.py", line 349, in _decode
+    row.append(self.decoder(self.post_quant_conv(tile)))
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/models/minimax_h3_image_vae.py", line 181, in forward
+    hidden_states = self.x_embedder(x.permute(0, 2, 3, 1).reshape(B, h * w, C))
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/core/vram/layers.py", line 592, in forward
+    out = module(x, *args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/torch/_dynamo/eval_frame.py", line 1263, in _fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/entropack/linear/linear.py", line 357, in forward
+    self._require_8bit_gemm(x.device)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/entropack/linear/linear.py", line 332, in _require_8bit_gemm
+    raise RuntimeError(
+    ...<3 lines>...
+    )
+RuntimeError: CompressedINT8Linear needs compute capability (8, 0) or later and Tesla T4 reports (7, 5). This format has no path on older hardware.

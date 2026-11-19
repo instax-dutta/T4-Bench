@@ -1,0 +1,5 @@
+[21:02:44] START B2_s1024_s42_cap10
+[21:04:25] DONE B2_s1024_s42_cap10 cap=10 rc=0 wall=99.921 peak=10769
+[21:04:25] START B2_s1024_s42_cap8
+[21:05:58] DONE B2_s1024_s42_cap8 cap=8 rc=0 wall=93.031 peak=10223
+[21:05:58] BATCH5 DONE

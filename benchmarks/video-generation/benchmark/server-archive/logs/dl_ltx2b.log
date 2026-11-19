@@ -1,0 +1,9 @@
+[05:56:25] START LTX2B
+/usr/local/lib/python3.13/dist-packages/huggingface_hub/cli/download.py:158: UserWarning: Ignoring `--include` since filenames have been explicitly set.
+  warnings.warn("Ignoring `--include` since filenames have been explicitly set.")
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Still waiting to acquire lock on /root/vidbench/models/LTX2B/.cache/huggingface/.gitignore.lock (elapsed: 0.1 seconds)
+Fetching 14 files:   7%|▋         | 1/14 [00:00<00:02,  5.51it/s]Fetching 14 files:  14%|█▍        | 2/14 [00:00<00:01,  7.22it/s]Fetching 14 files:  43%|████▎     | 6/14 [00:00<00:00, 15.80it/s]Fetching 14 files:  64%|██████▍   | 9/14 [00:01<00:00,  8.51it/s]Fetching 14 files:  64%|██████▍   | 9/14 [00:20<00:00,  8.51it/s]Fetching 14 files:  71%|███████▏  | 10/14 [01:11<00:50, 12.54s/it]Fetching 14 files:  79%|███████▊  | 11/14 [01:24<00:38, 12.72s/it]Fetching 14 files:  93%|█████████▎| 13/14 [01:31<00:09,  9.26s/it]Fetching 14 files: 100%|██████████| 14/14 [01:31<00:00,  6.52s/it]
+[32m✓ Downloaded[0m
+  path: /root/vidbench/models/LTX2B
+[05:58:03] DONE LTX2B

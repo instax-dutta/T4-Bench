@@ -1,0 +1,9 @@
+DIFFSYNTH A_s1024_s42_v4 rc=1
+  File "/usr/local/lib/python3.13/dist-packages/entropack/linear/linear.py", line 357, in forward
+    self._require_8bit_gemm(x.device)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/entropack/linear/linear.py", line 332, in _require_8bit_gemm
+    raise RuntimeError(
+    ...<3 lines>...
+    )
+RuntimeError: CompressedINT8Linear needs compute capability (8, 0) or later and Tesla T4 reports (7, 5). This format has no path on older hardware.

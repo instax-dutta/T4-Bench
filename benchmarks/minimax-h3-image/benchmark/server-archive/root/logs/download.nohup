@@ -1,0 +1,8 @@
+[18:19:12] START downloads
+[18:20:01] OK Q3_K_M
+[18:21:11] OK UD-Q4_K_XL
+[18:22:18] OK Q5_K_M
+[18:22:51] OK P-H3 TE int8
+[18:24:18] OK Qwen32B TE Q4_K_M
+[18:24:34] OK VAE fp16
+[18:24:34] DONE downloads

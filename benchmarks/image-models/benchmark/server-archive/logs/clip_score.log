@@ -1,0 +1,19 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 13897.33it/s]
+flux_batch4: 1.0000  n=4
+flux_s123: 1.0000  n=1
+flux_s42: 1.0000  n=1
+flux_s42_repeat: 1.0000  n=1
+flux_s999: 1.0000  n=1
+qwen_s123: 1.0000  n=1
+qwen_s42: 1.0000  n=1
+qwen_s999: 1.0000  n=1
+qwen_single4: 1.0000  n=4
+sdxl_s123: 1.0000  n=1
+sdxl_s42: 1.0000  n=1
+sdxl_s42_repeat: 1.0000  n=1
+sdxl_s999: 1.0000  n=1
+sdxl_single4: 1.0000  n=4
+zimage_s123: 1.0000  n=1
+zimage_s42: 1.0000  n=1
+zimage_s42_repeat: 1.0000  n=1
+zimage_s999: 1.0000  n=1

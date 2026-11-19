@@ -1,0 +1,881 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+CMake Error at cmake/ggml.cmake:5 (add_subdirectory):
+  The source directory
+
+    /root/bench/repos/stable-diffusion.cpp/ggml
+
+  does not contain a CMakeLists.txt file.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+CMake Error at cmake/ggml.cmake:9 (add_library):
+  add_library cannot create ALIAS target "ggml" because target "ggml::ggml"
+  does not already exist.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+-- Looking for include file alloca.h
+-- Looking for include file alloca.h - found
+-- Looking for include file stdint.h
+-- Looking for include file stdint.h - found
+-- Looking for include file sys/times.h
+-- Looking for include file sys/times.h - found
+-- Looking for include file sys/time.h
+-- Looking for include file sys/time.h - found
+-- Looking for include file sys/types.h
+-- Looking for include file sys/types.h - found
+-- Looking for include file unistd.h
+-- Looking for include file unistd.h - found
+-- Looking for include file inttypes.h
+-- Looking for include file inttypes.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of int
+-- Check size of int - done
+-- Check size of long
+-- Check size of long - done
+-- Check size of long long
+-- Check size of long long - done
+-- Check size of void*
+-- Check size of void* - done
+-- Looking for alloca
+-- Looking for alloca - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found version "13.0.88")
+CMake Error at cmake/cutlass.cmake:14 (message):
+  CUTLASS headers not found at
+  /root/bench/repos/stable-diffusion.cpp/thirdparty/cutlass.  Run git
+  submodule update --init --recursive from the sd.cpp repository root, set
+  SD_CUDA_CUTLASS_PATH to a CUTLASS source tree (tested with 3.9.2), or set
+  SD_CUDA_CUTLASS_PATH to an empty string to disable CUTLASS.
+Call Stack (most recent call first):
+  CMakeLists.txt:372 (include)
+
+
+-- Configuring incomplete, errors occurred!
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+CMake Error at cmake/ggml.cmake:5 (add_subdirectory):
+  The source directory
+
+    /root/bench/repos/stable-diffusion.cpp/ggml
+
+  does not contain a CMakeLists.txt file.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+CMake Error at cmake/ggml.cmake:9 (add_library):
+  add_library cannot create ALIAS target "ggml" because target "ggml::ggml"
+  does not already exist.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+-- The CUDA compiler identification is unknown
+CMake Error at CMakeLists.txt:377 (enable_language):
+  No CMAKE_CUDA_COMPILER could be found.
+
+  Tell CMake where to find the compiler by setting either the environment
+  variable "CUDACXX" or the CMake cache entry CMAKE_CUDA_COMPILER to the full
+  path to the compiler, or to the compiler name if it is in the PATH.
+
+
+-- Configuring incomplete, errors occurred!
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+CMake Error at cmake/ggml.cmake:5 (add_subdirectory):
+  The source directory
+
+    /root/bench/repos/stable-diffusion.cpp/ggml
+
+  does not contain a CMakeLists.txt file.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+CMake Error at cmake/ggml.cmake:9 (add_library):
+  add_library cannot create ALIAS target "ggml" because target "ggml::ggml"
+  does not already exist.
+Call Stack (most recent call first):
+  CMakeLists.txt:357 (include)
+
+
+Submodule 'examples/server/frontend' (https://github.com/leejet/sdcpp-webui.git) registered for path 'examples/server/frontend'
+Submodule 'ggml' (https://github.com/leejet/ggml.git) registered for path 'ggml'
+Submodule 'thirdparty/cutlass' (https://github.com/NVIDIA/cutlass.git) registered for path 'thirdparty/cutlass'
+Submodule 'thirdparty/libwebm' (https://github.com/webmproject/libwebm.git) registered for path 'thirdparty/libwebm'
+Submodule 'thirdparty/libwebp' (https://github.com/webmproject/libwebp.git) registered for path 'thirdparty/libwebp'
+Cloning into '/root/bench/repos/stable-diffusion.cpp/examples/server/frontend'...
+Cloning into '/root/bench/repos/stable-diffusion.cpp/ggml'...
+-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0
+-- Detecting CUDA compiler ABI info
+Cloning into '/root/bench/repos/stable-diffusion.cpp/thirdparty/cutlass'...
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+CMake Warning at examples/server/CMakeLists.txt:58 (message):
+  pnpm not found; frontend build disabled.
+
+
+-- HAVE_INDEX_HTML disabled
+-- Configuring incomplete, errors occurred!
+Cloning into '/root/bench/repos/stable-diffusion.cpp/thirdparty/libwebm'...
+Cloning into '/root/bench/repos/stable-diffusion.cpp/thirdparty/libwebp'...
+Submodule path 'examples/server/frontend': checked out 'b07665f893047e7b633bbdb69d97c3a9c594076e'
+Submodule path 'ggml': checked out 'eeda9ec48fc84a3df0bb9dcc19ae9053075a2539'
+Submodule path 'thirdparty/cutlass': checked out 'ad7b2f5e84fcfa124cb02b91d5bd26d238c0459e'
+Submodule path 'thirdparty/libwebm': checked out '5bf12267eea773a32fcf4949de52b0add158a8d5'
+Submodule path 'thirdparty/libwebp': checked out '0c9546f7efc61eac7f79ae115c3f99c91c21c443'
+[18:24:42] SUBMODULES DONE
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- CUDA Toolkit found
+-- Using CMAKE_CUDA_ARCHITECTURES=75 CMAKE_CUDA_ARCHITECTURES_NATIVE=No CUDA devices found.-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0;bf16-bf16;f8_e4m3-f8_e4m3
+-- Found NCCL: /usr/lib/x86_64-linux-gnu/libnccl.so
+-- CUDA host compiler is GNU 13.3.0
+-- Including CUDA backend
+-- ggml version: 1.0.0
+-- ggml commit:  eeda9ec4
+CMake Warning at examples/server/CMakeLists.txt:58 (message):
+  pnpm not found; frontend build disabled.
+
+
+-- HAVE_INDEX_HTML disabled
+-- Configuring done (1.8s)
+CMake Error at CMakeLists.txt:369 (target_link_libraries):
+  Target "stable-diffusion" links to:
+
+    CUDA::cuda_driver
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at ggml/src/ggml-cuda/CMakeLists.txt:188 (target_link_libraries):
+  Target "ggml-cuda" links to:
+
+    CUDA::cuda_driver
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+-- Generating done (0.2s)
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- CUDA Toolkit found
+-- Using CMAKE_CUDA_ARCHITECTURES=75 CMAKE_CUDA_ARCHITECTURES_NATIVE=No CUDA devices found.-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0;bf16-bf16;f8_e4m3-f8_e4m3
+-- CUDA host compiler is GNU 13.3.0
+-- Including CUDA backend
+-- ggml version: 1.0.0
+-- ggml commit:  eeda9ec4
+CMake Warning at examples/server/CMakeLists.txt:58 (message):
+  pnpm not found; frontend build disabled.
+
+
+-- HAVE_INDEX_HTML disabled
+-- Configuring done (0.3s)
+CMake Error at CMakeLists.txt:369 (target_link_libraries):
+  Target "stable-diffusion" links to:
+
+    CUDA::cuda_driver
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+-- Generating done (0.1s)
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1+
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- CUDA Toolkit found
+-- Using CMAKE_CUDA_ARCHITECTURES=75 CMAKE_CUDA_ARCHITECTURES_NATIVE=No CUDA devices found.-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0;bf16-bf16;f8_e4m3-f8_e4m3
+-- CUDA host compiler is GNU 13.3.0
+-- Including CUDA backend
+-- ggml version: 1.0.0
+-- ggml commit:  eeda9ec4
+CMake Warning at examples/server/CMakeLists.txt:58 (message):
+  pnpm not found; frontend build disabled.
+
+
+-- HAVE_INDEX_HTML disabled
+-- Configuring done (0.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: /root/bench/repos/stable-diffusion.cpp/build
+[  1%] Building C object thirdparty/CMakeFiles/sd-utf8proc.dir/utf8proc/utf8proc.c.o
+[  1%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+[  2%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/ascii.c.o
+[  3%] Building C object thirdparty/CMakeFiles/zip.dir/zip.c.o
+In file included from /root/bench/repos/stable-diffusion.cpp/thirdparty/zip.c:40:
+/root/bench/repos/stable-diffusion.cpp/thirdparty/miniz.h:4988:9: note: ‘#pragma message: Using fopen, ftello, fseeko, stat() etc. path for file I/O - this path may not support large files.’
+ 4988 | #pragma message(                                                               \
+      |         ^~~~~~~
+[  3%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/regcomp.c.o
+[  3%] Built target sd-utf8proc
+[  3%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+[  3%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+[  3%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/regenc.c.o
+[  4%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+[  5%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/regerror.c.o
+[  5%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/regexec.c.o
+[  5%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/regparse.c.o
+[  5%] Built target zip
+[  5%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-ext.cpp.o
+[  5%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-graph.cpp.o
+[  5%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+[  6%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+[  6%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/st.c.o
+[  7%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/unicode.c.o
+[  7%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/unicode_fold1_key.c.o
+[  7%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+[  7%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/unicode_fold2_key.c.o
+[  8%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/unicode_fold3_key.c.o
+[  8%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/unicode_unfold_key.c.o
+[  8%] Building C object thirdparty/CMakeFiles/onig.dir/oniguruma/utf8.c.o
+[  8%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+[  9%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+[  9%] Built target onig
+[  9%] Linking CXX static library libggml-base.a
+[  9%] Built target ggml-base
+[  9%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+[  9%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+[ 10%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+[ 10%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/acc.cu.o
+[ 10%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+[ 10%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/add-id.cu.o
+[ 10%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+[ 11%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/allreduce.cu.o
+[ 11%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/arange.cu.o
+[ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+[ 12%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/argmax.cu.o
+[ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+[ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+[ 12%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/argsort.cu.o
+[ 13%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/batch-get.cu.o
+[ 13%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/tiled/tiled.cpp.o
+[ 13%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/binbcast.cu.o
+[ 13%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/clamp.cu.o
+[ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/tiled/tiled-kernel.cpp.o
+[ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+[ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+[ 15%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/col2im-1d.cu.o
+[ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+[ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+/root/bench/repos/stable-diffusion.cpp/ggml/src/ggml-cpu/ops.cpp: In function ‘void ggml_compute_forward_clamp(const ggml_compute_params*, ggml_tensor*)’:
+/root/bench/repos/stable-diffusion.cpp/ggml/src/ggml-cpu/ops.cpp:6045:12: warning: enumeration value ‘GGML_TYPE_F8_E5M2’ not handled in switch [-Wswitch]
+ 6045 |     switch (src0->type) {
+      |            ^
+[ 16%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o
+[ 16%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/concat.cu.o
+[ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o
+[ 16%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv-transpose-1d.cu.o
+[ 17%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv2d-dw.cu.o
+[ 18%] Linking CXX static library libggml-cpu.a
+[ 18%] Built target ggml-cpu
+[ 18%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv2d-transpose.cu.o
+[ 18%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv2d.cu.o
+[ 18%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/conv3d.cu.o
+[ 19%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/convert.cu.o
+[ 19%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/count-equal.cu.o
+[ 19%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/cpy.cu.o
+[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/cross-entropy-loss.cu.o
+[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/cumsum.cu.o
+[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/diag.cu.o
+[ 20%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/dsv4-hc.cu.o
+[ 21%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn-mma-wide.cu.o
+[ 21%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn-tile.cu.o
+[ 21%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fattn.cu.o
+[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fill.cu.o
+[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fp8.cu.o
+[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/fwht.cu.o
+[ 22%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/gated-delta-net-mma.cu.o
+[ 23%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/gated_delta_net.cu.o
+[ 23%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/getrows.cu.o
+[ 23%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ggml-cuda.cu.o
+[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/gla.cu.o
+[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/im2col.cu.o
+[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/lightning-indexer.cu.o
+[ 24%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mean.cu.o
+[ 25%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmf.cu.o
+[ 25%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmid.cu.o
+[ 25%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmq-few.cu.o
+[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmq.cu.o
+[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmvf.cu.o
+[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/mmvq.cu.o
+[ 26%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/moe-weighted-reduction.cu.o
+[ 27%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/norm.cu.o
+[ 27%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/opt-step-adamw.cu.o
+[ 27%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/opt-step-sgd.cu.o
+[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/out-prod.cu.o
+[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pad.cu.o
+[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pad_reflect_1d.cu.o
+[ 28%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pool1d.cu.o
+[ 29%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/pool2d.cu.o
+[ 29%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/quantize.cu.o
+[ 29%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/roll.cu.o
+[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/rope.cu.o
+[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/scale.cu.o
+[ 30%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/set-rows.cu.o
+[ 31%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/set.cu.o
+[ 31%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/snake.cu.o
+[ 31%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/softcap.cu.o
+[ 31%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/softmax.cu.o
+[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/solve_tri.cu.o
+[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ssm-conv.cu.o
+[ 32%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/ssm-scan.cu.o
+[ 33%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/sum.cu.o
+[ 33%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/sumrows.cu.o
+[ 33%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/top-k-mask.cu.o
+[ 33%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/top-k.cu.o
+[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/topk-moe.cu.o
+[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/tri.cu.o
+[ 34%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/tsembd.cu.o
+[ 35%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/unary.cu.o
+[ 35%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/upscale.cu.o
+[ 35%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/wkv.cu.o
+[ 35%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq112-dv112.cu.o
+[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq128-dv128.cu.o
+[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq192-dv128.cu.o
+[ 36%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq256-dv256.cu.o
+[ 37%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq320-dv256.cu.o
+[ 37%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq40-dv40.cu.o
+[ 37%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq512-dv512.cu.o
+[ 37%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq576-dv512.cu.o
+[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq64-dv64.cu.o
+[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq72-dv72.cu.o
+[ 38%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq80-dv80.cu.o
+[ 39%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-tile-instance-dkq96-dv96.cu.o
+[ 39%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_1-ncols2_16.cu.o
+[ 39%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_1-ncols2_32.cu.o
+[ 39%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_1-ncols2_8.cu.o
+[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_1.cu.o
+[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_2.cu.o
+[ 40%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_16-ncols2_4.cu.o
+[ 41%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_16.cu.o
+[ 41%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_32.cu.o
+[ 41%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_4.cu.o
+[ 41%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_2-ncols2_8.cu.o
+[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_32-ncols2_1.cu.o
+[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_32-ncols2_2.cu.o
+[ 42%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_16.cu.o
+[ 43%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_2.cu.o
+[ 43%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_4.cu.o
+[ 43%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_4-ncols2_8.cu.o
+[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_64-ncols2_1.cu.o
+[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_1.cu.o
+[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_2.cu.o
+[ 44%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_4.cu.o
+[ 45%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-mma-f16-instance-ncols1_8-ncols2_8.cu.o
+[ 45%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq1_s.cu.o
+[ 45%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_s.cu.o
+[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_xs.cu.o
+[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq2_xxs.cu.o
+[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq3_s.cu.o
+[ 46%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq3_xxs.cu.o
+[ 47%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq4_nl.cu.o
+[ 47%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-iq4_xs.cu.o
+[ 47%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-mxfp4.cu.o
+[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-nvfp4.cu.o
+[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q1_0.cu.o
+[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q2_0.cu.o
+[ 48%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q2_k.cu.o
+[ 49%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q3_k.cu.o
+[ 49%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_0.cu.o
+[ 49%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_1.cu.o
+[ 50%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q4_k.cu.o
+[ 50%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_0.cu.o
+[ 50%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_1.cu.o
+[ 50%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q5_k.cu.o
+[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q6_k.cu.o
+[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmq-instance-q8_0.cu.o
+[ 51%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_1.cu.o
+[ 52%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_10.cu.o
+[ 52%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_11.cu.o
+[ 52%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_12.cu.o
+[ 52%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_13.cu.o
+[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_14.cu.o
+[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_15.cu.o
+[ 53%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_16.cu.o
+[ 54%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_2.cu.o
+[ 54%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_3.cu.o
+[ 54%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_4.cu.o
+[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_5.cu.o
+[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_6.cu.o
+[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_7.cu.o
+[ 55%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_8.cu.o
+[ 56%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/mmf-instance-ncols_9.cu.o
+[ 56%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-instance-f16-f16.cu.o
+[ 56%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-instance-q4_0-q4_0.cu.o
+[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-instance-q8_0-q8_0.cu.o
+[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-instance-bf16-bf16.cu.o
+[ 57%] Building CUDA object ggml/src/ggml-cuda/CMakeFiles/ggml-cuda.dir/template-instances/fattn-vec-instance-f8_e4m3-f8_e4m3.cu.o
+[ 57%] Linking CXX static library libggml-cuda.a
+[ 57%] Built target ggml-cuda
+[ 57%] Building CXX object ggml/src/CMakeFiles/ggml.dir/ggml-backend-dl.cpp.o
+[ 57%] Building CXX object ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o
+[ 57%] Linking CXX static library libggml.a
+[ 57%] Built target ggml
+[ 58%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/rope_cuda.cu.o
+[ 58%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/int8_cuda.cu.o
+[ 58%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/w4_cuda.cu.o
+[ 59%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/convrot_cuda.cu.o
+[ 59%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/affine_cuda.cu.o
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/int8.cu(975): warning #177-D: variable "intermediate" was declared but never referenced
+                  const bool intermediate = p.kind == SWIGLU_QUANTIZE || (p.kind == GATED && !p.fused_activation);
+                             ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[ 59%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/modulate_cuda.cu.o
+[ 59%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/bf16_cuda.cu.o
+[ 60%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/rms_affine_cuda.cu.o
+[ 60%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/registration_cuda.cu.o
+[ 60%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/sage_attention.cu.o
+[ 61%] Building CUDA object src/core/cuda/CMakeFiles/sd-cuda.dir/sol_attention.cu.o
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(170): warning #174-D: expression has no effect
+              offset_Q = smem_Q.advance_offset_by_column<2>(offset_Q - (num_tiles_q * 16 * stride), iter);
+                                                            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(188): warning #174-D: expression has no effect
+              offset_K = smem_K.advance_offset_by_column<2>(offset_K - (num_tiles_k * 16 * stride), iter);
+                                                            ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(200): warning #174-D: expression has no effect
+              offset_Q = smem_Q.advance_offset_by_column<2>(offset_Q - (num_tiles_q * 16 * stride), iter);
+                                                            ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(218): warning #174-D: expression has no effect
+              offset_K = smem_K.advance_offset_by_column<2>(offset_K - (num_tiles_k * 16 * stride), iter);
+                                                            ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(516): warning #174-D: expression has no effect
+                  offset_V = smem_V.advance_offset_by_column<2>(offset_V, fv);
+                                                                ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(547): warning #174-D: expression has no effect
+                  offset_V = smem_V.advance_offset_by_column<2>(offset_V, fv);
+                                                                ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sageattention/attn_utils.cuh(566): warning #174-D: expression has no effect
+                  offset_V = smem_V.advance_offset_by_column<2>(offset_V, fv);
+                                                                ^
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sol_attention.cu(136): warning #177-D: function "sd_cuda::sol_load(sd_cuda::SolQTile &, const nv_bfloat162 *, int)" was declared but never referenced
+                                       void sol_load(SolQTile& tile, const nv_bfloat162* input, int stride) {
+                                            ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/root/bench/repos/stable-diffusion.cpp/src/core/cuda/sol_attention.cu(159): warning #177-D: function "sd_cuda::sol_scores" was declared but never referenced
+                                       void sol_scores(const SolQTile (&q)[8], const nv_bfloat16* k, SolTile (&scores)[8], float scale) {
+                                            ^
+
+[ 61%] Built target sd-cuda
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/api.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/options.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/result.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/tensor.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/conditioning/prompt_input.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/conditioning/wan_audio.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/config.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/convert.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/backend_fit.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/compute_workspace.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/int8.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/modulate.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/registration.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/rope.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/w4.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/execution_engine.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_compat.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extend.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extend_backend.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extensions.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_graph_cut.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_runner.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_tensor_utils.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/layer_split_partition.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/option_types.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/parallel.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/pe_cache.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/backend_probe.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/conv_direct.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/flash_attn.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/regex.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/runner_cache.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/segment_graph_bindings.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/segment_weight_pipeline.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/util.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/detailer.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/extensions/photomaker_extension.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/extensions/pulid_extension.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/generation_info.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/adapter/lora_ops.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/anima.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/boogu_image.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ernie_image.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/fibo2.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux2.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux3.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/hidream_o1.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/hunyuan_video.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ideogram4.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/iris.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/krea2.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/lens.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/lingbot_video.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/llada_image.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/longcat.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ltxav.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/mage_flow.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ming_image.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/minimax_h3.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/minit2i.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/moss_image.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/pid.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/pixart.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/qwen_image.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sd.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sd3.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sensenova_u1.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/wan.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/z_image.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/z_image_l2p.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/gguf_io.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/pickle_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/safetensors_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/torch_legacy_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/torch_zip_io.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_loader.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_loader_files.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager_files.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager_prefetch.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_registry.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/name_conversion.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/diffusion_engine.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/image.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/image_upscale.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/model_builders.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/relay_vsr.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/request.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/seedvr2.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/video.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/video_upscale.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/audio_processing.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/guidance.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/image_preprocess.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/imatrix.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/sample-cache.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/tiling.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/stable-diffusion.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/bpe_tokenizer.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/clip_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/gemma_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/hf_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/mistral_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/qwen2_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/sensenova_u1_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/t5_unigram_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenize_util.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenizer.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenizer_config.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/vocab/vocab.cpp.o
+[ 94%] Building CXX object CMakeFiles/stable-diffusion.dir/src/upscaler.cpp.o
+[ 94%] Building CXX object CMakeFiles/stable-diffusion.dir/src/version.cpp.o
+[ 94%] Linking CXX static library libstable-diffusion.a
+[ 94%] Built target stable-diffusion
+[ 94%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/log.cpp.o
+[ 95%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/generation_metadata.cpp.o
+[ 95%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/common.cpp.o
+[ 95%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/common.cpp.o
+[ 95%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/media_io.cpp.o
+[ 95%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/generation_metadata.cpp.o
+[ 96%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/log.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/media_metadata.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/image_metadata.cpp.o
+[ 97%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/media_io.cpp.o
+[ 97%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/media_metadata.cpp.o
+[ 97%] Building CXX object examples/server/CMakeFiles/sd-server.dir/main.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/main.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/runtime.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/model_catalog.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_models.cpp.o
+[ 98%] Linking CXX executable ../../bin/sd-cli
+/usr/bin/ld: ../../libstable-diffusion.a(ggml_extend_backend.cpp.o): in function `cuda_compiled_arch(ggml_backend*)':
+ggml_extend_backend.cpp:(.text+0xdc87): undefined reference to `cuInit'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xddcb): undefined reference to `cuDeviceGetByPCIBusId'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xdde6): undefined reference to `cuDeviceGetAttribute'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xde01): undefined reference to `cuDeviceGetAttribute'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [examples/cli/CMakeFiles/sd-cli.dir/build.make:216: bin/sd-cli] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:604: examples/cli/CMakeFiles/sd-cli.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 99%] Building CXX object examples/server/CMakeFiles/sd-server.dir/async_jobs.cpp.o
+[ 99%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_index.cpp.o
+[ 99%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_openai.cpp.o
+[ 99%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_sdapi.cpp.o
+[100%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_sdcpp.cpp.o
+[100%] Linking CXX executable ../../bin/sd-server
+/usr/bin/ld: ../../libstable-diffusion.a(ggml_extend_backend.cpp.o): in function `cuda_compiled_arch(ggml_backend*)':
+ggml_extend_backend.cpp:(.text+0xdc87): undefined reference to `cuInit'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xddcb): undefined reference to `cuDeviceGetByPCIBusId'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xdde6): undefined reference to `cuDeviceGetAttribute'
+/usr/bin/ld: ggml_extend_backend.cpp:(.text+0xde01): undefined reference to `cuDeviceGetAttribute'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [examples/server/CMakeFiles/sd-server.dir/build.make:326: bin/sd-server] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:643: examples/server/CMakeFiles/sd-server.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+-- Use CUDA as backend stable-diffusion
+-- stable-diffusion.cpp version master-1106-532d2c1
+-- stable-diffusion.cpp commit 532d2c1
+-- Build static library
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- CUDA Toolkit found
+-- Using CMAKE_CUDA_ARCHITECTURES=75 CMAKE_CUDA_ARCHITECTURES_NATIVE=No CUDA devices found.-real
+-- FlashAttention K-V type combinations: f16-f16;q4_0-q4_0;q8_0-q8_0;bf16-bf16;f8_e4m3-f8_e4m3
+-- CUDA host compiler is GNU 13.3.0
+-- Including CUDA backend
+-- ggml version: 1.0.0
+-- ggml commit:  eeda9ec4
+CMake Warning at examples/server/CMakeLists.txt:58 (message):
+  pnpm not found; frontend build disabled.
+
+
+-- HAVE_INDEX_HTML disabled
+-- Configuring done (0.3s)
+-- Generating done (0.1s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUDA_CUDA_LIBRARY
+
+
+-- Build files have been written to: /root/bench/repos/stable-diffusion.cpp/build
+[  1%] Built target zip
+[  1%] Built target sd-utf8proc
+[  5%] Built target onig
+[  9%] Built target ggml-base
+[ 14%] Built target ggml-cpu
+[ 57%] Built target ggml-cuda
+[ 57%] Built target ggml
+[ 61%] Built target sd-cuda
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/api.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/options.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/result.cpp.o
+[ 62%] Building CXX object CMakeFiles/stable-diffusion.dir/src/api/tensor.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/conditioning/prompt_input.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/conditioning/wan_audio.cpp.o
+[ 63%] Building CXX object CMakeFiles/stable-diffusion.dir/src/config.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/convert.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/backend_fit.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/compute_workspace.cpp.o
+[ 64%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/int8.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/modulate.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/registration.cpp.o
+[ 65%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/rope.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/cpu/w4.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/execution_engine.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_compat.cpp.o
+[ 66%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extend.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extend_backend.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_extensions.cpp.o
+[ 67%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_graph_cut.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_runner.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/ggml_tensor_utils.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/layer_split_partition.cpp.o
+[ 68%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/option_types.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/parallel.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/pe_cache.cpp.o
+[ 69%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/backend_probe.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/conv_direct.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/probe/flash_attn.cpp.o
+[ 70%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/regex.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/runner_cache.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/segment_graph_bindings.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/segment_weight_pipeline.cpp.o
+[ 71%] Building CXX object CMakeFiles/stable-diffusion.dir/src/core/util.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/detailer.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/extensions/photomaker_extension.cpp.o
+[ 72%] Building CXX object CMakeFiles/stable-diffusion.dir/src/extensions/pulid_extension.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/generation_info.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/adapter/lora_ops.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/anima.cpp.o
+[ 73%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/boogu_image.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ernie_image.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/fibo2.cpp.o
+[ 74%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux2.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/flux3.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/hidream_o1.cpp.o
+[ 75%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/hunyuan_video.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ideogram4.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/iris.cpp.o
+[ 76%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/krea2.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/lens.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/lingbot_video.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/llada_image.cpp.o
+[ 77%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/longcat.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ltxav.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/mage_flow.cpp.o
+[ 78%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/ming_image.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/minimax_h3.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/minit2i.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/moss_image.cpp.o
+[ 79%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/pid.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/pixart.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/qwen_image.cpp.o
+[ 80%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sd.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sd3.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/sensenova_u1.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/wan.cpp.o
+[ 81%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/z_image.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model/integrations/z_image_l2p.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/gguf_io.cpp.o
+[ 82%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/pickle_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/safetensors_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/torch_legacy_io.cpp.o
+[ 83%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_io/torch_zip_io.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_loader.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_loader_files.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager.cpp.o
+[ 84%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager_files.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_manager_prefetch.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/model_registry.cpp.o
+[ 85%] Building CXX object CMakeFiles/stable-diffusion.dir/src/name_conversion.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/diffusion_engine.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/image.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/image_upscale.cpp.o
+[ 86%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/model_builders.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/relay_vsr.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/request.cpp.o
+[ 87%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/seedvr2.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/video.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/pipeline/video_upscale.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/audio_processing.cpp.o
+[ 88%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/guidance.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/image_preprocess.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/imatrix.cpp.o
+[ 89%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/sample-cache.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/runtime/tiling.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/stable-diffusion.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/bpe_tokenizer.cpp.o
+[ 90%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/clip_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/gemma_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/hf_tokenizer.cpp.o
+[ 91%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/mistral_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/qwen2_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/sensenova_u1_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/t5_unigram_tokenizer.cpp.o
+[ 92%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenize_util.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenizer.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/tokenizer_config.cpp.o
+[ 93%] Building CXX object CMakeFiles/stable-diffusion.dir/src/tokenizers/vocab/vocab.cpp.o
+[ 94%] Building CXX object CMakeFiles/stable-diffusion.dir/src/upscaler.cpp.o
+[ 94%] Building CXX object CMakeFiles/stable-diffusion.dir/src/version.cpp.o
+[ 94%] Linking CXX static library libstable-diffusion.a
+[ 94%] Built target stable-diffusion
+[ 94%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/common.cpp.o
+[ 94%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/log.cpp.o
+[ 95%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/generation_metadata.cpp.o
+[ 95%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/common.cpp.o
+[ 95%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/generation_metadata.cpp.o
+[ 96%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/log.cpp.o
+[ 96%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/media_io.cpp.o
+[ 96%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/media_io.cpp.o
+[ 96%] Building CXX object examples/server/CMakeFiles/sd-server.dir/__/common/media_metadata.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/__/common/media_metadata.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/image_metadata.cpp.o
+[ 97%] Building CXX object examples/cli/CMakeFiles/sd-cli.dir/main.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/async_jobs.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/main.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/model_catalog.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_index.cpp.o
+[ 98%] Linking CXX executable ../../bin/sd-cli
+[ 98%] Built target sd-cli
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_models.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_openai.cpp.o
+[ 98%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_sdapi.cpp.o
+[ 99%] Building CXX object examples/server/CMakeFiles/sd-server.dir/routes_sdcpp.cpp.o
+[100%] Building CXX object examples/server/CMakeFiles/sd-server.dir/runtime.cpp.o
+[100%] Linking CXX executable ../../bin/sd-server
+[100%] Built target sd-server
+[19:13:21] BUILD DONE

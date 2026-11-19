@@ -1,0 +1,1 @@
+zimage_dual2,dual2,97.734,0,4

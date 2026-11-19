@@ -1,0 +1,4 @@
+cog_s50_f49 cogvideox-2b 50 49 720x480 42 1 NA NA
+    stats=dict(mean=[round(x,1) for x in ImageStat.Stat(im).mean], std=[round(x,1) for x in ImageStat.Stat(im).std])
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Stat' object has no attribute 'std'

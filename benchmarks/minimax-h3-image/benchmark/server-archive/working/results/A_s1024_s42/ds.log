@@ -1,0 +1,59 @@
+┌──────────────────────────────────────────────────────────────────────┐
+│ DiffSynth-Studio Model Downloader Configuration:                     │
+│                                                                      │
+│ [√] Download from https://modelscope.cn/                             │
+│     (default behavior)                                               │
+│ [ ] Download from https://modelscope.ai/                             │
+│     (enabled via `export MODELSCOPE_ENDPOINT=https://modelscope.ai`) │
+│ [ ] Download from https://huggingface.co/                            │
+│     (enabled via `export DIFFSYNTH_DOWNLOAD_SOURCE=HuggingFace`)     │
+│ [ ] Skip download and load only pre-downloaded model files           │
+│     (enabled via `export DIFFSYNTH_SKIP_DOWNLOAD=True`)              │
+└──────────────────────────────────────────────────────────────────────┘
+Loading models from: "/root/bench/models/diffsynth/DiffSynth-Studio__MiniMax-H3-Image-EntroPack/models/dit_extreme_3bpp.safetensors"
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+200 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+2 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+8 nn.Linear layers replaced for loading the pre-quantized checkpoint (method: entropack_lossy_quant).
+Loaded model: {
+    "model_name": "minimax_h3_image_dit",
+    "model_class": "diffsynth.models.minimax_h3_image_dit.MiniMaxH3ImageDiTPruned",
+    "extra_kwargs": null
+}
+Loading models from: "/kaggle/working/bench/models/diffsynth/text_encoder/text_encoder_3bpp.safetensors"
+Quantization backend `entropack`: for hardware compatibility issues see https://github.com/modelscope/entropack
+Traceback (most recent call last):
+  File "/kaggle/working/bench/run_diffsynth.py", line 10, in <module>
+    pipe = MiniMaxH3ImagePipeline.from_pretrained(
+        torch_dtype=torch.float16,   # Turing: FP16 tensor cores, no BF16
+    ...<8 lines>...
+        vram_limit=13,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/pipelines/minimax_h3_image.py", line 71, in from_pretrained
+    model_pool = pipe.download_and_load_models(model_configs, vram_limit)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/diffusion/base_pipeline.py", line 312, in download_and_load_models
+    model_pool.auto_load_model(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        model_config.path,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        quantize=model_config.quantize,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/models/model_loader.py", line 91, in auto_load_model
+    model = self.load_model_file(config, path, vram_config, vram_limit=vram_limit, state_dict=state_dict, quantize=quantize)
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/models/model_loader.py", line 46, in load_model_file
+    model = load_model(
+        model_class, path, model_config,
+    ...<6 lines>...
+        quantize=quantize,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/core/loader/model.py", line 90, in load_model
+    state_dict = {i: state_dict[i] for i in state_dict}
+                     ~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/dist-packages/diffsynth/core/vram/disk_map.py", line 62, in __getitem__
+    param = self.files[file_id].get_tensor(name)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 48.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 30.81 MiB is free. Process 50 has 104.00 MiB memory in use. Including non-PyTorch memory, this process has 14.42 GiB memory in use. Of the allocated memory 14.19 GiB is allocated by PyTorch, and 124.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

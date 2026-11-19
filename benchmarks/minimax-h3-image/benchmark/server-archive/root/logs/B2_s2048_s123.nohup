@@ -1,0 +1,1 @@
+RUN /root/bench/results/B2_s2048_s123: rc=0 wall=180.5s peak_vram_mib={'0': 12413, '1': 3}

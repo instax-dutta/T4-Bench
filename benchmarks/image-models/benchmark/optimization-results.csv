@@ -1,0 +1,15 @@
+model,mode,wall_s,images,images_per_hour,peak_gpu0_mib,source
+flux2-klein-4b,baseline_cold_1,23.693,1,152,3677,benchmark/results.csv seed 123
+flux2-klein-4b,batch4_single_gpu,86.298,4,167,3677,server archive logs/flux_single4_result.txt
+flux2-klein-4b,batch2_per_gpu_dual,41.281,4,349,3677,server archive logs/flux_dual2_result.txt
+flux2-klein-4b,batch8_single_gpu,146.258,8,197,3677,captured shell output 2026-11-18 22:20 UTC
+flux2-klein-4b,batch4_per_gpu_dual,77.020,8,374,3677,captured shell output 2026-11-18 22:20 UTC
+z-image-turbo,baseline_cold_1,47.609,1,76,4651,benchmark/results.csv seed 999
+z-image-turbo,batch4_single_gpu,177.977,4,81,4651,server archive logs/zimage_single4_result.txt
+z-image-turbo,batch2_per_gpu_dual,97.734,4,147,4651,server archive logs/zimage_dual2_result.txt
+qwen-image-2.1-viggle-4step,baseline_cold_1,64.004,1,56,5867,benchmark/results.csv seed 42
+qwen-image-2.1-viggle-4step,batch4_single_gpu,160.195,4,90,5867,server archive logs/qwen_single4_result.txt
+qwen-image-2.1-viggle-4step,batch2_per_gpu_dual,96.066,4,150,5867,server archive logs/qwen_dual2_result.txt
+sdxl,baseline_cold_1,63.523,1,57,7313,benchmark/results.csv seed 123
+sdxl,batch4_single_gpu,248.739,4,58,7313,captured shell output 2026-11-18 21:53 UTC
+sdxl,batch2_per_gpu_dual,134.794,4,107,7313,captured shell output 2026-11-18 21:53 UTC

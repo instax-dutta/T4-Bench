@@ -1,0 +1,9 @@
+[18:29:50] START python deps
+[18:30:00] OK python deps
+[18:30:00] START clone ComfyUI
+[18:30:03] OK ComfyUI
+[18:30:03] START clone ComfyUI-GGUF
+[18:30:03] OK ComfyUI-GGUF
+[18:30:03] START clone DiffSynth-Studio
+[18:30:05] OK DiffSynth
+[18:30:05] DONE setup

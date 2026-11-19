@@ -1,0 +1,45 @@
+ggml_cuda_init: found 2 CUDA devices (Total VRAM: 29823 MiB):
+  Device 0: Tesla T4, compute capability 7.5, VMM: no, VRAM: 14911 MiB
+  Device 1: Tesla T4, compute capability 7.5, VMM: no, VRAM: 14911 MiB
+[I] loading diffusion model from '/kaggle/working/quadbench/models/zimage/z_image_turbo-Q4_K.gguf' --- diffusion_engine.cpp:697
+[I] load /kaggle/working/quadbench/models/zimage/z_image_turbo-Q4_K.gguf using gguf format --- model_loader.cpp:220
+[I] loading llm from '/kaggle/working/quadbench/models/shared/Qwen3-4B-Instruct-2507-Q4_K_M.gguf' --- diffusion_engine.cpp:754
+[I] load /kaggle/working/quadbench/models/shared/Qwen3-4B-Instruct-2507-Q4_K_M.gguf using gguf format --- model_loader.cpp:220
+[I] loading vae from '/kaggle/working/quadbench/models/zimage/split_files/vae/ae.safetensors' --- diffusion_engine.cpp:768
+[I] load /kaggle/working/quadbench/models/zimage/split_files/vae/ae.safetensors using safetensors format --- model_loader.cpp:226
+[I] Version: Z-Image  --- diffusion_engine.cpp:982
+[I] Weight type stat:                      f32: 640  |    q8_0: 22   |    q4_K: 396  |    q6_K: 37    --- diffusion_engine.cpp:1560
+[I] Conditioner weight type stat:          f32: 145  |    q4_K: 216  |    q6_K: 37    --- diffusion_engine.cpp:1561
+[I] Diffusion model weight type stat:      f32: 251  |    q8_0: 22   |    q4_K: 180   --- diffusion_engine.cpp:1562
+[I] VAE weight type stat:                  f32: 244   --- diffusion_engine.cpp:1563
+[I] using VAE for encoding / decoding --- model_builders.cpp:226
+[I] vae decoder: ch = 128 --- auto_encoder_kl.hpp:529
+[I] flash attention auto: CUDA0 -> on (CUDA MMA) --- flash_attn.cpp:74
+[I] conv2d direct auto: CUDA0 -> on (implicit GEMM) --- conv_direct.cpp:87
+[I] conv3d direct auto: CUDA0 -> on (implicit GEMM) --- conv_direct.cpp:87
+[I] total params memory size = 6221.12MB (VRAM 0.00MB, RAM 6221.12MB): text_encoders 2375.91MB(RAM), diffusion_model 3685.21MB(RAM), vae 160.00MB(RAM), controlnet 0.00MB(N/A), extensions 0.00MB(N/A) --- diffusion_engine.cpp:1430
+[I] running in FLOW mode --- diffusion_engine.cpp:1485
+[I] generate_image 1024x1024 --- image.cpp:954
+[I] get_sigmas with discrete scheduler --- denoiser.hpp:1132
+[I] sampling using Euler method --- request.cpp:478
+[I] qwen3 build cached graph cut plan done (taking 3 ms) --- ggml_graph_cut.cpp:1032
+  |#                                                 |   1/386 -   0.00MB/s[K  |###################################               | 263/386 -   7.93GB/s[K  |##################################################| 386/386 -   5.64GB/s[K
+[I] loading tensors completed, taking 0.40s (read: 0.28s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.00s) --- model_loader.cpp:1437
+[I] get_learned_condition completed, taking 1.90s --- image.cpp:664
+[I] generating image: 1/1 - seed 123 --- image.cpp:1005
+[I] z_image build cached graph cut plan done (taking 6 ms) --- ggml_graph_cut.cpp:1032
+  |#####################                             | 183/452 -   7.30GB/s[K  |############################################      | 390/452 -   7.39GB/s[K  |##################################################| 452/452 -   5.99GB/s[K
+[I] loading tensors completed, taking 0.60s (read: 0.48s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.00s) --- model_loader.cpp:1437
+  |======>                                           | 1/8 -   7.08s/it - ETA 00:49[K  |============>                                     | 2/8 -   4.14s/it - ETA 00:33[K  |==================>                               | 3/8 -   4.15s/it - ETA 00:25[K  |=========================>                        | 4/8 -   4.17s/it - ETA 00:19[K  |===============================>                  | 5/8 -   4.19s/it - ETA 00:14[K  |=====================================>            | 6/8 -   4.21s/it - ETA 00:09[K  |===========================================>      | 7/8 -   4.23s/it - ETA 00:04[K  |==================================================| 8/8 -   4.24s/it[K
+[I] sampling completed, taking 36.43s --- image.cpp:1038
+[I] generating 1 latent images completed, taking 36.43s --- image.cpp:1050
+[I] decoding 1 latents --- image.cpp:689
+[I] vae build cached graph cut plan done (taking 0 ms) --- ggml_graph_cut.cpp:1032
+  |##################################################| 138/138 - 945.00MB/s[K
+[I] loading tensors completed, taking 0.20s (read: 0.02s, memcpy: 0.00s, convert: 0.07s, copy_to_backend: 0.00s) --- model_loader.cpp:1437
+  |=>                                                |  1/49 -   2.34it/s - ETA 00:20[K  |==>                                               |  2/49 -   8.55it/s - ETA 00:12[K  |===>                                              |  3/49 -   8.40it/s - ETA 00:10[K  |====>                                             |  4/49 -   8.33it/s - ETA 00:08[K  |=====>                                            |  5/49 -   8.40it/s - ETA 00:07[K  |======>                                           |  6/49 -   8.47it/s - ETA 00:07[K  |=======>                                          |  7/49 -   8.55it/s - ETA 00:06[K  |========>                                         |  8/49 -   8.47it/s - ETA 00:06[K  |=========>                                        |  9/49 -   8.40it/s - ETA 00:06[K  |==========>                                       | 10/49 -   8.47it/s - ETA 00:05[K  |===========>                                      | 11/49 -   8.33it/s - ETA 00:05[K  |============>                                     | 12/49 -   8.26it/s - ETA 00:05[K  |=============>                                    | 13/49 -   8.40it/s - ETA 00:05[K  |==============>                                   | 14/49 -   8.55it/s - ETA 00:04[K  |===============>                                  | 15/49 -   8.55it/s - ETA 00:04[K  |================>                                 | 16/49 -   8.47it/s - ETA 00:04[K  |=================>                                | 17/49 -   8.33it/s - ETA 00:04[K  |==================>                               | 18/49 -   8.33it/s - ETA 00:04[K  |===================>                              | 19/49 -   8.40it/s - ETA 00:04[K  |====================>                             | 20/49 -   8.47it/s - ETA 00:03[K  |=====================>                            | 21/49 -   8.55it/s - ETA 00:03[K  |======================>                           | 22/49 -   8.47it/s - ETA 00:03[K  |=======================>                          | 23/49 -   8.47it/s - ETA 00:03[K  |========================>                         | 24/49 -   8.40it/s - ETA 00:03[K  |=========================>                        | 25/49 -   8.40it/s - ETA 00:03[K  |==========================>                       | 26/49 -   8.47it/s - ETA 00:02[K  |===========================>                      | 27/49 -   8.55it/s - ETA 00:02[K  |============================>                     | 28/49 -   8.47it/s - ETA 00:02[K  |=============================>                    | 29/49 -   8.40it/s - ETA 00:02[K  |==============================>                   | 30/49 -   8.33it/s - ETA 00:02[K  |===============================>                  | 31/49 -   8.33it/s - ETA 00:02[K  |================================>                 | 32/49 -   8.47it/s - ETA 00:02[K  |=================================>                | 33/49 -   8.55it/s - ETA 00:02[K  |==================================>               | 34/49 -   8.47it/s - ETA 00:01[K  |===================================>              | 35/49 -   8.55it/s - ETA 00:01[K  |====================================>             | 36/49 -   8.40it/s - ETA 00:01[K  |=====================================>            | 37/49 -   8.40it/s - ETA 00:01[K  |======================================>           | 38/49 -   8.55it/s - ETA 00:01[K  |=======================================>          | 39/49 -   8.55it/s - ETA 00:01[K  |========================================>         | 40/49 -   8.55it/s - ETA 00:01[K  |=========================================>        | 41/49 -   8.40it/s - ETA 00:01[K  |==========================================>       | 42/49 -   8.40it/s - ETA 00:00[K  |===========================================>      | 43/49 -   8.40it/s - ETA 00:00[K  |============================================>     | 44/49 -   8.62it/s - ETA 00:00[K  |=============================================>    | 45/49 -   8.47it/s - ETA 00:00[K  |==============================================>   | 46/49 -   8.47it/s - ETA 00:00[K  |===============================================>  | 47/49 -   8.40it/s - ETA 00:00[K  |================================================> | 48/49 -   8.40it/s - ETA 00:00[K  |==================================================| 49/49 -   8.47it/s[K
+[I] latent 1 decoded, taking 6.12s --- image.cpp:755
+[I] decode_first_stage completed, taking 6.12s --- image.cpp:759
+[I] generate_image completed in 44.47s --- image.cpp:1227
+[I] save result image 0 to '/kaggle/working/quadbench/results/zimage_s123/out.png' (success) --- main.cpp:501
+[I] 1/1 images saved --- main.cpp:579

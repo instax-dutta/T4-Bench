@@ -1,0 +1,17 @@
+[21:21:09] START Qwen download
+[90mHint: A new version of huggingface_hub (2.4.0) is available! You are using version 1.33.0.
+To update, run: hf update[0m
+[90mHint: The `hf-cli` skill is not installed. Run `hf skills add -g` to teach your AI agents how to use the `hf` CLI.[0m
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/qwen/qwen_image_2.1_turbo_Q4_K_M.gguf
+OK_dit
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/shared/Qwen3VL-8B-Instruct-Q4_K_M.gguf
+OK_te
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/qwen/vae/qwen_image_2.1_vae_bf16.safetensors
+OK_vae
+[21:21:50] DONE

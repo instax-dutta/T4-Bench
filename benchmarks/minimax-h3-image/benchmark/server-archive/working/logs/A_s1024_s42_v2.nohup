@@ -1,0 +1,9 @@
+DIFFSYNTH A_s1024_s42_v2 rc=1
+        enable_cooperative_groups, name_expressions, log_stream,
+        cache_in_memory, jitify, to_ltoir)
+  File "/usr/local/lib/python3.13/dist-packages/cupy/cuda/compiler.py", line 634, in _compile_with_cache_cuda
+    os.makedirs(cache_dir, exist_ok=True)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 218, in makedirs
+  File "<frozen os>", line 228, in makedirs
+OSError: [Errno 30] Read-only file system: '/root/.cupy'

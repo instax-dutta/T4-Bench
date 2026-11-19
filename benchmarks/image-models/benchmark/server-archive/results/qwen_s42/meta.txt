@@ -1,0 +1,2 @@
+model=qwen-image-2.1-viggle-4step steps=4 cfg=1.0 sigmas= size=1024x1024 seed=42
+prompt_sha256=6d9517e33813f5d26ed720f27554eccbf9b0d3cf2f45291c25ef47007844eef2

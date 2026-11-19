@@ -1,0 +1,16 @@
+[21:17:07] START Z-Image download
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{"timestamp":"2026-11-18T21:17:08.431766Z","level":"ERROR","fields":{"message":"Error logging to file \"/root/.cache/huggingface/xet/logs/xet_20261118T211708427+0000_18269.log\" (Read-only file system (os error 30)); falling back to console logging."},"filename":"/home/runner/work/xet-core/xet-core/xet_runtime/src/logging/init.rs","line_number":64}
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/zimage/z_image_turbo-Q4_K.gguf
+OK dit
+{"timestamp":"2026-11-18T21:17:16.806553Z","level":"ERROR","fields":{"message":"Error logging to file \"/root/.cache/huggingface/xet/logs/xet_20261118T211716806+0000_18309.log\" (Read-only file system (os error 30)); falling back to console logging."},"filename":"/home/runner/work/xet-core/xet-core/xet_runtime/src/logging/init.rs","line_number":64}
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/zimage/split_files/vae/ae.safetensors
+OK vae
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+{"timestamp":"2026-11-18T21:17:18.943067Z","level":"ERROR","fields":{"message":"Error logging to file \"/root/.cache/huggingface/xet/logs/xet_20261118T211718942+0000_18329.log\" (Read-only file system (os error 30)); falling back to console logging."},"filename":"/home/runner/work/xet-core/xet-core/xet_runtime/src/logging/init.rs","line_number":64}
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/shared/Qwen3-4B-Instruct-2507-Q4_K_M.gguf
+OK qwen3-4b
+[21:17:24] DONE

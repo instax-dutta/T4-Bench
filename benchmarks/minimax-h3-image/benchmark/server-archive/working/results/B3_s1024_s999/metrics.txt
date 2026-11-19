@@ -1,0 +1,3 @@
+exit_code=0
+wall_seconds=108.621
+peak_vram_mib={'0': 13971, '1': 3}

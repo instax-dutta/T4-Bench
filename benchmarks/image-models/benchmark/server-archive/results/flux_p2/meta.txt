@@ -1,0 +1,2 @@
+model=flux2-klein-4b steps=4 cfg=1.0 sigmas= size=1024x1024 seed=42
+prompt_sha256=6f2b7bad93d654104ff751254459903bf88b736f5f9bffa6e5a5b1e1fbcaba6e

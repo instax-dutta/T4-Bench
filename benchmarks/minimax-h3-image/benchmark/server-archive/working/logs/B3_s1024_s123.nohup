@@ -1,0 +1,1 @@
+RUN /kaggle/working/bench/results/B3_s1024_s123: rc=0 wall=114.7s peak_vram_mib={'0': 13971, '1': 3}

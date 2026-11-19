@@ -1,0 +1,5 @@
+Run ID: B3_s1024_s42
+Diffusion: /root/bench/models/unsloth-gguf/minimax_h3_image_pruned-Q5_K_M.gguf
+LLM: /root/bench/models/p-h3-te/text_encoders/p-h3-image_text_encoder_int8_convrot.safetensors
+Size: 1024x1024 Seed: 42
+Prompt sha256: 6d9517e33813f5d26ed720f27554eccbf9b0d3cf2f45291c25ef47007844eef2

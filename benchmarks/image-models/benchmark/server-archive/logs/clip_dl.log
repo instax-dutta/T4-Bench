@@ -1,0 +1,4 @@
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 12 files:   8%|▊         | 1/12 [00:00<00:01,  9.02it/s]Fetching 12 files:  33%|███▎      | 4/12 [00:00<00:00, 19.78it/s]Fetching 12 files:  83%|████████▎ | 10/12 [00:03<00:00,  2.56it/s]Fetching 12 files: 100%|██████████| 12/12 [00:05<00:00,  1.74it/s]Fetching 12 files: 100%|██████████| 12/12 [00:05<00:00,  2.11it/s]
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/clip

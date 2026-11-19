@@ -1,0 +1,152 @@
+import manimgx as m
+
+PAPER = "#0E1110"
+INK = "#ECEDE6"
+MUTED = "#9AA19A"
+RULE = "#2C322E"
+VERM = "#FF6B4A"
+TEAL = "#4FD1C5"
+GREEN = "#67C77D"
+AMBER = "#F0B75C"
+
+
+def header(scene, kicker, title):
+    scene.camera.background_color = PAPER
+    k = m.Text(kicker, font_size=20, weight="BOLD").set_color(VERM)
+    t = m.Text(title, font_size=38, weight="BOLD").set_color(INK)
+    k.to_corner(m.UL, buff=0.55)
+    t.next_to(k, m.DOWN, buff=0.18).align_to(k, m.LEFT)
+    line = m.Line(m.LEFT * 5.8, m.RIGHT * 5.8, color=RULE, stroke_width=1.5)
+    line.next_to(t, m.DOWN, buff=0.28)
+    scene.add(k, t, line)
+    return t
+
+
+class ImageRace(m.Scene):
+    def construct(self):
+        header(self, "01 / IMAGE MODELS", "Images per hour, both GPUs busy")
+        items = [("FLUX", 374, VERM), ("QWEN", 150, TEAL),
+                 ("Z-IMG", 147, GREEN), ("SDXL", 107, INK)]
+        maxv = 400
+        baseline = -1.7
+        bars, labels, nums = [], [], []
+        for i, (name, val, col) in enumerate(items):
+            h = val / maxv * 3.0
+            x = -4.5 + i * 3.0
+            r = m.Rectangle(width=1.5, height=h, color=col, fill_color=col,
+                            fill_opacity=1, stroke_width=0)
+            r.move_to([x, baseline + h / 2, 0])
+            bars.append(r)
+            lab = m.Text(name, font_size=20, weight="BOLD").set_color(MUTED)
+            lab.move_to([x, baseline - 0.45, 0])
+            labels.append(lab)
+            num = m.Text(str(val), font_size=30, weight="BOLD").set_color(col)
+            num.move_to([x, baseline + h + 0.35, 0])
+            nums.append(num)
+        axis = m.Line([-5.6, baseline, 0], [5.6, baseline, 0], color=MUTED, stroke_width=1.5)
+        self.add(axis)
+        self.play(m.LaggedStart(*[m.GrowFromEdge(b, m.DOWN) for b in bars], lag_ratio=0.12))
+        self.play(m.LaggedStart(*[m.FadeIn(n, shift=m.DOWN * 0.15) for n in nums], lag_ratio=0.08))
+        self.add(*labels)
+        note = m.Text("batched, dual-GPU, 1024px", font_size=18).set_color(MUTED)
+        note.to_corner(m.DR, buff=0.5)
+        self.play(m.FadeIn(note))
+        self.wait(0.6)
+
+
+class QualitySpeed(m.Scene):
+    def construct(self):
+        header(self, "02 / QUALITY vs SPEED", "Prompt alignment against throughput")
+        ax = m.Axes(x_range=[0, 400, 100], y_range=[0.35, 0.40, 0.01],
+                    x_length=8.2, y_length=3.4, tips=False,
+                    axis_config={"color": MUTED, "stroke_width": 1.5})
+        ax.shift(m.DOWN * 0.35)
+        self.play(m.Create(ax))
+        pts = [(374, 0.3924, VERM, "FLUX"), (150, 0.3839, TEAL, "QWEN"),
+               (147, 0.3814, GREEN, "Z-IMG"), (107, 0.3894, INK, "SDXL")]
+        anims, extras = [], []
+        for x, y, col, name in pts:
+            dot = m.Dot(ax.c2p(x, y), radius=0.12, color=col, fill_color=col)
+            anims.append(m.GrowFromCenter(dot))
+            lab = m.Text(name, font_size=17, weight="BOLD").set_color(MUTED)
+            lab.next_to(dot, m.RIGHT, buff=0.18)
+            if name == "QWEN":
+                lab.shift(m.RIGHT * 0.35 + m.DOWN * 0.30)
+            elif name == "Z-IMG":
+                lab.shift(m.RIGHT * 0.35 + m.DOWN * 0.48)
+            elif name == "SDXL":
+                lab.shift(m.LEFT * 0.95 + m.UP * 0.36)
+            extras.append(lab)
+        self.play(m.LaggedStart(*anims, lag_ratio=0.12))
+        self.add(*extras)
+        xl = m.Text("images / hour", font_size=18).set_color(MUTED)
+        xl.next_to(ax, m.DOWN, buff=0.25)
+        yl = m.Text("CLIP cosine", font_size=18).set_color(MUTED)
+        yl.next_to(ax, m.LEFT, buff=0.3).rotate(m.PI / 2)
+        self.play(m.FadeIn(xl), m.FadeIn(yl))
+        self.wait(0.6)
+
+
+class VideoRace(m.Scene):
+    def construct(self):
+        header(self, "03 / VIDEO CLIPS", "Same 49 frames, wildly different time")
+        items = [("CogVideoX-2b", 1053, INK), ("LTX 2B distilled", 27, VERM)]
+        maxv = 1100
+        y0 = 0.7
+        self.add(m.Line([-5.6, 1.8, 0], [5.6, 1.8, 0], color=RULE, stroke_width=1))
+        self.add(m.Line([-5.6, -1.0, 0], [5.6, -1.0, 0], color=RULE, stroke_width=1))
+        bars, labels, nums = [], [], []
+        for i, (name, val, col) in enumerate(items):
+            y = y0 - i * 2.05
+            w = val / maxv * 8.0
+            r = m.Rectangle(width=w, height=0.6, color=col, fill_color=col,
+                            fill_opacity=1, stroke_width=0)
+            r.move_to([-5.6 + w / 2, y, 0])
+            bars.append(r)
+            lab = m.Text(name, font_size=20, weight="BOLD").set_color(MUTED)
+            lab.move_to([-5.6, y + 0.75, 0]).align_to([-5.6, 0, 0], m.LEFT)
+            labels.append(lab)
+            num = m.Text(f"{val} s", font_size=26, weight="BOLD").set_color(col)
+            num.move_to([-5.6 + w + 0.6, y, 0])
+            nums.append(num)
+        self.play(m.LaggedStart(*[m.GrowFromEdge(b, m.LEFT) for b in bars], lag_ratio=0.15))
+        self.play(m.LaggedStart(*[m.FadeIn(n, shift=m.LEFT * 0.2) for n in nums], lag_ratio=0.1))
+        self.add(*labels)
+        note = m.Text("38x faster, same frame count", font_size=22, weight="BOLD").set_color(VERM)
+        note.to_corner(m.DR, buff=0.5)
+        self.play(m.FadeIn(note))
+        self.wait(0.6)
+
+
+class MemoryWall(m.Scene):
+    def construct(self):
+        header(self, "04 / H3 MEMORY WALL", "Weights versus a single T4")
+        items = [("BF16", 126.0, INK), ("FP8", 64.1, AMBER), ("4-bit", 33.1, TEAL)]
+        maxv = 140
+        baseline = -1.7
+        bars, labels, nums = [], [], []
+        for i, (name, val, col) in enumerate(items):
+            h = val / maxv * 3.0
+            x = -3.6 + i * 3.6
+            r = m.Rectangle(width=1.6, height=h, color=col, fill_color=col,
+                            fill_opacity=1, stroke_width=0)
+            r.move_to([x, baseline + h / 2, 0])
+            bars.append(r)
+            lab = m.Text(name, font_size=20, weight="BOLD").set_color(MUTED)
+            lab.move_to([x, baseline - 0.42, 0])
+            labels.append(lab)
+            num = m.Text(f"{val:g}", font_size=24, weight="BOLD").set_color(col)
+            num.move_to([x, baseline + h + 0.3, 0])
+            nums.append(num)
+        limit_y = baseline + 30 / maxv * 3.0
+        limit = m.DashedLine([-5.6, limit_y, 0], [5.6, limit_y, 0], color=VERM, stroke_width=2)
+        llab = m.Text("15 GB VRAM", font_size=18, weight="BOLD").set_color(VERM)
+        llab.move_to([-1.8, limit_y - 0.32, 0])
+        self.play(m.LaggedStart(*[m.GrowFromEdge(b, m.DOWN) for b in bars], lag_ratio=0.12))
+        self.add(*labels)
+        self.play(m.Create(limit), m.FadeIn(llab))
+        self.play(m.LaggedStart(*[m.FadeIn(n, shift=m.DOWN * 0.12) for n in nums], lag_ratio=0.08))
+        note = m.Text("even 4-bit cannot fit with activations", font_size=17).set_color(MUTED)
+        note.to_corner(m.DR, buff=0.5)
+        self.play(m.FadeIn(note))
+        self.wait(0.6)

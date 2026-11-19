@@ -1,0 +1,7 @@
+[90mHint: A new version of huggingface_hub (2.4.0) is available! You are using version 1.33.0.
+To update, run: hf update[0m
+[90mHint: The `hf-cli` skill is not installed. Run `hf skills add -g` to teach your AI agents how to use the `hf` CLI.[0m
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 12 files:  17%|█▋        | 2/12 [00:00<00:00, 14.04it/s]Fetching 12 files:  50%|█████     | 6/12 [00:00<00:00, 26.46it/s]Fetching 12 files:  83%|████████▎ | 10/12 [00:03<00:00,  2.15it/s]Fetching 12 files: 100%|██████████| 12/12 [00:05<00:00,  1.59it/s]Fetching 12 files: 100%|██████████| 12/12 [00:05<00:00,  2.05it/s]
+[32m✓ Downloaded[0m
+  path: /kaggle/working/vidbench/models/clip

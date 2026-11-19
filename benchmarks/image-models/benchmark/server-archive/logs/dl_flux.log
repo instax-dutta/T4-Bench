@@ -1,0 +1,10 @@
+[21:27:18] START Flux download
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/flux/flux-2-klein-4b-Q4_0.gguf
+OK_dit
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/flux/split_files/vae/flux2-vae.safetensors
+OK_vae
+[21:27:28] DONE

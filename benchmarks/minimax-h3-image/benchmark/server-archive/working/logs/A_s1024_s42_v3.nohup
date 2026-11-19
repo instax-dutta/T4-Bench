@@ -1,0 +1,9 @@
+DIFFSYNTH A_s1024_s42_v3 rc=1
+  File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/torch/_dynamo/eval_frame.py", line 1263, in _fn
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/entropack/linear/linear.py", line 165, in forward
+    return F.linear(x, self.dequantize(x.device).to(x.dtype), self._bias_on(x.device))
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: self and mat2 must have the same dtype, but got BFloat16 and Half

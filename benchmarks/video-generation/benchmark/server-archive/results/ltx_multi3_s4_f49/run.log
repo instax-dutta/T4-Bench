@@ -1,0 +1,50 @@
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]Loading pipeline components...:  20%|██        | 1/5 [00:00<00:00,  8.47it/s]
+Loading weights:   0%|          | 0/219 [00:00<?, ?it/s][A
+Loading weights:   0%|          | 1/219 [00:01<04:16,  1.17s/it][A
+Loading weights:   3%|▎         | 7/219 [00:04<01:56,  1.81it/s][A
+Loading weights:   7%|▋         | 16/219 [00:06<01:10,  2.89it/s][A
+Loading weights:   8%|▊         | 17/219 [00:06<01:06,  3.05it/s][A
+Loading weights:  11%|█▏        | 25/219 [00:08<01:02,  3.10it/s][A
+Loading weights:  16%|█▌        | 34/219 [00:11<00:53,  3.43it/s][A
+Loading weights:  20%|█▉        | 43/219 [00:13<00:52,  3.34it/s][A
+Loading weights:  24%|██▎       | 52/219 [00:16<00:49,  3.38it/s][A
+Loading weights:  24%|██▍       | 53/219 [00:16<00:48,  3.46it/s][A
+Loading weights:  27%|██▋       | 59/219 [00:16<00:32,  4.86it/s][A
+Loading weights:  28%|██▊       | 61/219 [00:19<00:53,  2.94it/s][A
+Loading weights:  29%|██▉       | 63/219 [00:19<00:46,  3.33it/s][A
+Loading weights:  32%|███▏      | 70/219 [00:22<00:49,  3.01it/s][A
+Loading weights:  36%|███▌      | 79/219 [00:24<00:41,  3.33it/s][A
+Loading weights:  37%|███▋      | 80/219 [00:24<00:39,  3.48it/s][A
+Loading weights:  40%|████      | 88/219 [00:27<00:39,  3.33it/s][A
+Loading weights:  44%|████▍     | 97/219 [00:29<00:34,  3.53it/s][A
+Loading weights:  45%|████▍     | 98/219 [00:29<00:33,  3.66it/s][A
+Loading weights:  48%|████▊     | 106/219 [00:32<00:33,  3.39it/s][A
+Loading weights:  53%|█████▎    | 115/219 [00:34<00:29,  3.52it/s][A
+Loading weights:  53%|█████▎    | 116/219 [00:34<00:28,  3.59it/s][A
+Loading weights:  57%|█████▋    | 124/219 [00:37<00:27,  3.46it/s][A
+Loading weights:  61%|██████    | 133/219 [00:39<00:24,  3.55it/s][A
+Loading weights:  61%|██████    | 134/219 [00:39<00:23,  3.67it/s][A
+Loading weights:  65%|██████▍   | 142/219 [00:42<00:22,  3.46it/s][A
+Loading weights:  69%|██████▉   | 151/219 [00:45<00:19,  3.42it/s][A
+Loading weights:  73%|███████▎  | 160/219 [00:47<00:16,  3.48it/s][A
+Loading weights:  77%|███████▋  | 169/219 [00:49<00:13,  3.60it/s][A
+Loading weights:  78%|███████▊  | 170/219 [00:50<00:14,  3.43it/s][A
+Loading weights:  81%|████████▏ | 178/219 [00:52<00:11,  3.45it/s][A
+Loading weights:  82%|████████▏ | 179/219 [00:53<00:11,  3.37it/s][A
+Loading weights:  85%|████████▌ | 187/219 [00:55<00:09,  3.42it/s][A
+Loading weights:  86%|████████▌ | 188/219 [00:55<00:08,  3.56it/s][A
+Loading weights:  89%|████████▉ | 196/219 [00:57<00:06,  3.52it/s][A
+Loading weights:  90%|████████▉ | 197/219 [00:58<00:06,  3.40it/s][A
+Loading weights:  94%|█████████▎| 205/219 [01:00<00:04,  3.33it/s][A
+Loading weights:  98%|█████████▊| 214/219 [01:02<00:01,  3.71it/s][A
+Loading weights:  98%|█████████▊| 215/219 [01:02<00:01,  3.78it/s][A
+Loading weights: 100%|██████████| 219/219 [01:04<00:00,  3.57it/s][ALoading weights: 100%|██████████| 219/219 [01:04<00:00,  3.41it/s]
+Loading pipeline components...:  40%|████      | 2/5 [01:04<01:53, 37.93s/it]Loading pipeline components...:  60%|██████    | 3/5 [01:05<00:41, 20.99s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][A
+Loading checkpoint shards:  50%|█████     | 1/2 [00:19<00:19, 19.01s/it][A
+Loading checkpoint shards: 100%|██████████| 2/2 [00:29<00:00, 14.09s/it][ALoading checkpoint shards: 100%|██████████| 2/2 [00:29<00:00, 14.83s/it]
+Loading pipeline components...:  80%|████████  | 4/5 [01:35<00:24, 24.44s/it]Loading pipeline components...: 100%|██████████| 5/5 [01:41<00:00, 17.82s/it]Loading pipeline components...: 100%|██████████| 5/5 [01:41<00:00, 20.23s/it]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:12<00:38, 12.88s/it] 50%|█████     | 2/4 [00:13<00:11,  5.54s/it] 75%|███████▌  | 3/4 [00:14<00:03,  3.40s/it]100%|██████████| 4/4 [00:14<00:00,  2.40s/it]100%|██████████| 4/4 [00:14<00:00,  3.75s/it]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:12<00:37, 12.60s/it] 50%|█████     | 2/4 [00:13<00:10,  5.43s/it] 75%|███████▌  | 3/4 [00:13<00:03,  3.36s/it]100%|██████████| 4/4 [00:14<00:00,  2.39s/it]100%|██████████| 4/4 [00:14<00:00,  3.70s/it]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:12<00:38, 12.88s/it] 50%|█████     | 2/4 [00:13<00:11,  5.55s/it] 75%|███████▌  | 3/4 [00:14<00:03,  3.43s/it]100%|██████████| 4/4 [00:15<00:00,  2.44s/it]100%|██████████| 4/4 [00:15<00:00,  3.78s/it]
+MULTI DONE /kaggle/working/vidbench/results/ltx_multi3_s4_f49 load 101.2 per_clip [51.518, 27.569, 27.357] total 207.7 peak 11033

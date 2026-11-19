@@ -1,0 +1,2 @@
+/root/bench/run_sdcpp.sh: line 27: 12478 Killed                  "$CLI" --diffusion-model "$DIFF" --vae "$VAE" --llm "$LLM" -p "$PROMPT" -o "$RUN/out.png" --cfg-scale 1.0 --steps 6 --sampling-method euler --sigmas minimax-h3-image -W "$W" -H "$H" --rng cpu --seed "$SEED" --offload-to-cpu --vae-tiling "$@" > "$RUN/sd.log" 2>&1
+RUN /root/bench/results/B_qwen32b_s1024_s42: rc=137 wall=174.8s peak_vram_mib={'0': 13337, '1': 3}

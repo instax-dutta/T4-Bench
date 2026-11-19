@@ -1,0 +1,5 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/qwen/qwen_image_2.1_turbo_Q4_K_M.gguf
+[32m✓ Downloaded[0m
+  path: /kaggle/working/quadbench/models/qwen/vae/qwen_image_2.1_vae_bf16.safetensors

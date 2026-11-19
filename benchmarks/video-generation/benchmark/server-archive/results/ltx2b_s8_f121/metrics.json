@@ -1,0 +1,20 @@
+{
+  "wall_seconds": 131.392,
+  "frames": 121,
+  "size": "768x512",
+  "steps": 8,
+  "seed": 42,
+  "peak_vram_mib": 11032,
+  "first_frame": {
+    "mean": [
+      73.2,
+      66.4,
+      56.2
+    ],
+    "std": [
+      42.4,
+      39.0,
+      35.9
+    ]
+  }
+}

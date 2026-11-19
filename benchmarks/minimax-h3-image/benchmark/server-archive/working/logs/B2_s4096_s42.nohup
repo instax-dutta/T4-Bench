@@ -1,0 +1,1 @@
+RUN /kaggle/working/bench/results/B2_s4096_s42: rc=0 wall=659.7s peak_vram_mib={'0': 14653, '1': 3}

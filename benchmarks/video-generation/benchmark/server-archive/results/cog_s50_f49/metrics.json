@@ -1,0 +1,21 @@
+{
+  "wall_seconds": 1053.0,
+  "frames": 49,
+  "size": "720x480",
+  "steps": 50,
+  "seed": 42,
+  "peak_vram_mib": 11301,
+  "first_frame": {
+    "mean": [
+      178.7,
+      183.4,
+      148.4
+    ],
+    "std": [
+      83.5,
+      71.6,
+      89.6
+    ]
+  },
+  "note": "wall parsed from progress bar 17:33; export after metric-writer bug"
+}
