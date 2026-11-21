@@ -34,6 +34,7 @@ benchmarks/
   image-models/        Z-Image, Qwen-Image, SDXL, FLUX.2
   video-generation/    CogVideoX, LTX 2B, abandoned LTX 13B
   minimax-h3-image/    quant/engine research and native-resolution test
+  longcat-video-avatar/  pending: staged tooling for a benchmark not yet run
   media/               generated images and videos from the original runs
 website/               static site, data module, ManimGX diagrams, GEO assets
 scripts/               extraction and verification tools

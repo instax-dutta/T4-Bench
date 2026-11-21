@@ -1,0 +1,21 @@
+#!/bin/zsh
+# Multiplexed SSH to the Kaggle T4 VM. Reuses a single master connection;
+# recreates it only if the old master is dead.
+SOCK=/private/var/folders/kx/l4dqrdzs5c3ccwgzl_dhv0mw0000gn/T/opencode/t4vm/ctl
+HOST=root@127.0.0.1
+PORT=9191
+
+if ! ssh -S $SOCK -O check $HOST >/dev/null 2>&1; then
+  rm -f $SOCK
+  sshpass -p kaggle ssh -M -S $SOCK \
+    -o ControlPersist=yes \
+    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+    -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+    -o ServerAliveInterval=30 -o ServerAliveCountMax=4 \
+    -o ConnectTimeout=20 \
+    -p $PORT $HOST -fN || exit 1
+  sleep 1
+fi
+exec ssh -S $SOCK \
+  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+  -p $PORT $HOST "$@"
