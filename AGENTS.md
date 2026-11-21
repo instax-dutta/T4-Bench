@@ -83,7 +83,6 @@ When the user requests a durable behavior change, record it here or in the relev
 - `benchmarks/AGENTS.md` - three preserved benchmark projects, sorted by subject
 - `docs/AGENTS.md` - the cross-project index and comparison notes
 - `scripts/AGENTS.md` - verification oracles reused across projects
-- `archive/AGENTS.md` - user-created project archive ZIPs
 - `website/AGENTS.md` - static benchmark visualisation site and its evidence
 
 Scope kept at root: the unified objective, cross-project comparisons, and the
