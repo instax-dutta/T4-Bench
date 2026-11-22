@@ -32,7 +32,12 @@ HEADER = ["engine", "quant", "gpus", "ctx", "run", "pp_tok_s", "tg_tok_s",
           "gpu0_peak_mib", "gpu1_peak_mib", "note"]
 
 ENV = dict(os.environ)
-ENV["LD_LIBRARY_PATH"] = "/usr/local/nvidia/lib64:/usr/local/cuda-13.0/lib64"
+# b12633 prebuilt, CUDA 12.8 flavor: the 13.5 flavor lacks sm_75 SASS and its
+# PTX is too new for the VM's CUDA 13.0 driver; the 12.8 cudart bundle works.
+ENV["LD_LIBRARY_PATH"] = (
+    "/usr/local/nvidia/lib64:"
+    "/workspace/llama_prebuilt/cudart-llama-b12633-bin-ubuntu-cuda-12.8-x64:"
+    "/workspace/llama.cpp/build/bin")
 
 # 1 Hz per-GPU memory peak sampler, same protocol as the repo's other benchmarks
 peaks = {}
@@ -96,12 +101,17 @@ def timed_run(cmd, log_path, timeout=3600):
 
 
 def llamacpp(gguf, gpus, ctx, run_id):
-    name = os.path.basename(gguf).replace(".gguf", "")
+    name = os.path.basename(gguf)
+    name = name.replace(".gguf_file", "").replace(".gguf", "")
+    # b12633/v1.0.0 CLI: no -c flag (ctx is auto-sized), -ts uses "/" separators
     cmd = ["/workspace/llama.cpp/build/bin/llama-bench", "-m", gguf,
-           "-ngl", "99", "-p", "512", "-n", "256", "-r", "3",
-           "-c", str(ctx)]
-    if int(gpus) == 2:
-        cmd += ["-ts", "1,1"]
+           "-ngl", "99", "-p", "512", "-n", "256", "-r", "3"]
+    if int(gpus) == 1:
+        # v1.0.0 layer-splits across all visible devices by default; force
+        # a true single-card run
+        cmd += ["-sm", "none"]
+    else:
+        cmd += ["-ts", "1/1"]
     stop, holder = sampler_on()
     code, wall = timed_run(cmd, f"{LOGS}/llamacpp_{name}_{run_id}.log")
     g0, g1 = sampler_off(stop, holder)
@@ -117,7 +127,7 @@ def llamacpp(gguf, gpus, ctx, run_id):
                 tg = line.rsplit("|", 2)[-2].strip()
     except Exception:
         pass
-    row(engine="llama.cpp", quant=name, gpus=gpus, ctx=ctx, run=run_id,
+    row(engine="llama.cpp", quant=name, gpus=gpus, ctx="auto", run=run_id,
         pp_tok_s=pp, tg_tok_s=tg, load_ms=load_ms, wall_s=f"{wall:.1f}",
         exit_code=code, gpu0_peak_mib=g0, gpu1_peak_mib=g1)
 
@@ -167,13 +177,16 @@ def ollama(model, gpus, ctx, run_id):
 
 
 def vision(gguf, mmproj, gpus, ctx):
-    name = os.path.basename(gguf).replace(".gguf", "")
+    name = os.path.basename(gguf)
+    name = name.replace(".gguf_file", "").replace(".gguf", "")
     port = 8765
     cmd = ["/workspace/llama.cpp/build/bin/llama-server", "-m", gguf,
-           "--mmproj", mmproj, "--jinja", "-c", str(ctx), "-ngl", "99",
+           "--mmproj", mmproj, "--jinja", "-ngl", "99",
            "--host", "127.0.0.1", "--port", str(port)]
     if int(gpus) == 2:
-        cmd += ["-ts", "1,1"]
+        cmd += ["-ts", "1/1"]
+    else:
+        cmd += ["-sm", "none"]  # keep the single-card run on one device
     stop, holder = sampler_on()
     server = subprocess.Popen(cmd, env=ENV,
                               stdout=open(f"{LOGS}/vision_{name}.log", "w"),
