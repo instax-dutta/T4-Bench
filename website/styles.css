@@ -64,6 +64,14 @@ h1 em{font-style:normal;color:var(--hot)}
 .table-wrap{overflow-x:auto;margin-top:20px}
 table{width:100%;min-width:640px;border-collapse:collapse;font-size:13px}
 th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+/* wrapping variant: cells wrap instead of forcing horizontal scroll */
+.table-wrap.free{overflow-x:visible}
+.table-wrap.free table{min-width:0}
+.table-wrap.free td{white-space:normal;vertical-align:top;line-height:1.55}
+.table-wrap.free td+td{max-width:38ch}
+/* compact variant: tighter rows for reference tables that must fit a viewport */
+.table-wrap.compact table{font-size:12px}
+.table-wrap.compact th,.table-wrap.compact td{padding:7px 10px}
 th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 td.num,th.num{text-align:right;font-family:var(--mono)}
 tbody tr:hover{background:#1A201C}

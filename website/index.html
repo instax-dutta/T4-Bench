@@ -184,7 +184,7 @@
     <mx-clip src="assets/agent-tasks.mp4" poster="assets/agent-tasks-poster.jpg" caption="Agent tasks completed"></mx-clip>
     <mx-clip src="assets/ternary-speed.mp4" poster="assets/ternary-speed-poster.jpg" caption="Long-context model, one vs two GPUs"></mx-clip>
   </div>
-  <div class="table-wrap"><table id="spark-table"></table></div>
+  <div class="table-wrap free"><table id="spark-table"></table></div>
   <p class="caption">The larger Spark model finishes more agent tasks, but needs more memory. Adding a second T4 nearly doubles reply speed for the ternary model.</p>
 </section>
 
@@ -243,10 +243,10 @@
 
 <section class="chapter" id="engines">
   <div class="chapter-head"><span class="num">08</span><div><h2>The engines</h2><p>Every inference and fine-tuning engine we measured on this box, ranked by what actually ran.</p></div></div>
-  <div class="table-wrap"><table id="engines-table"></table></div>
-  <div class="table-wrap"><table id="engines-ft-table"></table></div>
+  <div class="table-wrap compact"><table id="engines-table"></table></div>
+  <div class="table-wrap compact"><table id="engines-ft-table"></table></div>
   <p class="verdict" id="engines-verdict"></p>
-  <p class="caption">Ranks reflect measured status on this 2x T4 box, not general quality. vLLM, SGLang and raw transformers were only attempted on the newest model; their rows quote the observed failure.</p>
+  <p class="caption">Ranks are measured status on this box, not general quality. Pick a llama.cpp build matching your driver (CUDA 12.8 prebuilt, not 13.5); build sd.cpp with the arch pinned to sm_75. Full per-engine notes: the data page and llms-full.txt.</p>
 </section>
 
 <section class="chapter" id="method">

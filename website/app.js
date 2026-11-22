@@ -162,10 +162,10 @@
 
     // Engines (last content chapter)
     if (D.engines) {
-      table('#engines-table', ['#', 'Engine', 'Status on 2x T4', 'Best measured here', 'What it ran'],
-        D.engines.inference.map(e => [e.rank, e.engine, e.status, e.best || 'n/a', e.runs]));
-      table('#engines-ft-table', ['#', 'Fine-tuning engine', 'Status on 2x T4', 'Best measured here', 'What it ran'],
-        D.engines.finetuning.map(e => [e.rank, e.engine, e.status, e.best || 'n/a', e.runs]));
+      table('#engines-table', ['#', 'Engine', 'Status on 2x T4', 'Best measured here'],
+        D.engines.inference.map(e => [e.rank, e.engine, e.status, e.best || 'n/a']));
+      table('#engines-ft-table', ['#', 'Fine-tuning engine', 'Status on 2x T4', 'Best measured here'],
+        D.engines.finetuning.map(e => [e.rank, e.engine, e.status, e.best || 'n/a']));
       $('#engines-verdict').textContent = D.engines.verdict;
     }
 
@@ -176,7 +176,7 @@
   }
 
   function initHints() {
-    document.querySelectorAll('.table-wrap').forEach(w => {
+    document.querySelectorAll('.table-wrap:not(.free)').forEach(w => {
       const h = el('p', 'table-hint', 'Swipe sideways for every column →');
       w.after(h);
     });

@@ -133,18 +133,18 @@ Full report: https://github.com/instax-dutta/T4-Bench/blob/main/benchmarks/inkli
 ## Inference engines on 2x T4
 | # | Engine | Status | Best measured | What it ran |
 |---|---|---|---|---|
-| 1 | llama.cpp (GGUF text) | works | 26.5 tok/s on Inkling-2-Mini with vision at 37.3 s per image chat; 22.9 tok/s on Ternary 27B across both T4s | newest architectures first; also the runner inside Ollama. Use a build matching your driver (the CUDA 12.8 prebuilt works on CUDA 13.0 drivers; the 13.5 flavor does not) |
-| 2 | stable-diffusion.cpp (GGUF image) | works | 374 images/hour (FLUX.2 klein); native 4096px H3 at 5.5 images/hour | all four image models and every measured H3 track; build from source with -DCMAKE_CUDA_ARCHITECTURES=75 to skip years of compile time for other GPUs |
-| 3 | diffusers (video and native pipelines) | works | LTX 2B distilled at 27.6 s per warm clip; CogVideoX-2b at 1053 s | the video project; no FP4/FP8 checkpoints on T4 (Inkling's native needs ~53 GB dequant) |
-| 4 | Ollama | works, lags new archs | 119 tok/s on LiquidAI LFM2.5-8B-A1B (warm server) | the chat leaderboard; fails on inkling2_loop and on MLX-only official tags |
-| 5 | ComfyUI | attempted, not completed | n/a | H3 track: needs a GGUF-aware workflow and a nonstandard text-encoder type; queued as an engine for the Kromoss int8 W8A8 sweep |
-| 6 | vLLM | failed | n/a | rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75 |
-| 7 | SGLang | failed | n/a | does not install on this box (Python 3.13, CUDA 13); excluded in the H3 plan for sm_75 |
-| 8 | raw transformers | limited | n/a | component library behind diffusers; unknown model type on the newest architectures |
-| 9 | WanGP | not benchmarkable | n/a | interactive Gradio launcher requiring manual model selection; no headless reproducible call |
+| 1 | llama.cpp (GGUF text) | works | 26.5 tok/s with vision (Inkling-2-Mini) | 26.5 tok/s on Inkling-2-Mini with vision at 37.3 s per image chat; 22.9 tok/s on Ternary 27B on both T4s; also the runner inside Ollama. Pick the build that matches your driver: the CUDA 12.8 prebuilt works on CUDA 13.0, the 13.5 flavor does not |
+| 2 | stable-diffusion.cpp (GGUF image) | works | 374 images/hour (FLUX.2 klein) | 374 images/hour (FLUX.2 klein); native 4096px H3 at 5.5 images/hour; all four image models and every measured H3 track; build from source with the architecture pinned to sm_75 |
+| 3 | diffusers (video and native pipelines) | works | 27.6 s per warm clip (LTX 2B) | LTX 2B distilled at 27.6 s per warm clip; CogVideoX-2b at 1053 s; the video project; no FP4/FP8 checkpoints on T4 (Inkling native needs ~53 GB dequant) |
+| 4 | Ollama | works, lags new archs | 119 tok/s (LFM2.5-8B-A1B, warm) | 119 tok/s on LiquidAI LFM2.5-8B-A1B (warm server); the chat leaderboard; fails on inkling2_loop and MLX-only tags |
+| 5 | ComfyUI | attempted, not completed | queued for the Kromoss sweep | H3 track: needs a GGUF-aware workflow and a nonstandard encoder; queued for Kromoss |
+| 6 | vLLM | failed | rejects the Inkling GGUF | rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75 |
+| 7 | SGLang | failed | no Python 3.13 / CUDA 13 wheel | no wheel for Python 3.13 / CUDA 13; excluded in the H3 plan for sm_75 |
+| 8 | raw transformers | limited | unknown model type on newest archs | component library behind diffusers; unknown model type on the newest architectures |
+| 9 | WanGP | not benchmarkable | interactive launcher only | interactive Gradio launcher only; no headless reproducible call |
 
 ## Fine-tuning engines on 2x T4
 | # | Engine | Status | Best measured | What it ran |
 |---|---|---|---|---|
-| 1 | Unsloth | works | 6.9 GB peak, loss 0.829, 8.65 s per step | the 8B QLoRA fine-tune; the model-soup variant lands at the same 6.9 GB with loss 0.8044 |
+| 1 | Unsloth | works | 6.9 GB peak, loss 0.829, 8.65 s per step | the 8B QLoRA fine-tune; the soup variant lands at the same 6.9 GB, loss 0.8044 |
 | 2 | transformers Trainer | limited | 14.5 GB peak, loss 0.8058 | 2.1x Unsloth's memory; runs out of memory at 14.5 GB when the import path is blocked |

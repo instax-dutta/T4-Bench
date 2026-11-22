@@ -239,7 +239,6 @@ data = {
 }
 
 # --- engines (ranked from measured results across all projects) --------------
-_ink_best = max(inkling_single, key=lambda m: m["tg"])
 _vision_ok = next(v for v in inkling_vision if v["result"] == "works")
 _llm_best = max(EXTRA["llmScoreboard"], key=lambda m: m["decodeTokS"])
 _tern_dual = EXTRA["ternary"]["dualT4"][0]
@@ -255,43 +254,49 @@ data["engines"] = {
     "inference": [
         {"rank": 1, "engine": "llama.cpp (GGUF text)",
          "status": "works",
-         "best": (f"{_ink_best['tg']} tok/s on Inkling-2-Mini with vision at "
-                  f"{_vision_ok['wallS']} s per image chat; {_tern_dual['tg128']} tok/s on Ternary 27B across both T4s"),
-         "runs": ("newest architectures first; also the runner inside Ollama. Use a build matching "
-                  "your driver (the CUDA 12.8 prebuilt works on CUDA 13.0 drivers; the 13.5 flavor does not)")},
+         "best": "26.5 tok/s with vision (Inkling-2-Mini)",
+         "runs": (f"26.5 tok/s on Inkling-2-Mini with vision at {_vision_ok['wallS']} s per image chat; "
+                  f"{_tern_dual['tg128']} tok/s on Ternary 27B on both T4s; also the runner inside "
+                  "Ollama. Pick the build that matches your driver: the CUDA 12.8 prebuilt works "
+                  "on CUDA 13.0, the 13.5 flavor does not")},
         {"rank": 2, "engine": "stable-diffusion.cpp (GGUF image)",
          "status": "works",
-         "best": (f"{data['winners']['imageThroughput']} images/hour (FLUX.2 klein); "
-                  f"native 4096px H3 at {round(3600 / _h3_wall, 1)} images/hour"),
-         "runs": ("all four image models and every measured H3 track; build from source with "
-                  "-DCMAKE_CUDA_ARCHITECTURES=75 to skip years of compile time for other GPUs")},
+         "best": f"{data['winners']['imageThroughput']} images/hour (FLUX.2 klein)",
+         "runs": (f"{data['winners']['imageThroughput']} images/hour (FLUX.2 klein); native 4096px H3 "
+                  f"at {round(3600 / _h3_wall, 1)} images/hour; all four image models and every "
+                  "measured H3 track; build from source with the architecture pinned to sm_75")},
         {"rank": 3, "engine": "diffusers (video and native pipelines)",
          "status": "works",
-         "best": (f"LTX 2B distilled at {data['winners']['steadyClipSeconds']:g} s per warm clip; "
-                  f"CogVideoX-2b at {round(data['winners']['cogSeconds'])} s"),
-         "runs": "the video project; no FP4/FP8 checkpoints on T4 (Inkling's native needs ~53 GB dequant)"},
+         "best": f"{data['winners']['steadyClipSeconds']:g} s per warm clip (LTX 2B)",
+         "runs": (f"LTX 2B distilled at {data['winners']['steadyClipSeconds']:g} s per warm clip; "
+                  f"CogVideoX-2b at {round(data['winners']['cogSeconds'])} s; the video project; "
+                  "no FP4/FP8 checkpoints on T4 (Inkling native needs ~53 GB dequant)")},
         {"rank": 4, "engine": "Ollama", "status": "works, lags new archs",
-         "best": f"{_llm_best['decodeTokS']:g} tok/s on {_llm_best['model']} (warm server)",
-         "runs": "the chat leaderboard; fails on inkling2_loop and on MLX-only official tags"},
+         "best": f"{_llm_best['decodeTokS']:g} tok/s ({_llm_best['model'].split(' ')[-1]}, warm)",
+         "runs": (f"{_llm_best['decodeTokS']:g} tok/s on {_llm_best['model']} (warm server); "
+                  "the chat leaderboard; fails on inkling2_loop and MLX-only tags")},
         {"rank": 5, "engine": "ComfyUI", "status": "attempted, not completed",
-         "best": "",
-         "runs": ("H3 track: needs a GGUF-aware workflow and a nonstandard text-encoder type; "
-                  "queued as an engine for the Kromoss int8 W8A8 sweep")},
-        {"rank": 6, "engine": "vLLM", "status": "failed", "best": "",
+         "best": "queued for the Kromoss sweep",
+         "runs": "H3 track: needs a GGUF-aware workflow and a nonstandard encoder; queued for Kromoss"},
+        {"rank": 6, "engine": "vLLM", "status": "failed",
+         "best": "rejects the Inkling GGUF",
          "runs": "rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75"},
-        {"rank": 7, "engine": "SGLang", "status": "failed", "best": "",
-         "runs": "does not install on this box (Python 3.13, CUDA 13); excluded in the H3 plan for sm_75"},
-        {"rank": 8, "engine": "raw transformers", "status": "limited", "best": "",
+        {"rank": 7, "engine": "SGLang", "status": "failed",
+         "best": "no Python 3.13 / CUDA 13 wheel",
+         "runs": "no wheel for Python 3.13 / CUDA 13; excluded in the H3 plan for sm_75"},
+        {"rank": 8, "engine": "raw transformers", "status": "limited",
+         "best": "unknown model type on newest archs",
          "runs": "component library behind diffusers; unknown model type on the newest architectures"},
-        {"rank": 9, "engine": "WanGP", "status": "not benchmarkable", "best": "",
-         "runs": "interactive Gradio launcher requiring manual model selection; no headless reproducible call"},
+        {"rank": 9, "engine": "WanGP", "status": "not benchmarkable",
+         "best": "interactive launcher only",
+         "runs": "interactive Gradio launcher only; no headless reproducible call"},
     ],
     "finetuning": [
         {"rank": 1, "engine": "Unsloth", "status": "works",
          "best": (f"{round(_ft_unsloth['peakMiB'] / 1024, 1)} GB peak, loss {_ft_unsloth['loss']}, "
                   f"{_ft_step['step'].replace('**', '')} per step"),
-         "runs": (f"the 8B QLoRA fine-tune; the model-soup variant lands at the same "
-                  f"{round(_ft_soup_u['peakMiB'] / 1024, 1)} GB with loss {_ft_soup_u['loss']}")},
+         "runs": (f"the 8B QLoRA fine-tune; the soup variant lands at the same "
+                  f"{round(_ft_soup_u['peakMiB'] / 1024, 1)} GB, loss {_ft_soup_u['loss']}")},
         {"rank": 2, "engine": "transformers Trainer", "status": "limited",
          "best": f"{round(_ft_tr_ok['peakMiB'] / 1024, 1)} GB peak, loss {_ft_tr_ok['loss']}",
          "runs": (f"2.1x Unsloth's memory; runs out of memory at "

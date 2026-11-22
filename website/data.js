@@ -732,64 +732,64 @@ window.BENCH_DATA = {
         "rank": 1,
         "engine": "llama.cpp (GGUF text)",
         "status": "works",
-        "best": "26.5 tok/s on Inkling-2-Mini with vision at 37.3 s per image chat; 22.9 tok/s on Ternary 27B across both T4s",
-        "runs": "newest architectures first; also the runner inside Ollama. Use a build matching your driver (the CUDA 12.8 prebuilt works on CUDA 13.0 drivers; the 13.5 flavor does not)"
+        "best": "26.5 tok/s with vision (Inkling-2-Mini)",
+        "runs": "26.5 tok/s on Inkling-2-Mini with vision at 37.3 s per image chat; 22.9 tok/s on Ternary 27B on both T4s; also the runner inside Ollama. Pick the build that matches your driver: the CUDA 12.8 prebuilt works on CUDA 13.0, the 13.5 flavor does not"
       },
       {
         "rank": 2,
         "engine": "stable-diffusion.cpp (GGUF image)",
         "status": "works",
-        "best": "374 images/hour (FLUX.2 klein); native 4096px H3 at 5.5 images/hour",
-        "runs": "all four image models and every measured H3 track; build from source with -DCMAKE_CUDA_ARCHITECTURES=75 to skip years of compile time for other GPUs"
+        "best": "374 images/hour (FLUX.2 klein)",
+        "runs": "374 images/hour (FLUX.2 klein); native 4096px H3 at 5.5 images/hour; all four image models and every measured H3 track; build from source with the architecture pinned to sm_75"
       },
       {
         "rank": 3,
         "engine": "diffusers (video and native pipelines)",
         "status": "works",
-        "best": "LTX 2B distilled at 27.6 s per warm clip; CogVideoX-2b at 1053 s",
-        "runs": "the video project; no FP4/FP8 checkpoints on T4 (Inkling's native needs ~53 GB dequant)"
+        "best": "27.6 s per warm clip (LTX 2B)",
+        "runs": "LTX 2B distilled at 27.6 s per warm clip; CogVideoX-2b at 1053 s; the video project; no FP4/FP8 checkpoints on T4 (Inkling native needs ~53 GB dequant)"
       },
       {
         "rank": 4,
         "engine": "Ollama",
         "status": "works, lags new archs",
-        "best": "119 tok/s on LiquidAI LFM2.5-8B-A1B (warm server)",
-        "runs": "the chat leaderboard; fails on inkling2_loop and on MLX-only official tags"
+        "best": "119 tok/s (LFM2.5-8B-A1B, warm)",
+        "runs": "119 tok/s on LiquidAI LFM2.5-8B-A1B (warm server); the chat leaderboard; fails on inkling2_loop and MLX-only tags"
       },
       {
         "rank": 5,
         "engine": "ComfyUI",
         "status": "attempted, not completed",
-        "best": "",
-        "runs": "H3 track: needs a GGUF-aware workflow and a nonstandard text-encoder type; queued as an engine for the Kromoss int8 W8A8 sweep"
+        "best": "queued for the Kromoss sweep",
+        "runs": "H3 track: needs a GGUF-aware workflow and a nonstandard encoder; queued for Kromoss"
       },
       {
         "rank": 6,
         "engine": "vLLM",
         "status": "failed",
-        "best": "",
+        "best": "rejects the Inkling GGUF",
         "runs": "rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75"
       },
       {
         "rank": 7,
         "engine": "SGLang",
         "status": "failed",
-        "best": "",
-        "runs": "does not install on this box (Python 3.13, CUDA 13); excluded in the H3 plan for sm_75"
+        "best": "no Python 3.13 / CUDA 13 wheel",
+        "runs": "no wheel for Python 3.13 / CUDA 13; excluded in the H3 plan for sm_75"
       },
       {
         "rank": 8,
         "engine": "raw transformers",
         "status": "limited",
-        "best": "",
+        "best": "unknown model type on newest archs",
         "runs": "component library behind diffusers; unknown model type on the newest architectures"
       },
       {
         "rank": 9,
         "engine": "WanGP",
         "status": "not benchmarkable",
-        "best": "",
-        "runs": "interactive Gradio launcher requiring manual model selection; no headless reproducible call"
+        "best": "interactive launcher only",
+        "runs": "interactive Gradio launcher only; no headless reproducible call"
       }
     ],
     "finetuning": [
@@ -798,7 +798,7 @@ window.BENCH_DATA = {
         "engine": "Unsloth",
         "status": "works",
         "best": "6.9 GB peak, loss 0.829, 8.65 s per step",
-        "runs": "the 8B QLoRA fine-tune; the model-soup variant lands at the same 6.9 GB with loss 0.8044"
+        "runs": "the 8B QLoRA fine-tune; the soup variant lands at the same 6.9 GB, loss 0.8044"
       },
       {
         "rank": 2,
