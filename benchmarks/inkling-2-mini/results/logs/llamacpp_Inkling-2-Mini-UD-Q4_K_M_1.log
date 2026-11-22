@@ -1,0 +1,12 @@
+ggml_cuda_init: found 2 CUDA devices (Total VRAM: 29823 MiB):
+  Device 0: Tesla T4, compute capability 7.5, VMM: yes, VRAM: 14911 MiB
+  Device 1: Tesla T4, compute capability 7.5, VMM: yes, VRAM: 14911 MiB
+load_backend: loaded CUDA backend from /workspace/llama.cpp/build/bin/libggml-cuda.so
+load_backend: loaded RPC backend from /workspace/llama.cpp/build/bin/libggml-rpc.so
+load_backend: loaded CPU backend from /workspace/llama.cpp/build/bin/libggml-cpu-skylakex.so
+| model                          |       size |     params | backend    | ngl |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| inkling2_loop ?B Q4_K - Medium |  15.46 GiB |    26.07 B | CUDA       |  12 |           pp512 |        120.31 ± 1.69 |
+| inkling2_loop ?B Q4_K - Medium |  15.46 GiB |    26.07 B | CUDA       |  12 |           tg256 |          2.12 ± 0.02 |
+
+build: 9c10c94e1 (12633)

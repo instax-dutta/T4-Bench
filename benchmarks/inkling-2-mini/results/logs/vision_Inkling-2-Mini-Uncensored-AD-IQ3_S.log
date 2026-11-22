@@ -1,0 +1,46 @@
+0.00.364.120 I srv  llama_server: initializing ...
+0.00.364.174 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.374.864 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.383.391 I srv    load_model: loading model '/workspace/weights/quants/Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf'
+0.02.330.304 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.02.704.345 W load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+0.06.414.501 I cmn          init: llama threadpool init, n_threads = 2
+0.09.477.128 I srv    load_model: loaded multimodal model, '/workspace/weights/quants/mmproj-Inkling-2-Mini-Uncensored-F16.gguf'
+0.09.709.965 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 4096, kv_unified = 'true'
+0.09.733.918 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.09.734.058 I srv  server_run_i: model loaded
+0.09.734.085 I srv  server_on_li: listening on http://127.0.0.1:8765
+0.17.845.441 I slot       select: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+0.17.846.207 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.30.920.023 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =     12, progress = 0.00, t =  13.07 s / 0.92 tokens per second
+0.31.051.371 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =     14, progress = 0.00, t =  13.21 s / 1.06 tokens per second
+/__w/llama.cpp/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu:119: CUDA error
+0.31.687.823 E CUDA error: out of memory
+0.31.687.832 E   current device: 0, in function alloc at /__w/llama.cpp/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu:729
+0.31.687.833 E   cuMemCreate(&handle, reserve_size, &prop, 0)
+/workspace/llama.cpp/build/bin/libggml-base.so.1(+0x16abb)[0x7b522cb3cabb]
+/workspace/llama.cpp/build/bin/libggml-base.so.1(+0x16f3c)[0x7b522cb3cf3c]
+/workspace/llama.cpp/build/bin/libggml-base.so.1(ggml_abort+0x15b)[0x7b522cb3d11b]
+/workspace/llama.cpp/build/bin/libggml-cuda.so(_Z15ggml_cuda_errorPKcS0_S0_iS0_+0xb7)[0x7b52171db0b7]
+/workspace/llama.cpp/build/bin/libggml-cuda.so(_ZN18ggml_cuda_pool_vmm5allocEmPm+0x6e5)[0x7b52171fccf5]
+/workspace/llama.cpp/build/bin/libggml-cuda.so(+0x2f8759)[0x7b52171ed759]
+/workspace/llama.cpp/build/bin/libggml-cuda.so(+0x302548)[0x7b52171f7548]
+/workspace/llama.cpp/build/bin/libggml-base.so.1(ggml_backend_sched_graph_compute_async+0x7c1)[0x7b522cb5bdc1]
+/workspace/llama.cpp/build/bin/libggml-base.so.1(ggml_backend_sched_graph_compute+0x12)[0x7b522cb5bf52]
+/workspace/llama.cpp/build/bin/libmtmd.so.1(_ZN15mtmd_subcontext6encodeEP25mtmd_subctx_encode_params+0xc58)[0x7b522d2ebb68]
+/workspace/llama.cpp/build/bin/libmtmd.so.1(_ZN15mtmd_subcontext12encode_batchEiPK20mtmd_image_f32_batchRSt6vectorIfSaIfEE+0x90)[0x7b522d2fe0c0]
+/workspace/llama.cpp/build/bin/libmtmd.so.1(+0xe00a2)[0x7b522d1aa0a2]
+/workspace/llama.cpp/build/bin/libmtmd.so.1(mtmd_batch_encode+0x46c)[0x7b522d1b675c]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(+0x19e273)[0x7b522df36273]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZNSt17_Function_handlerIFvvEZZN19server_context_impl10pre_decodeEvENKUlR11server_slotE4_clES3_EUlvE_E9_M_invokeERKSt9_Any_data+0x16f)[0x7b522df5bdbf]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZN12server_queue14yield_to_queueEOSt8functionIFvvEE+0xa6)[0x7b522df0c306]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZZN19server_context_impl10pre_decodeEvENKUlR11server_slotE3_clES1_+0x720)[0x7b522df80860]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZN19server_context_impl7iterateERSt6vectorI11server_slotSaIS1_EESt8functionIFvRS1_EE+0x8e)[0x7b522df67e2e]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZN19server_context_impl10pre_decodeEv+0x47f)[0x7b522df6899f]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZN19server_context_impl12update_slotsEv+0x131)[0x7b522df75ab1]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_ZN12server_queue10start_loopEl+0x125)[0x7b522df0cf45]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(+0x108f4f)[0x7b522dea0f4f]
+/workspace/llama.cpp/build/bin/libllama-server-impl.so(_Z12llama_serveriPPc+0x140)[0x7b522dea16c0]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7b522d8f21ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7b522d8f228b]
+/workspace/llama.cpp/build/bin/llama-server(+0x2305)[0x57c6d68de305]

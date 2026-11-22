@@ -1,0 +1,90 @@
+W1122 17:31:12.923000 24349 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1122 17:31:12.923000 24349 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1122 17:31:12.924000 24349 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38] 
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38]        █     █     █▄   ▄█
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.34.0
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38]   █▄█▀ █     █     █     █  model   /workspace/weights/quants/Inkling-2-Mini-Uncensored-AD-IQ2_M.gguf
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=24349) INFO 11-22 17:31:47 [startup.py:38] 
+(APIServer pid=24349) INFO 11-22 17:31:48 [startup.py:96] non-default args: {'model_tag': '/workspace/weights/quants/Inkling-2-Mini-Uncensored-AD-IQ2_M.gguf', 'model': '/workspace/weights/quants/Inkling-2-Mini-Uncensored-AD-IQ2_M.gguf', 'max_model_len': 4096}
+Traceback (most recent call last):
+  File "/usr/local/bin/vllm", line 6, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/cli/main.py", line 117, in main
+    args.dispatch_function(args)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/cli/serve.py", line 156, in cmd
+    uvloop.run(run_server(args))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/uvloop/__init__.py", line 96, in run
+    return __asyncio.run(
+           ~~~~~~~~~~~~~^
+        wrapper(),
+        ^^^^^^^^^^
+    ...<2 lines>...
+        **run_kwargs
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/usr/lib/python3.13/asyncio/runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1515, in uvloop.loop.Loop.run_until_complete
+  File "/usr/local/lib/python3.13/dist-packages/uvloop/__init__.py", line 48, in wrapper
+    return await main
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 176, in run_server
+    await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 190, in run_server_worker
+    async with build_async_engine_client(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        args,
+        ^^^^^
+        client_config=client_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine_client:
+    ^
+  File "/usr/lib/python3.13/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 60, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        engine_args,
+        ^^^^^^^^^^^^
+        usage_context=usage_context,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        client_config=client_config,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as engine:
+    ^
+  File "/usr/lib/python3.13/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 82, in build_async_engine_client_from_engine_args
+    vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+  File "/usr/local/lib/python3.13/dist-packages/vllm/engine/arg_utils.py", line 2313, in create_engine_config
+    model_config = self.create_model_config()
+  File "/usr/local/lib/python3.13/dist-packages/vllm/engine/arg_utils.py", line 2025, in create_model_config
+    return ModelConfig(
+        model=self.model,
+    ...<69 lines>...
+        renderer_num_workers=self.renderer_num_workers,
+    )
+  File "/usr/local/lib/python3.13/dist-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+  Value error, Invalid repository ID or local directory specified: '/workspace/weights/quants/Inkling-2-Mini-Uncensored-AD-IQ2_M.gguf'.
+Please verify the following requirements:
+1. Provide a valid Hugging Face repository ID.
+2. Specify a local directory that contains a recognized configuration file.
+   - For Hugging Face models: ensure the presence of a 'config.json'.
+   - For Mistral models: ensure the presence of a 'params.json'.
+ [type=value_error, input_value=ArgsKwargs((), {'model': ...nderer_num_workers': 1}), input_type=ArgsKwargs]
+    For further information visit https://errors.pydantic.dev/2.14/v/value_error

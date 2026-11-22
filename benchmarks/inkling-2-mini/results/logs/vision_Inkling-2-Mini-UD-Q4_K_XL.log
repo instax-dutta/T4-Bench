@@ -1,0 +1,17 @@
+0.00.361.147 I srv  llama_server: initializing ...
+0.00.361.173 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.371.355 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.378.039 I srv    load_model: loading model '/workspace/weights/quants/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file'
+0.02.369.295 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 12, abort
+0.02.741.641 W load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+1.06.256.313 W resolve_fused_ops: layer 37 is assigned to device CUDA0 but Flash Attention is assigned to device CPU (usually due to missing support)
+1.06.256.342 W resolve_fused_ops: Flash Attention not supported, set to disabled
+1.06.304.369 E ggml_backend_cuda_buffer_type_alloc_buffer: allocating 18796.12 MiB on device 0: cudaMalloc failed: out of memory
+1.06.305.848 E ggml_gallocr_reserve_n_impl: failed to allocate CUDA0 buffer of size 19709160960
+1.06.305.872 E graph_reserve: failed to allocate compute buffers
+1.06.533.259 E llama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers
+1.06.535.516 E cmn  common_init_: failed to create context with model '/workspace/weights/quants/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file'
+1.06.536.548 E cmn  common_init_: failed to create context with model '/workspace/weights/quants/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file'
+1.06.542.684 E srv    load_model: failed to create_context with model '/workspace/weights/quants/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file'
+1.06.542.716 I srv    operator(): operator(): cleaning up before exit...
+1.06.549.556 E srv  server_run_i: exiting due to model loading error

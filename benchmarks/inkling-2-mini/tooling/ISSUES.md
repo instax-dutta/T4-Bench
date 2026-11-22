@@ -89,17 +89,61 @@ tg = generation t/s, VRAM = per-GPU peak MiB.
 | UD-Q3_K_XL | 12.69 GiB | 1 GPU | 312.34 ± 1.99 | 24.30 ± 0.24 | 13913 / 105 |
 | AD-Q4_K uncensored | 15.46 GiB | -ngl 12: GPU0+CPU hybrid | 131.41 ± 5.04 | 2.38 ± 0.01 | 8099 / 1409 |
 
-Reading so far: single-T4 generation sits at 22-26 t/s for 1-3 bpw and
+Reading so far: single-T4 generation sits at 23-26 t/s for 1-3 bpw and
 24.3 t/s for Q3_K_XL (K-quant matmuls beat IQ dequant on sm_75); the 12.7
 GiB Q3_K_XL fits one 15 GiB T4 with ~1.4 GiB headroom at auto ctx. The
 Q4-class files exceed one card, and the `-ngl 12` hybrid (half the layers
-on CPU) drops generation to 2.4 t/s - the 4-bit tier is not practical on
-this box without a real two-GPU split.
+on CPU) drops generation to 1.9-2.4 t/s - the 4-bit tier is not practical
+on this box. There is no true two-GPU split: `-sm row` is unsupported for
+this MoE, `-sm tensor` returns `LLAMA_SPLIT_MODE_TENSOR not implemented
+for architecture 'inkling2_loop'` (measured on AD-Q4_K), and full offload
+piles everything onto device 0.
 
 Contaminated first pass (box shared with an abandoned nvcc build and
 Ollama's idle 5 GiB on GPU1; superseded by the clean rows above):
 tg 16-17 t/s for the 1-3 bpw quants - a cautionary note on measuring with
 a noisy box.
 
-Pending: Q4_K_M / Q4_K_XL / Q8_K_XL hybrid rows, vision (fix 9),
-vLLM/SGLang/transformers attempt rows, possible `-sm tensor` dual row.
+## Final numbers (sweep2 + wrap-up rows, 2026-11-22)
+
+Engine verdicts:
+
+- **llama.cpp b12633 prebuilt (CUDA 12.8 flavor): the only engine that
+  runs Inkling-2-Mini on T4.** Single-card tg 22-26 t/s on quants up to
+  12.7 GiB; working vision at 37.3 s per image chat.
+- **Ollama: negative both ways** - official tag is MLX-only, local GGUF
+  import hits unknown architecture in its bundled runner.
+- **vLLM: fails on the GGUF** (pydantic config validation, 70 s).
+- **SGLang: does not install** on this VM (Python 3.13 / CUDA 13).
+- **transformers-native: unknown model type** - this transformers build
+  predates inkling2_loop support, fails in 11 s before any memory issue.
+
+Full matrix (pp512/tg256 t/s, per-GPU peak MiB; raw CSV:
+`results/inkling_results.csv`):
+
+| Quant | Size GiB | Config | pp512 | tg256 | GPU0/GPU1 |
+|---|---|---|---|---|---|
+| UD-IQ1_M | 7.46 | 1 GPU | 312.50 | 26.47 | 8635 / 105 |
+| AD-IQ2_M (uncens.) | 8.06 | 1 GPU | 341.83 | 26.11 | 9233 / 105 |
+| UD-Q2_K_XL | 8.51 | 1 GPU | 314.62 | 25.10 | 9699 / 105 |
+| UD-IQ3_XXS | 10.86 | 1 GPU | 310.32 | 22.97 | 12091 / 105 |
+| AD-IQ3_S (uncens.) | 12.43 | 1 GPU | 319.94 | 22.28 | 13471 / 105 |
+| UD-Q3_K_XL | 12.69 | 1 GPU | 312.34 | 24.30 | 13913 / 105 |
+| AD-Q4_K (uncens.) | 15.46 | hybrid (GPU0+CPU) | 131.41 | 2.38 | 8099 / 1409 |
+| UD-Q4_K_M | 15.46 | hybrid | 120.31 | 2.12 | 7701 / 1409 |
+| UD-Q4_K_XL | 16.42 | hybrid | 116.37 | 2.12 | 7701 / 1409 |
+| UD-Q8_K_XL | 21.30 | hybrid | 90.90 | 1.87 | 8001 / 1815 |
+
+Vision:
+
+| Config | Result |
+|---|---|
+| AD-IQ2_M + mmproj-F16, 1 GPU | **works: 37.3 s per image chat, GPU0 14533 MiB, correct description with visible loop reasoning** |
+| AD-IQ3_S + mmproj, 1 GPU | OOM during image encode (14.2 GiB loaded, no encode headroom) |
+| UD-Q4_K_XL hybrid + mmproj | context creation OOM, server exits |
+
+Practical verdict for Kaggle-T4 users: run the uncensored build at
+**AD-IQ2_M (26.1 t/s, vision-capable) or AD-IQ3_S (22.3 t/s, no vision
+headroom) on a single T4**; the 4-bit tiers are unusable here and no
+cross-card split exists. Q3_K_XL is the quality-throughput sweet spot at
+24.3 t/s if the censored base is acceptable.
