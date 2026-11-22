@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #0E1110; color: #ECEDE6;
+    font-family: Georgia, "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  .mono { font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .frame { position: absolute; inset: 28px; border: 1px solid #2C322E; }
+  .inner { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; }
+  .brand-row { display: flex; align-items: baseline; gap: 18px; }
+  .brand { font-family: "SF Mono", Menlo, monospace; font-weight: 700; font-size: 26px; letter-spacing: .12em; }
+  .brand em { color: #FF6B4A; font-style: normal; }
+  .eyebrow { font-family: "SF Mono", Menlo, monospace; font-size: 13px; letter-spacing: .18em; color: #9AA19A; }
+  h1 { font-size: 62px; line-height: 1.08; letter-spacing: -0.01em; margin-top: 42px; font-weight: 700; }
+  h1 em { color: #FF6B4A; }
+  .rule { height: 1px; background: #2C322E; margin: 44px 0 0; }
+  .stats { display: flex; margin-top: 38px; }
+  .stat { flex: 1; padding-right: 28px; }
+  .stat + .stat { border-left: 1px solid #2C322E; padding-left: 28px; }
+  .stat .label { font-family: "SF Mono", Menlo, monospace; font-size: 12px; letter-spacing: .14em; color: #9AA19A; text-transform: uppercase; }
+  .stat .num { font-family: "SF Mono", Menlo, monospace; font-size: 44px; font-weight: 700; letter-spacing: -0.04em; margin-top: 12px; font-variant-numeric: tabular-nums; }
+  .stat .unit { font-family: "SF Mono", Menlo, monospace; font-size: 12px; color: #9AA19A; margin-top: 6px; letter-spacing: .06em; text-transform: uppercase; }
+  .hot { color: #FF6B4A; } .teal { color: #4FD1C5; } .green { color: #67C77D; } .ink2 { color: #ECEDE6; }
+  .footer-row { margin-top: auto; display: flex; align-items: center; justify-content: space-between; }
+  .url { font-family: "SF Mono", Menlo, monospace; font-size: 16px; letter-spacing: .08em; color: #ECEDE6; }
+  .url em { color: #FF6B4A; font-style: normal; }
+  .bars { display: flex; gap: 5px; align-items: flex-end; height: 30px; }
+  .bars i { display: block; width: 11px; background: #FF6B4A; }
+  .bars i:nth-child(1) { height: 13px; } .bars i:nth-child(2) { height: 19px; background: #4FD1C5; } .bars i:nth-child(3) { height: 30px; background: #ECEDE6; }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="brand-row">
+      <div class="brand">T4<em>-</em>BENCH</div>
+      <div class="eyebrow">MEASURED ON KAGGLE · 2× TESLA T4 · 2026</div>
+    </div>
+    <h1>What runs on<br><em>two Tesla T4s?</em></h1>
+    <div class="rule"></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Fastest chat</div>
+        <div class="num hot">119</div>
+        <div class="unit">tokens / second</div>
+      </div>
+      <div class="stat">
+        <div class="label">Multimodal + vision</div>
+        <div class="num teal">26</div>
+        <div class="unit">tokens / second</div>
+      </div>
+      <div class="stat">
+        <div class="label">Fastest images</div>
+        <div class="num green">374</div>
+        <div class="unit">images / hour</div>
+      </div>
+      <div class="stat">
+        <div class="label">Fastest video</div>
+        <div class="num ink2">27.6</div>
+        <div class="unit">seconds / clip</div>
+      </div>
+    </div>
+    <div class="footer-row">
+      <div class="url">t4b<em>.</em>sdad.pro</div>
+      <div class="bars"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</body>
+</html>
