@@ -144,10 +144,17 @@
     const inkData = D.inkling;
     bars('#inkling-bars', inkData.single.map(m => ({ label: m.name, value: m.tg })),
       30, (it, i) => i === 0 ? hot : cool, v => v + ' tok/s');
+    bars('#inkling-memory-bars', inkData.sizes.map(s => ({ label: s.name, value: s.sizeGiB, fits: s.fits })),
+      24, (it, i) => it.fits ? green : hot,
+      (v, it) => it.fits ? v + ' GB · fits' : v + ' GB · too big');
     table('#inkling-table',
       ['Quant', 'File size', 'Reply speed (tok/s)', 'Prompt speed (tok/s)', 'Graphics memory'],
       inkData.single.map(m => [m.name, m.sizeGiB + ' GB', m.tg, m.pp,
         Math.round(m.peakVramMiB / 1024) + ' GB']));
+    table('#inkling-size-table',
+      ['Quant', 'File size (GB)', 'Fits one 15 GB T4', 'Reply speed (tok/s)'],
+      inkData.sizes.map(s => [s.name, s.sizeGiB, s.fits ? 'yes' : 'no',
+        s.tg === null ? 'hybrid: 1.9-2.4' : s.tg]));
     table('#inkling-vision-table', ['Vision configuration', 'Seconds per image chat', 'Graphics memory', 'Result'],
       inkData.vision.map(v => [v.config, v.wallS === '' ? 'n/a' : v.wallS,
         Math.round(v.peakVramMiB / 1024) + ' GB', v.result]));

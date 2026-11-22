@@ -122,6 +122,10 @@ ink_names = {
     "Inkling-2-Mini-UD-IQ3_XXS": "UD-IQ3_XXS",
     "Inkling-2-Mini-Uncensored-AD-IQ3_S": "AD-IQ3_S (uncens.)",
     "Inkling-2-Mini-UD-Q3_K_XL": "UD-Q3_K_XL",
+    "Inkling-2-Mini-Uncensored-AD-Q4_K": "AD-Q4_K (uncens.)",
+    "Inkling-2-Mini-UD-Q4_K_M": "UD-Q4_K_M",
+    "Inkling-2-Mini-UD-Q4_K_XL": "UD-Q4_K_XL",
+    "Inkling-2-Mini-UD-Q8_K_XL": "UD-Q8_K_XL",
 }
 inkling_single = []
 for r in ink_rows:
@@ -141,6 +145,23 @@ for r in ink_rows:
         "peakVramMiB": int(num(r["gpu0_peak_mib"])),
     })
 inkling_single.sort(key=lambda m: -m["tg"])
+inkling_sizes_map = {
+    "Inkling-2-Mini-UD-IQ1_M": 7.46, "Inkling-2-Mini-Uncensored-AD-IQ2_M": 8.06,
+    "Inkling-2-Mini-UD-Q2_K_XL": 8.51, "Inkling-2-Mini-UD-IQ3_XXS": 10.86,
+    "Inkling-2-Mini-Uncensored-AD-IQ3_S": 12.43, "Inkling-2-Mini-UD-Q3_K_XL": 12.69,
+    "Inkling-2-Mini-Uncensored-AD-Q4_K": 15.46, "Inkling-2-Mini-UD-Q4_K_M": 15.46,
+    "Inkling-2-Mini-UD-Q4_K_XL": 16.42, "Inkling-2-Mini-UD-Q8_K_XL": 21.30,
+}
+inkling_sizes = [
+    {"name": ink_names.get(r["quant"], r["quant"]),
+     "sizeGiB": inkling_sizes_map[r["quant"]],
+     "fits": r["gpus"] == "1",
+     "tg": (round(float(r["tg_tok_s"].split(" ")[0]), 1)
+            if r["tg_tok_s"] else None)}
+    for r in ink_rows
+    if r["engine"] == "llama.cpp" and r["quant"] in inkling_sizes_map
+]
+inkling_sizes.sort(key=lambda m: m["sizeGiB"])
 inkling_negatives = [
     [r["engine"], r["note"]] for r in ink_rows
     if r["engine"] in ("ollama", "vllm", "sglang", "transformers-native")
@@ -177,6 +198,8 @@ data = {
     "llm": EXTRA["llmScoreboard"],
     "inkling": {
         "single": inkling_single,
+        "sizes": inkling_sizes,
+        "t4GiB": 15.0,
         "hybridNote": ("4-bit quants (15.5-21.3 GiB) do not fit one T4 and "
                        "have no cross-GPU split; a GPU+CPU hybrid manages "
                        "only 1.9-2.4 tok/s."),

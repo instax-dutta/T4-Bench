@@ -410,6 +410,69 @@ window.BENCH_DATA = {
         "peakVramMiB": 13471
       }
     ],
+    "sizes": [
+      {
+        "name": "UD-IQ1_M (1-bit)",
+        "sizeGiB": 7.46,
+        "fits": true,
+        "tg": 26.5
+      },
+      {
+        "name": "AD-IQ2_M (uncens.)",
+        "sizeGiB": 8.06,
+        "fits": true,
+        "tg": 26.1
+      },
+      {
+        "name": "UD-Q2_K_XL",
+        "sizeGiB": 8.51,
+        "fits": true,
+        "tg": 25.1
+      },
+      {
+        "name": "UD-IQ3_XXS",
+        "sizeGiB": 10.86,
+        "fits": true,
+        "tg": 23.0
+      },
+      {
+        "name": "AD-IQ3_S (uncens.)",
+        "sizeGiB": 12.43,
+        "fits": true,
+        "tg": 22.3
+      },
+      {
+        "name": "UD-Q3_K_XL",
+        "sizeGiB": 12.69,
+        "fits": true,
+        "tg": 24.3
+      },
+      {
+        "name": "AD-Q4_K (uncens.)",
+        "sizeGiB": 15.46,
+        "fits": false,
+        "tg": 2.4
+      },
+      {
+        "name": "UD-Q4_K_M",
+        "sizeGiB": 15.46,
+        "fits": false,
+        "tg": 2.1
+      },
+      {
+        "name": "UD-Q4_K_XL",
+        "sizeGiB": 16.42,
+        "fits": false,
+        "tg": 2.1
+      },
+      {
+        "name": "UD-Q8_K_XL",
+        "sizeGiB": 21.3,
+        "fits": false,
+        "tg": 1.9
+      }
+    ],
+    "t4GiB": 15.0,
     "hybridNote": "4-bit quants (15.5-21.3 GiB) do not fit one T4 and have no cross-GPU split; a GPU+CPU hybrid manages only 1.9-2.4 tok/s.",
     "vision": [
       {

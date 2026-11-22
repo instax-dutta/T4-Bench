@@ -150,12 +150,14 @@
       <div class="bars" id="inkling-bars"></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>What the sweep found</h3><span class="hint">Engine matrix</span></div>
-      <p class="verdict" id="inkling-verdict"></p>
-      <p class="small">Quants are Unsloth Mainline GGUFs and AtomicChat uncensored builds. The 12 middle layers run three times per token, so each answer also spends time in hidden reasoning.</p>
+      <div class="panel-head"><h3>The 15 GB wall</h3><span class="hint">Quant file size · green fits one T4</span></div>
+      <div class="bars" id="inkling-memory-bars"></div>
     </div>
   </div>
+  <p class="verdict" id="inkling-verdict"></p>
+  <p class="small">Quants are Unsloth Mainline GGUFs and AtomicChat uncensored builds. The 12 middle layers run three times per token, so each answer also spends time in hidden reasoning. There is no way to split the oversized quants across both T4s.</p>
   <div class="table-wrap"><table id="inkling-table"></table></div>
+  <div class="table-wrap"><table id="inkling-size-table"></table></div>
   <div class="table-wrap"><table id="inkling-vision-table"></table></div>
 </section>
 
