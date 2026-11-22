@@ -72,12 +72,12 @@
     const answers = [
       { label: 'Fastest chat model', name: 'LFM2.5-8B-A1B', big: '119', unit: 'tokens / second' },
       { label: 'Best small agent', name: 'Spark 4B', big: '3/3', unit: 'agent tasks passed' },
+      { label: 'Best multimodal chat', name: 'Inkling-2-Mini', big: '26', unit: 'tokens / second · vision works', wide: true },
       { label: 'Leanest fine-tune', name: 'Unsloth NF4', big: '7.1', unit: 'GB graphics memory' },
       { label: 'Fastest image model', name: 'FLUX.2 klein 4B', big: '374', unit: 'images / hour' },
-      { label: 'Best multimodal chat', name: 'Inkling-2-Mini', big: '26', unit: 'tokens / second' },
     ];
     answers.forEach(a => {
-      const d = el('div', 'answer');
+      const d = el('div', a.wide ? 'answer answer--wide' : 'answer');
       d.append(el('div', 'label', a.label), el('strong', '', a.name),
         el('span', 'big', a.big), el('span', 'unit', ' ' + a.unit));
       $('#answers').append(d);
