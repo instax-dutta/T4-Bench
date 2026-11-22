@@ -103,15 +103,17 @@ def timed_run(cmd, log_path, timeout=3600):
 def llamacpp(gguf, gpus, ctx, run_id):
     name = os.path.basename(gguf)
     name = name.replace(".gguf_file", "").replace(".gguf", "")
-    # b12633/v1.0.0 CLI: no -c flag (ctx is auto-sized), -ts uses "/" separators
+    # b12633/v1.0.0 CLI: no -c flag (ctx is auto-sized), -ts does not split
+    # (full model piles onto device 0); -sm row is unsupported for this MoE.
+    # Dual-GPU works via explicit layer split: 12 of 24 weight layers/card.
     cmd = ["/workspace/llama.cpp/build/bin/llama-bench", "-m", gguf,
-           "-ngl", "99", "-p", "512", "-n", "256", "-r", "3"]
+           "-p", "512", "-n", "256", "-r", "3"]
     if int(gpus) == 1:
-        # v1.0.0 layer-splits across all visible devices by default; force
-        # a true single-card run
-        cmd += ["-sm", "none"]
+        # single card: keep everything on device 0 (v1.0.0 would otherwise
+        # still try to use other visible devices for buffers)
+        cmd += ["-ngl", "99", "-sm", "none"]
     else:
-        cmd += ["-ts", "1/1"]
+        cmd += ["-ngl", "12"]
     stop, holder = sampler_on()
     code, wall = timed_run(cmd, f"{LOGS}/llamacpp_{name}_{run_id}.log")
     g0, g1 = sampler_off(stop, holder)
@@ -181,24 +183,42 @@ def vision(gguf, mmproj, gpus, ctx):
     name = name.replace(".gguf_file", "").replace(".gguf", "")
     port = 8765
     cmd = ["/workspace/llama.cpp/build/bin/llama-server", "-m", gguf,
-           "--mmproj", mmproj, "--jinja", "-ngl", "99",
+           "--mmproj", mmproj, "--jinja",
            "--host", "127.0.0.1", "--port", str(port)]
     if int(gpus) == 2:
-        cmd += ["-ts", "1/1"]
+        cmd += ["-ngl", "12"]  # explicit layer split, 12 of 24 layers/card
     else:
-        cmd += ["-sm", "none"]  # keep the single-card run on one device
+        cmd += ["-ngl", "99", "-sm", "none"]  # single card
     stop, holder = sampler_on()
     server = subprocess.Popen(cmd, env=ENV,
                               stdout=open(f"{LOGS}/vision_{name}.log", "w"),
                               stderr=subprocess.STDOUT)
-    time.sleep(30)  # load window; llama-server signals readiness in log
+    # wait for readiness (up to 3 min), then a short settle
+    t0 = time.time()
+    ready = False
+    while time.time() - t0 < 180:
+        try:
+            log = open(f"{LOGS}/vision_{name}.log").read()
+            if "listening" in log or "server is listening" in log:
+                ready = True
+                break
+        except Exception:
+            pass
+        time.sleep(3)
+    if not ready:
+        print("[vision] server not ready in 180s", flush=True)
+    time.sleep(5)
     body = ('{"messages":[{"role":"user","content":[{"type":"image_url","'
             'image_url":{"url":"data:image/jpeg;base64,%s"}},'
             '{"type":"text","text":"Describe this image in one sentence."}]}]}'
             % open("/workspace/weights/bench_image.b64").read().strip())
+    body_path = "/workspace/weights/vision_body.json"
+    with open(body_path, "w") as f:
+        f.write(body)
     t0 = time.time()
     p = subprocess.run(["curl", "-s", f"http://127.0.0.1:{port}/v1/chat/completions",
-                        "-H", "Content-Type: application/json", "-d", body],
+                        "-H", "Content-Type: application/json",
+                        "--data", f"@{body_path}"],
                        env=ENV, capture_output=True, text=True, timeout=600)
     wall = time.time() - t0
     server.terminate()
@@ -211,6 +231,10 @@ def vision(gguf, mmproj, gpus, ctx):
 
 
 def attempt(engine, cmd):
+    if len(cmd) == 1:
+        # the sweep passes attempt commands as one shell-ish string
+        import shlex
+        cmd = shlex.split(cmd[0])
     stop, holder = sampler_on()
     code, wall = timed_run(cmd, f"{LOGS}/attempt_{engine}.log", timeout=900)
     g0, g1 = sampler_off(stop, holder)
