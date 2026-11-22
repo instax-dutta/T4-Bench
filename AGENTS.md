@@ -80,7 +80,7 @@ When the user requests a durable behavior change, record it here or in the relev
 
 ## Child DOX Index
 
-- `benchmarks/AGENTS.md` - the preserved benchmark projects plus the pending longcat-video-avatar staging folder, sorted by subject
+- `benchmarks/AGENTS.md` - the preserved benchmark projects plus the pending longcat-video-avatar and inkling-2-mini staging folders, sorted by subject
 - `docs/AGENTS.md` - the cross-project index and comparison notes
 - `scripts/AGENTS.md` - verification oracles reused across projects
 - `website/AGENTS.md` - static benchmark visualisation site and its evidence

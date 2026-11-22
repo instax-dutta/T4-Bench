@@ -7,6 +7,7 @@ Hold the completed benchmark projects intact, sorted by subject, with their orig
 - `benchmarks/image-models/**` - Z-Image-Turbo, Qwen-Image 2.1 Viggle 4-step, SDXL and FLUX.2 klein 4B: baseline and throughput optimization. Owned by its nested `AGENTS.md`.
 - `benchmarks/video-generation/**` - CogVideoX-2b, LTX 2B distilled and the abandoned LTX 13B attempt. Owned by its nested `AGENTS.md`.
 - `benchmarks/longcat-video-avatar/**` - PENDING: staged tooling and resume plan for LongCat-Video-Avatar-1.6 on 2x T4; paused on VM storage quota, no measured results yet. Owned by its nested `AGENTS.md`.
+- `benchmarks/inkling-2-mini/**` - PENDING: staged full engine-x-quant sweep for Inkling-2-Mini on 2x T4 (llama.cpp/Ollama quants, attempt rows for vLLM/SGLang/transformers), no measured results yet. Owned by its nested `AGENTS.md`.
 
 ## Local Contracts
 - Do not edit files inside a project without first reading that project's AGENTS.md chain.
@@ -27,3 +28,4 @@ Hold the completed benchmark projects intact, sorted by subject, with their orig
 - `benchmarks/image-models/AGENTS.md` - four image-generation models benchmark
 - `benchmarks/video-generation/AGENTS.md` - video-generation benchmark
 - `benchmarks/longcat-video-avatar/AGENTS.md` - pending avatar benchmark: staged tooling, no results yet
+- `benchmarks/inkling-2-mini/AGENTS.md` - pending Inkling-2-Mini engine-x-quant sweep: staged tooling, no results yet
