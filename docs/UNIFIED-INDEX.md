@@ -12,6 +12,7 @@ folders remain untouched; this is a sorted, read-mostly copy.
 | Video generation | `benchmarks/video-generation/docs/BENCHMARK-RESULTS.md` | `benchmarks/video-generation/benchmark/results.csv`, `server-archive/` |
 | LLM / agents / training | `benchmarks/llm-and-training/README.md` | `benchmarks/llm-and-training/extracted.json`, `sources/` |
 | MiniMax-H3-Image | `benchmarks/minimax-h3-image/docs/BENCHMARK-RESULTS.md` | `benchmarks/minimax-h3-image/benchmark/results-summary.csv`, `server-archive/` |
+| Inkling-2-Mini | `benchmarks/inkling-2-mini/docs/BENCHMARK-RESULTS.md` | `benchmarks/inkling-2-mini/results/inkling_results.csv`, `results/logs/` |
 
 ## Cross-project verdicts
 
@@ -27,6 +28,8 @@ into one score.
 | Image, highest alignment runner-up | SDXL 1.0 base | CLIP 0.3894, 107 images/hour | same engine and resolution |
 | Video, best of both | LTX-Video 2B 0.9.8 distilled | 27 s per warm 49-frame clip at 4 steps, ~11 GiB VRAM, CLIP 0.215-0.234 | 768x512, warm process, fixed prompt |
 | Video, highest alignment | CogVideoX-2b | CLIP 0.2645, 1053 s per 49 frames | 720x480, 50 steps |
+| Multimodal chat, uncensored | Inkling-2-Mini AD-IQ2_M (AtomicChat) | 26.1 tok/s, vision works at 37.3 s per image chat | llama.cpp b12633, llama-bench -p 512 -n 256 -r 3, one T4 |
+| Multimodal chat, quality ceiling | Inkling-2-Mini UD-Q3_K_XL | 24.3 tok/s at 13.9 GiB, highest-bpw quant that fits one T4 | same protocol; no cross-GPU split exists for larger quants |
 
 MiniMax-H3-Image is the outlier: it reaches native 4096x4096 but at about
 660 s per image (5.5 images/hour), so it is not a throughput winner despite its

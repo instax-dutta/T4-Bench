@@ -82,3 +82,30 @@ The figures come from saved runs on the same machine.
 | All FP8 | 64.1 | no |
 | All 4-bit | 33.1 | no |
 | One T4 VRAM | 15.0 | yes |
+
+## Inkling-2-Mini, single T4
+| Quant | File GB | Reply tok/s | Prompt tok/s | VRAM GB |
+|---|---|---|---|---|
+| UD-IQ1_M (1-bit) | 7.46 | 26.5 | 312.5 | 8.4 |
+| AD-IQ2_M (uncens.) | 8.06 | 26.1 | 341.8 | 9.0 |
+| UD-Q2_K_XL | 8.51 | 25.1 | 314.6 | 9.5 |
+| UD-Q3_K_XL | 12.69 | 24.3 | 312.3 | 13.6 |
+| UD-IQ3_XXS | 10.86 | 23.0 | 310.3 | 11.8 |
+| AD-IQ3_S (uncens.) | 12.43 | 22.3 | 319.9 | 13.2 |
+
+## Inkling-2-Mini vision
+| Configuration | Seconds per image chat | VRAM GB | Result |
+|---|---|---|---|
+| AD-IQ2_M + vision, one T4 | 37.3 | 14.2 | works |
+| AD-IQ3_S + vision, one T4 | n/a | 14.2 | out of memory during image encode |
+| UD-Q4_K_XL hybrid + vision | n/a | 0.5 | context creation out of memory |
+
+## Inkling-2-Mini engines that fail on T4
+| Engine | Observed failure |
+|---|---|
+| ollama | official tag is MLX-only; MLX runtime unavailable on CUDA |
+| ollama | local GGUF import fails: unknown architecture inkling2_loop in Ollama bundled llama.cpp |
+| ollama | arch inkling2_loop unsupported in Ollama bundled runner |
+| vllm |     For further information visit https://errors.pydantic.dev/2.14/v/value_error |
+| sglang | /usr/bin/python3: Error while finding module specification for 'sglang.launch_se |
+| transformers-native | You can update Transformers with the command `pip install --upgr |

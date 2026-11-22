@@ -22,24 +22,32 @@ Do not rely on memory. Re-read the applicable DOX chain in the current session b
 
 ## Purpose
 
-Pending benchmark of `thinkingmachines/Inkling-2-Mini` (26.4B MoE, 3.4B
-active, looped transformer, multimodal) on the Kaggle 2x Tesla T4 machine,
-covering every engine x quant combination that can plausibly run there.
-Released 2026-11-20; GGUF quants make it T4-viable where the native
-NVFP4/MXFP8 checkpoint is not. No measured results yet; the VM is being
-fetched and the sweep is staged.
+COMPLETED 2026-11-22: full engine x quant benchmark of
+`thinkingmachines/Inkling-2-Mini` (26.4B MoE, 3.4B active, looped
+transformer, multimodal) on the Kaggle 2x Tesla T4 machine. llama.cpp
+b12633 (CUDA 12.8 prebuilt) is the only working engine: 22-26 t/s
+single-card generation on quants up to 12.7 GiB, vision at 37.3 s per
+image chat, no cross-GPU split exists for the 4-bit tiers. Results in
+`docs/BENCHMARK-RESULTS.md`, raw CSV in `results/`, session issue log
+in `tooling/ISSUES.md`.
 
 ## Ownership
 
+- `docs/BENCHMARK-RESULTS.md` - authoritative report (owned by `docs/AGENTS.md`)
+- `results/inkling_results.csv` - raw rows for every measurement
+- `results/logs/` - llama-bench tables, attempt logs, vision logs and the recorded image-chat response
 - `tooling/bench_inkling.py` - driver: llama-bench wrapper with 1 Hz
   nvidia-smi peak sampling, Ollama /api/generate pass, vision end-to-end
   pass, and attempt-engine rows; CSV schema in the file header
 - `tooling/sweep_inkling.sh` - full matrix orchestrator; quota-aware
   (downloads each quant, benches every engine that can use it, deletes
   before the next; peak disk ~24 GB)
+- `tooling/ISSUES.md` - session issue log: every failure, its cause and
+  the fix that unblocked it
 - `tooling/ollama_import.sh` - local GGUF import for same-file engine
   comparison
 - `tooling/transformers_attempt.py` - native-checkpoint failure row
+- Root `handoff.md` links: none for this project
 
 ## Local Contracts
 
@@ -91,5 +99,6 @@ fetched and the sweep is staged.
 
 ## Child DOX Index
 
-- No child AGENTS.md. `tooling/` is a plain folder; scripts there are
-  self-describing and referenced from the sections above.
+- `docs/AGENTS.md` - measured results report
+- `tooling/`, `results/` - plain folders; files there are self-describing
+  and referenced from the sections above.

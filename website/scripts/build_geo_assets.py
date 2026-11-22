@@ -51,6 +51,14 @@ sections.append(("Video generation", ["Configuration", "Frames", "Seconds/clip",
      for m in D["videoModels"]]))
 sections.append(("MiniMax-H3 memory", ["Precision", "GB", "Fits one T4"],
     [[w["name"], w["gib"], "yes" if w["gib"] <= 15 else "no"] for w in D["h3"]["weightsGiB"]]))
+sections.append(("Inkling-2-Mini, single T4", ["Quant", "File GB", "Reply tok/s", "Prompt tok/s", "VRAM GB"],
+    [[m["name"], m["sizeGiB"], m["tg"], m["pp"], round(m["peakVramMiB"] / 1024, 1)]
+     for m in D["inkling"]["single"]]))
+sections.append(("Inkling-2-Mini vision", ["Configuration", "Seconds per image chat", "VRAM GB", "Result"],
+    [[v["config"], v["wallS"] if v["wallS"] != "" else "n/a",
+      round(v["peakVramMiB"] / 1024, 1), v["result"]] for v in D["inkling"]["vision"]]))
+sections.append(("Inkling-2-Mini engines that fail on T4", ["Engine", "Observed failure"],
+    D["inkling"]["negatives"]))
 
 html_parts = ["""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -65,7 +73,7 @@ html_parts = ["""<!doctype html>
   "description": "Measured image, video, language, agent and fine-tuning benchmarks on two Kaggle Tesla T4 GPUs.",
   "url": BASE + "/benchmarks.html",
   "creator": {"@type": "Organization", "name": "T4-Bench", "url": BASE},
-  "datePublished": "2026-11-19",
+  "datePublished": "2026-11-22",
   "variableMeasured": ["images per hour", "seconds per clip", "tokens per second", "peak graphics memory", "quality score"]
 }, indent=2) + """</script></head><body>
 <header class="topbar"><a class="brand" href="/">T4<span>-</span>BENCH</a><nav><a href="/">Home</a><a href="llms.txt">llms.txt</a><a href="llms-full.txt">Full text</a></nav></header>

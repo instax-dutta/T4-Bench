@@ -7,7 +7,7 @@ Hold the completed benchmark projects intact, sorted by subject, with their orig
 - `benchmarks/image-models/**` - Z-Image-Turbo, Qwen-Image 2.1 Viggle 4-step, SDXL and FLUX.2 klein 4B: baseline and throughput optimization. Owned by its nested `AGENTS.md`.
 - `benchmarks/video-generation/**` - CogVideoX-2b, LTX 2B distilled and the abandoned LTX 13B attempt. Owned by its nested `AGENTS.md`.
 - `benchmarks/longcat-video-avatar/**` - PENDING: staged tooling and resume plan for LongCat-Video-Avatar-1.6 on 2x T4; paused on VM storage quota, no measured results yet. Owned by its nested `AGENTS.md`.
-- `benchmarks/inkling-2-mini/**` - PENDING: staged full engine-x-quant sweep for Inkling-2-Mini on 2x T4 (llama.cpp/Ollama quants, attempt rows for vLLM/SGLang/transformers), no measured results yet. Owned by its nested `AGENTS.md`.
+- `benchmarks/inkling-2-mini/**` - COMPLETED: Inkling-2-Mini engine-x-quant matrix (llama.cpp b12633 prebuilt is the only working engine; 22-26 tok/s single-card; no cross-GPU split; vision at 37.3 s per image chat). Owned by its nested `AGENTS.md`.
 - `benchmarks/kromoss/**` - QUEUED: staged MOSS-Image 5B DiT sweep (diffusers 50-step and 8-step LoRA configs, ComfyUI bf16 and int8 W8A8); started 2026-11-22, aborted before first result when the VM session closed, to run on a future session. Owned by its nested `AGENTS.md`.
 
 ## Local Contracts
@@ -29,5 +29,5 @@ Hold the completed benchmark projects intact, sorted by subject, with their orig
 - `benchmarks/image-models/AGENTS.md` - four image-generation models benchmark
 - `benchmarks/video-generation/AGENTS.md` - video-generation benchmark
 - `benchmarks/longcat-video-avatar/AGENTS.md` - pending avatar benchmark: staged tooling, no results yet
-- `benchmarks/inkling-2-mini/AGENTS.md` - pending Inkling-2-Mini engine-x-quant sweep: staged tooling, no results yet
+- `benchmarks/inkling-2-mini/AGENTS.md` - completed Inkling-2-Mini engine-x-quant sweep: report, CSV and issue log
 - `benchmarks/kromoss/AGENTS.md` - queued Kromoss image-model sweep: staged tooling, runs after Inkling

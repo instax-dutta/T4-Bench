@@ -10,6 +10,7 @@ This site helps people and AI agents answer one question: what runs well on two 
 - Fastest image model tested: FLUX.2 klein 4B, 374 images/hour at 1024x1024.
 - Fastest video model tested: LTX-Video 2B distilled, 27.6 seconds per warm 49-frame clip.
 - Fastest chat model tested: LFM2.5-8B-A1B, 119 tokens/second, one T4.
+- Best multimodal chat tested: Inkling-2-Mini (looped 26B MoE), 26 tokens/second on one T4 with the AD-IQ2_M quant; vision works at 37.3 seconds per image chat. llama.cpp b12633 is the only engine that runs it on T4 (Ollama, vLLM, SGLang and transformers all fail); 4-bit quants do not fit and have no cross-GPU split.
 - Best small agent tested: Spark 4B, 3 of 3 agent tasks passed.
 - Leanest fine-tuning method tested: Unsloth NF4, 7.1 GB versus 14.9 GB for stock transformers.
 - Source notes: https://blog.sdad.pro/

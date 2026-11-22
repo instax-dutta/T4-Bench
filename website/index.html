@@ -29,7 +29,7 @@
     "name": "T4-Bench",
     "url": "https://t4b.sdad.pro/"
   },
-  "datePublished": "2026-11-19",
+  "datePublished": "2026-11-22",
   "variableMeasured": [
     "images per hour",
     "seconds per clip",
@@ -68,6 +68,14 @@
     },
     {
       "@type": "Question",
+      "name": "Can Inkling-2-Mini run on Kaggle T4s?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, with GGUF quants up to 12.7 GB on a single T4 via llama.cpp b12633: 22 to 26 tokens per second, and vision works at 37.3 seconds per image chat with the AD-IQ2_M quant. Ollama, vLLM, SGLang and transformers all fail on this box, and 4-bit quants have no cross-GPU split."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Where can I see all the numbers?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -88,6 +96,7 @@
     <a href="#finetune">Training</a>
     <a href="#image">Images</a>
     <a href="#video">Video</a>
+    <a href="#inkling">Inkling</a>
     <a href="benchmarks.html">Data</a>
     <a href="#method">Method</a>
   </nav>
@@ -106,6 +115,7 @@
       <div class="answer"><div class="label">Best small agent</div><strong>Spark 4B</strong><span class="big">3/3</span><span class="unit"> agent tasks passed</span></div>
       <div class="answer"><div class="label">Leanest fine-tune</div><strong>Unsloth NF4</strong><span class="big">7.1</span><span class="unit"> GB graphics memory</span></div>
       <div class="answer"><div class="label">Fastest image model</div><strong>FLUX.2 klein 4B</strong><span class="big">374</span><span class="unit"> images / hour</span></div>
+      <div class="answer"><div class="label">Best multimodal chat</div><strong>Inkling-2-Mini</strong><span class="big">26</span><span class="unit"> tokens / second</span></div>
     </div>
 </section>
 
@@ -204,8 +214,25 @@
   <div class="table-wrap"><table id="h3-table"></table></div>
 </section>
 
+<section class="chapter" id="inkling">
+  <div class="chapter-head"><span class="num">07</span><div><h2>Inkling-2-Mini on one card</h2><p>A looped 26B mixture-of-experts model with vision, measured across every quant that fits.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Reply speed by quant</h3><span class="hint">Single T4 · higher is better</span></div>
+      <div class="bars" id="inkling-bars"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>What the sweep found</h3><span class="hint">Engine matrix</span></div>
+      <p class="verdict" id="inkling-verdict"></p>
+      <p class="small">Quants are Unsloth Mainline GGUFs and AtomicChat uncensored builds. The 12 middle layers run three times per token, so each answer also spends time in hidden reasoning.</p>
+    </div>
+  </div>
+  <div class="table-wrap"><table id="inkling-table"></table></div>
+  <div class="table-wrap"><table id="inkling-vision-table"></table></div>
+</section>
+
 <section class="chapter" id="method">
-  <div class="chapter-head"><span class="num">07</span><div><h2>How to read this</h2><p>Every number in these tables comes from a saved run.</p></div></div>
+  <div class="chapter-head"><span class="num">08</span><div><h2>How to read this</h2><p>Every number in these tables comes from a saved run.</p></div></div>
   <div class="grid-2">
     <div class="panel"><h3>What we learned</h3><p id="verdicts">Small and clever beats big on this machine: a 6B image model outruns a 33B one, and an 8B mixture-of-experts chat model outruns a 27B dense one.</p></div>
     <div class="panel"><h3>Important limits</h3><ul id="limits"></ul></div>

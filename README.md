@@ -14,6 +14,7 @@ Most model comparisons assume large GPUs. T4-Bench asks a narrower question: wha
 | Task | Winner | Measured result |
 |---|---|---|
 | Chat / coding | LFM2.5-8B-A1B | 119 tokens/second |
+| Multimodal chat / vision | Inkling-2-Mini AD-IQ2_M | 26 tokens/second, 37 s per image chat |
 | Small agent | Spark 4B | 3/3 agent tasks passed |
 | Fine-tuning | Unsloth NF4 | 7.1 GB vs 14.9 GB stock |
 | Image generation | FLUX.2 klein 4B | 374 images/hour at 1024×1024 |
@@ -35,8 +36,8 @@ benchmarks/
   video-generation/    CogVideoX, LTX 2B, abandoned LTX 13B
   minimax-h3-image/    quant/engine research and native-resolution test
   longcat-video-avatar/  pending: staged tooling for a benchmark not yet run
-  inkling-2-mini/       pending: staged engine-x-quant sweep, not yet run
-  kromoss/              queued: staged image-model sweep, runs after Inkling
+  inkling-2-mini/       Inkling-2-Mini engine-x-quant sweep, measured
+  kromoss/              queued: staged image-model sweep, not yet run
   media/               generated images and videos from the original runs
 website/               static site, data module, ManimGX diagrams, GEO assets
 scripts/               extraction and verification tools

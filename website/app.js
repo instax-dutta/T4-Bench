@@ -74,6 +74,7 @@
       { label: 'Best small agent', name: 'Spark 4B', big: '3/3', unit: 'agent tasks passed' },
       { label: 'Leanest fine-tune', name: 'Unsloth NF4', big: '7.1', unit: 'GB graphics memory' },
       { label: 'Fastest image model', name: 'FLUX.2 klein 4B', big: '374', unit: 'images / hour' },
+      { label: 'Best multimodal chat', name: 'Inkling-2-Mini', big: '26', unit: 'tokens / second' },
     ];
     answers.forEach(a => {
       const d = el('div', 'answer');
@@ -139,7 +140,20 @@
     table('#h3-table', ['Model precision', 'Memory needed (GB)', 'Fits one T4'],
       D.h3.weightsGiB.map(w => [w.name, w.gib, w.gib <= 15 ? 'yes' : 'no']));
 
-    $('#verdicts').textContent = 'Smaller models often win here. A 6B image model outruns the 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, and a smaller text encoder is what lets the video model run at all.';
+    // Inkling-2-Mini
+    const inkData = D.inkling;
+    bars('#inkling-bars', inkData.single.map(m => ({ label: m.name, value: m.tg })),
+      30, (it, i) => i === 0 ? hot : cool, v => v + ' tok/s');
+    table('#inkling-table',
+      ['Quant', 'File size', 'Reply speed (tok/s)', 'Prompt speed (tok/s)', 'Graphics memory'],
+      inkData.single.map(m => [m.name, m.sizeGiB + ' GB', m.tg, m.pp,
+        Math.round(m.peakVramMiB / 1024) + ' GB']));
+    table('#inkling-vision-table', ['Vision configuration', 'Seconds per image chat', 'Graphics memory', 'Result'],
+      inkData.vision.map(v => [v.config, v.wallS === '' ? 'n/a' : v.wallS,
+        Math.round(v.peakVramMiB / 1024) + ' GB', v.result]));
+    $('#inkling-verdict').textContent = inkData.engine + '. One T4 runs every quant up to 12.7 GB at 22-26 tok/s; ' + inkData.hybridNote;
+
+    $('#verdicts').textContent = 'Smaller models often win here. A 6B image model outruns the 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, a smaller text encoder is what lets the video model run at all, and a looped 26B fits one T4 only below 4-bit.';
     $('#limits').innerHTML = '';
     D.limitations.forEach(t => { const li = el('li', '', t); $('#limits').append(li); });
     $('#sources').innerHTML = 'Source: personal research and benchmarking notes from <a href="https://blog.sdad.pro/" target="_blank" rel="noopener">blog.sdad.pro</a>.';

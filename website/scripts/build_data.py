@@ -113,8 +113,50 @@ h3 = [
 ]
 h3_4096 = [r for r in h3_ok if r["w"] == "4096"]
 
+# --- inkling -----------------------------------------------------------------
+ink_rows = read_csv(BASE / "benchmarks/inkling-2-mini/results/inkling_results.csv")
+ink_names = {
+    "Inkling-2-Mini-UD-IQ1_M": "UD-IQ1_M (1-bit)",
+    "Inkling-2-Mini-Uncensored-AD-IQ2_M": "AD-IQ2_M (uncens.)",
+    "Inkling-2-Mini-UD-Q2_K_XL": "UD-Q2_K_XL",
+    "Inkling-2-Mini-UD-IQ3_XXS": "UD-IQ3_XXS",
+    "Inkling-2-Mini-Uncensored-AD-IQ3_S": "AD-IQ3_S (uncens.)",
+    "Inkling-2-Mini-UD-Q3_K_XL": "UD-Q3_K_XL",
+}
+inkling_single = []
+for r in ink_rows:
+    if r["engine"] != "llama.cpp" or r["gpus"] != "1":
+        continue
+    tg = float(r["tg_tok_s"].split(" ")[0])
+    pp = float(r["pp_tok_s"].split(" ")[0])
+    inkling_single.append({
+        "id": r["quant"], "name": ink_names.get(r["quant"], r["quant"]),
+        "sizeGiB": {"Inkling-2-Mini-UD-IQ1_M": 7.46,
+                    "Inkling-2-Mini-Uncensored-AD-IQ2_M": 8.06,
+                    "Inkling-2-Mini-UD-Q2_K_XL": 8.51,
+                    "Inkling-2-Mini-UD-IQ3_XXS": 10.86,
+                    "Inkling-2-Mini-Uncensored-AD-IQ3_S": 12.43,
+                    "Inkling-2-Mini-UD-Q3_K_XL": 12.69}[r["quant"]],
+        "pp": round(pp, 1), "tg": round(tg, 1),
+        "peakVramMiB": int(num(r["gpu0_peak_mib"])),
+    })
+inkling_single.sort(key=lambda m: -m["tg"])
+inkling_negatives = [
+    [r["engine"], r["note"]] for r in ink_rows
+    if r["engine"] in ("ollama", "vllm", "sglang", "transformers-native")
+    and r["exit_code"] not in ("", "0")
+]
+inkling_vision = [
+    {"config": "AD-IQ2_M + vision, one T4", "wallS": 37.3,
+     "peakVramMiB": 14533, "result": "works"},
+    {"config": "AD-IQ3_S + vision, one T4", "wallS": "",
+     "peakVramMiB": 14565, "result": "out of memory during image encode"},
+    {"config": "UD-Q4_K_XL hybrid + vision", "wallS": "",
+     "peakVramMiB": 513, "result": "context creation out of memory"},
+]
+
 data = {
-    "generated": "2026-11-19",
+    "generated": "2026-11-22",
     "server": {"gpus": 2, "gpu": "Tesla T4 15360 MiB", "arch": "sm_75 Turing",
                "ramGiB": 31, "cuda": "13.0", "torch": "2.11.0+cu130"},
     "imageModels": image_models,
@@ -133,6 +175,16 @@ data = {
                 "cogSeconds": next((m["wall"] for m in video_models
                     if m["id"] == "cog_s50_f49"), 1053.0)},
     "llm": EXTRA["llmScoreboard"],
+    "inkling": {
+        "single": inkling_single,
+        "hybridNote": ("4-bit quants (15.5-21.3 GiB) do not fit one T4 and "
+                       "have no cross-GPU split; a GPU+CPU hybrid manages "
+                       "only 1.9-2.4 tok/s."),
+        "vision": inkling_vision,
+        "negatives": inkling_negatives,
+        "engine": "llama.cpp b12633 (CUDA 12.8 prebuilt) is the only engine "
+                  "that runs Inkling-2-Mini on T4",
+    },
     "agentConcurrency": EXTRA["agentConcurrency"],
     "toolEval": EXTRA["toolEval"],
     "fineTuning": EXTRA["fineTuning"],
@@ -145,6 +197,8 @@ data = {
         "Images were tested at 1024x1024. Video clips were kept short and used each model's normal preset.",
         "We stopped the 13B video run halfway through its download. The Kaggle session ran out of writable space at 57 of 93 GB, so this says nothing about the model itself.",
         "Most timings include a fresh model load. Rows marked warm or batched reuse a model that is already loaded.",
+        "Inkling speeds are token generation with a 512-token prompt and 256 generated tokens. The looped model cannot fully disable its reasoning, so per-answer time is longer than tokens-per-second suggests.",
+        "Inkling 4-bit quants were only measured in a GPU-plus-CPU hybrid at 1.9-2.4 tokens per second, because llama.cpp has no way to split this architecture across both T4s.",
     ],
 }
 

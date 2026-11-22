@@ -1,5 +1,5 @@
 window.BENCH_DATA = {
-  "generated": "2026-11-19",
+  "generated": "2026-11-22",
   "server": {
     "gpus": 2,
     "gpu": "Tesla T4 15360 MiB",
@@ -359,6 +359,106 @@ window.BENCH_DATA = {
       "gpus": "2x T4 split"
     }
   ],
+  "inkling": {
+    "single": [
+      {
+        "id": "Inkling-2-Mini-UD-IQ1_M",
+        "name": "UD-IQ1_M (1-bit)",
+        "sizeGiB": 7.46,
+        "pp": 312.5,
+        "tg": 26.5,
+        "peakVramMiB": 8635
+      },
+      {
+        "id": "Inkling-2-Mini-Uncensored-AD-IQ2_M",
+        "name": "AD-IQ2_M (uncens.)",
+        "sizeGiB": 8.06,
+        "pp": 341.8,
+        "tg": 26.1,
+        "peakVramMiB": 9233
+      },
+      {
+        "id": "Inkling-2-Mini-UD-Q2_K_XL",
+        "name": "UD-Q2_K_XL",
+        "sizeGiB": 8.51,
+        "pp": 314.6,
+        "tg": 25.1,
+        "peakVramMiB": 9699
+      },
+      {
+        "id": "Inkling-2-Mini-UD-Q3_K_XL",
+        "name": "UD-Q3_K_XL",
+        "sizeGiB": 12.69,
+        "pp": 312.3,
+        "tg": 24.3,
+        "peakVramMiB": 13913
+      },
+      {
+        "id": "Inkling-2-Mini-UD-IQ3_XXS",
+        "name": "UD-IQ3_XXS",
+        "sizeGiB": 10.86,
+        "pp": 310.3,
+        "tg": 23.0,
+        "peakVramMiB": 12091
+      },
+      {
+        "id": "Inkling-2-Mini-Uncensored-AD-IQ3_S",
+        "name": "AD-IQ3_S (uncens.)",
+        "sizeGiB": 12.43,
+        "pp": 319.9,
+        "tg": 22.3,
+        "peakVramMiB": 13471
+      }
+    ],
+    "hybridNote": "4-bit quants (15.5-21.3 GiB) do not fit one T4 and have no cross-GPU split; a GPU+CPU hybrid manages only 1.9-2.4 tok/s.",
+    "vision": [
+      {
+        "config": "AD-IQ2_M + vision, one T4",
+        "wallS": 37.3,
+        "peakVramMiB": 14533,
+        "result": "works"
+      },
+      {
+        "config": "AD-IQ3_S + vision, one T4",
+        "wallS": "",
+        "peakVramMiB": 14565,
+        "result": "out of memory during image encode"
+      },
+      {
+        "config": "UD-Q4_K_XL hybrid + vision",
+        "wallS": "",
+        "peakVramMiB": 513,
+        "result": "context creation out of memory"
+      }
+    ],
+    "negatives": [
+      [
+        "ollama",
+        "official tag is MLX-only; MLX runtime unavailable on CUDA"
+      ],
+      [
+        "ollama",
+        "local GGUF import fails: unknown architecture inkling2_loop in Ollama bundled llama.cpp"
+      ],
+      [
+        "ollama",
+        "arch inkling2_loop unsupported in Ollama bundled runner"
+      ],
+      [
+        "vllm",
+        "    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+      ],
+      [
+        "sglang",
+        "/usr/bin/python3: Error while finding module specification for 'sglang.launch_se"
+      ],
+      [
+        "transformers-native",
+        "You can update Transformers with the command `pip install --upgr"
+      ]
+    ],
+    "engine": "llama.cpp b12633 (CUDA 12.8 prebuilt) is the only engine that runs Inkling-2-Mini on T4"
+  },
   "agentConcurrency": [
     {
       "agents": 1.0,
@@ -551,6 +651,8 @@ window.BENCH_DATA = {
     "Our 0 to 100 quality score is a similarity check against the prompt. It tells you whether the output followed the words, not whether people like it.",
     "Images were tested at 1024x1024. Video clips were kept short and used each model's normal preset.",
     "We stopped the 13B video run halfway through its download. The Kaggle session ran out of writable space at 57 of 93 GB, so this says nothing about the model itself.",
-    "Most timings include a fresh model load. Rows marked warm or batched reuse a model that is already loaded."
+    "Most timings include a fresh model load. Rows marked warm or batched reuse a model that is already loaded.",
+    "Inkling speeds are token generation with a 512-token prompt and 256 generated tokens. The looped model cannot fully disable its reasoning, so per-answer time is longer than tokens-per-second suggests.",
+    "Inkling 4-bit quants were only measured in a GPU-plus-CPU hybrid at 1.9-2.4 tokens per second, because llama.cpp has no way to split this architecture across both T4s."
   ]
 };

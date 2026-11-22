@@ -1,3 +1,4 @@
+engine,quant,gpus,ctx,run,pp_tok_s,tg_tok_s,eval_count,eval_tok_s,load_ms,wall_s,exit_code,gpu0_peak_mib,gpu1_peak_mib,note
 ollama,inkling-2-mini,2,8192,1,,,,,,0.1,1,0,0,official tag is MLX-only; MLX runtime unavailable on CUDA
 ollama,Inkling-2-Mini-Uncensored-AD-IQ3_S,1,8192,1,,,,,,0.2,1,0,0,local GGUF import fails: unknown architecture inkling2_loop in Ollama bundled llama.cpp
 ollama,Inkling-2-Mini-UD-Q3_K_XL,1,8192,1,,,,,,0.2,1,0,0,arch inkling2_loop unsupported in Ollama bundled runner
