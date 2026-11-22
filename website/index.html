@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>T4-Bench: What runs on two Kaggle T4s</title>
-<meta name="description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook.">
+<meta name="description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook, including the Inkling-2-Mini multimodal engine sweep at 26 tokens/second with vision.">
 <link rel="canonical" href="https://t4b.sdad.pro/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="T4-Bench: What runs on two Kaggle T4s">
-<meta property="og:description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook.">
+<meta property="og:description" content="Measured image, video, LLM, agent and fine-tuning benchmarks on a Kaggle 2x Tesla T4 notebook, including Inkling-2-Mini at 26 tokens/second with vision.">
 <meta property="og:url" content="https://t4b.sdad.pro/">
 <meta property="og:image" content="https://t4b.sdad.pro/assets/image-race-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="T4-Bench: What runs on two Kaggle T4s">
 <meta name="twitter:description" content="Measured benchmarks on Kaggle 2x Tesla T4.">
 <meta name="author" content="T4-Bench">
-<meta name="keywords" content="T4 benchmark, Kaggle T4, image generation benchmark, video generation benchmark, LLM inference benchmark, GPU benchmarks">
+<meta name="keywords" content="T4 benchmark, Kaggle T4, image generation benchmark, video generation benchmark, LLM inference benchmark, GPU benchmarks, Inkling-2-Mini, multimodal LLM benchmark, GGUF quant benchmark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3Crect x='4' y='18' width='6' height='10' fill='%23FF6B4A'/%3E%3Crect x='13' y='12' width='6' height='16' fill='%234FD1C5'/%3E%3Crect x='22' y='7' width='6' height='21' fill='%23ECEDE6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">{
@@ -34,6 +34,7 @@
     "images per hour",
     "seconds per clip",
     "tokens per second",
+    "seconds per image chat",
     "peak graphics memory",
     "quality score"
   ]

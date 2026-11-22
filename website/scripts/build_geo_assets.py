@@ -94,7 +94,7 @@ ink_plain = "\n".join(["## Headline: Inkling-2-Mini on Kaggle 2x T4", ""] + ink_
 html_parts = ["""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All benchmark data: T4-Bench</title>
-<meta name="description" content="Complete measured benchmark tables for image, video, LLM, agent and fine-tuning workloads on Kaggle 2x Tesla T4.">
+<meta name="description" content="Complete measured benchmark tables for image, video, LLM, agent and fine-tuning workloads on Kaggle 2x Tesla T4, including the Inkling-2-Mini multimodal sweep at 26 tokens/second.">
 <link rel="canonical" href="https://t4b.sdad.pro/benchmarks.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1110'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
@@ -105,7 +105,7 @@ html_parts = ["""<!doctype html>
   "url": BASE + "/benchmarks.html",
   "creator": {"@type": "Organization", "name": "T4-Bench", "url": BASE},
   "datePublished": "2026-11-22",
-  "variableMeasured": ["images per hour", "seconds per clip", "tokens per second", "peak graphics memory", "quality score"]
+  "variableMeasured": ["images per hour", "seconds per clip", "tokens per second", "seconds per image chat", "peak graphics memory", "quality score"]
 }, indent=2) + """</script></head><body>
 <header class="topbar"><a class="brand" href="/">T4<span>-</span>BENCH</a><nav><a href="/">Home</a><a href="llms.txt">llms.txt</a><a href="llms-full.txt">Full text</a></nav></header>
 <main style="max-width:1160px;margin:0 auto;padding:40px 20px">

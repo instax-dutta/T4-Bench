@@ -1,6 +1,6 @@
 # GEO Audit Report: T4-Bench
 
-**Audit date:** 2026-11-19
+**Audit date:** 2026-11-19 (baseline) · **Final pass:** 2026-11-23
 **URL:** https://t4b.sdad.pro/
 **Repository:** https://github.com/instax-dutta/T4-Bench
 **Business type:** Research/data publisher (benchmark atlas)
@@ -96,3 +96,34 @@ GitHub repository metadata now includes description, homepage and topical tags. 
 - Earn third-party mentions and links to improve Brand Authority.
 - Add a formal license/citation file if the data is to be reused externally.
 - Keep `llms-full.txt` and `benchmarks.html` regenerated whenever data changes.
+
+---
+
+## Final pass addendum (2026-11-23)
+
+Re-audit after publishing the Inkling-2-Mini results. Everything the
+baseline remediation put in place still holds, and the Inkling data is now
+first-class on every AI-facing surface: a headline block at the top of
+`llms-full.txt` and `benchmarks.html`, a self-contained section in
+`llms.txt`, a FAQ question in the homepage JSON-LD, and a dedicated website
+chapter with static tables mirroring its charts.
+
+Fixes applied in this pass:
+
+- Meta descriptions on the homepage and `benchmarks.html` now name
+  Inkling-2-Mini and the 26 tok/s headline (previously the new data was
+  invisible to snippet-led engines); keywords extended with
+  Inkling-2-Mini, multimodal LLM benchmark and GGUF quant benchmark.
+- `robots.txt` gained `OAI-SearchBot` (ChatGPT Search) alongside the
+  existing GPTBot, ChatGPT-User, ClaudeBot, Claude-User, PerplexityBot,
+  Google-Extended, CCBot, Applebot-Extended and meta-externalagent rules.
+- `sitemap.xml` lastmod dates advanced to 2026-11-23 for all four URLs.
+- Dataset JSON-LD `variableMeasured` gained "seconds per image chat"
+  (the vision metric) on both pages that carry it.
+- Verified: all six sitemap-served paths return 200 locally, every
+  JSON-LD block parses, the no-JS static hero contains the Inkling
+  banner, and screenshots report no console errors or overflow.
+
+Projected score after this pass: ~80/100. The Brand Authority gap
+(third-party mentions) remains the only material limitation, as in the
+baseline.

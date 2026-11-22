@@ -22,6 +22,9 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: Applebot-Extended
 Allow: /
 
