@@ -123,6 +123,15 @@ def llamacpp(gguf, gpus, ctx, run_id):
 
 
 def ollama(model, gpus, ctx, run_id):
+    # engine-support dedup: skip if a row for this model already exists
+    # (documented failures: MLX-only official tag; unsupported inkling2_loop
+    # in Ollama bundled llama.cpp)
+    try:
+        if any(l.startswith("ollama,%s," % model) for l in open(CSV).read().splitlines()):
+            print("[skip] ollama row exists:", model, flush=True)
+            return
+    except FileNotFoundError:
+        pass
     # warm run (load), then 3 timed calls
     warm = subprocess.run(
         ["curl", "-s", "http://localhost:11434/api/generate", "-d",
