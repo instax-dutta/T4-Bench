@@ -92,6 +92,7 @@
   <a href="#top" class="brand">T4<span>-</span>BENCH</a>
   <nav aria-label="Benchmark categories">
     <a href="#llm">Chat</a>
+    <a href="#inkling">Inkling</a>
     <a href="#agents">Agents</a>
     <a href="#finetune">Training</a>
     <a href="#image">Images</a>
@@ -141,8 +142,25 @@
   <div class="clip-row"><mx-clip src="assets/tool-eval.mp4" poster="assets/tool-eval-poster.jpg" caption="Tool-use test, 15 tasks"></mx-clip></div>
 </section>
 
+<section class="chapter" id="inkling">
+  <div class="chapter-head"><span class="num">02</span><div><h2>Inkling-2-Mini on one card</h2><p>A looped 26B mixture-of-experts model with vision, measured across every quant that fits.</p></div></div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h3>Reply speed by quant</h3><span class="hint">Single T4 · higher is better</span></div>
+      <div class="bars" id="inkling-bars"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>What the sweep found</h3><span class="hint">Engine matrix</span></div>
+      <p class="verdict" id="inkling-verdict"></p>
+      <p class="small">Quants are Unsloth Mainline GGUFs and AtomicChat uncensored builds. The 12 middle layers run three times per token, so each answer also spends time in hidden reasoning.</p>
+    </div>
+  </div>
+  <div class="table-wrap"><table id="inkling-table"></table></div>
+  <div class="table-wrap"><table id="inkling-vision-table"></table></div>
+</section>
+
 <section class="chapter" id="agents">
-  <div class="chapter-head"><span class="num">02</span><div><h2>Agents &amp; long memory</h2><p>Small models that can use tools and remember long documents.</p></div></div>
+  <div class="chapter-head"><span class="num">03</span><div><h2>Agents &amp; long memory</h2><p>Small models that can use tools and remember long documents.</p></div></div>
   <div class="grid-2">
     <div class="panel">
       <div class="panel-head"><h3>Agent tasks completed</h3><span class="hint">Out of 3 · higher is better</span></div>
@@ -162,7 +180,7 @@
 </section>
 
 <section class="chapter" id="finetune">
-  <div class="chapter-head"><span class="num">03</span><div><h2>Fine-tuning</h2><p>Memory needed to train an 8B model with the same settings.</p></div></div>
+  <div class="chapter-head"><span class="num">04</span><div><h2>Fine-tuning</h2><p>Memory needed to train an 8B model with the same settings.</p></div></div>
   <div class="grid-2">
     <div class="panel">
       <div class="panel-head"><h3>Memory used</h3><span class="hint">GB · lower is better</span></div>
@@ -179,7 +197,7 @@
 </section>
 
 <section class="chapter" id="image">
-  <div class="chapter-head"><span class="num">04</span><div><h2>Image generation</h2><p>Four models, one engine, 1024×1024 pictures.</p></div></div>
+  <div class="chapter-head"><span class="num">05</span><div><h2>Image generation</h2><p>Four models, one engine, 1024×1024 pictures.</p></div></div>
   <div class="grid-2">
     <div class="panel">
       <div class="panel-head"><h3>Pictures per hour</h3><span class="hint">Higher is better · both GPUs busy</span></div>
@@ -191,7 +209,7 @@
 </section>
 
 <section class="chapter" id="video">
-  <div class="chapter-head"><span class="num">05</span><div><h2>Video generation</h2><p>Short clips. Wall time includes loading, generating and saving.</p></div></div>
+  <div class="chapter-head"><span class="num">06</span><div><h2>Video generation</h2><p>Short clips. Wall time includes loading, generating and saving.</p></div></div>
   <div class="grid-2">
     <div class="panel">
       <div class="panel-head"><h3>Seconds per clip</h3><span class="hint">Lower is better</span></div>
@@ -203,7 +221,7 @@
 </section>
 
 <section class="chapter" id="h3">
-  <div class="chapter-head"><span class="num">06</span><div><h2>The memory limit</h2><p>Why the largest image model needs tricks to run at all.</p></div></div>
+  <div class="chapter-head"><span class="num">07</span><div><h2>The memory limit</h2><p>Why the largest image model needs tricks to run at all.</p></div></div>
   <div class="grid-2">
     <div class="panel">
       <div class="panel-head"><h3>Memory needed</h3><span class="hint">GB · one T4 has 15 GB</span></div>
@@ -212,23 +230,6 @@
     <mx-clip src="assets/memory-wall.mp4" poster="assets/memory-wall-poster.jpg" caption="Weights versus one card"></mx-clip>
   </div>
   <div class="table-wrap"><table id="h3-table"></table></div>
-</section>
-
-<section class="chapter" id="inkling">
-  <div class="chapter-head"><span class="num">07</span><div><h2>Inkling-2-Mini on one card</h2><p>A looped 26B mixture-of-experts model with vision, measured across every quant that fits.</p></div></div>
-  <div class="grid-2">
-    <div class="panel">
-      <div class="panel-head"><h3>Reply speed by quant</h3><span class="hint">Single T4 · higher is better</span></div>
-      <div class="bars" id="inkling-bars"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3>What the sweep found</h3><span class="hint">Engine matrix</span></div>
-      <p class="verdict" id="inkling-verdict"></p>
-      <p class="small">Quants are Unsloth Mainline GGUFs and AtomicChat uncensored builds. The 12 middle layers run three times per token, so each answer also spends time in hidden reasoning.</p>
-    </div>
-  </div>
-  <div class="table-wrap"><table id="inkling-table"></table></div>
-  <div class="table-wrap"><table id="inkling-vision-table"></table></div>
 </section>
 
 <section class="chapter" id="method">
