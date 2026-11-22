@@ -36,6 +36,7 @@ benchmarks/
   minimax-h3-image/    quant/engine research and native-resolution test
   longcat-video-avatar/  pending: staged tooling for a benchmark not yet run
   inkling-2-mini/       pending: staged engine-x-quant sweep, not yet run
+  kromoss/              queued: staged image-model sweep, runs after Inkling
   media/               generated images and videos from the original runs
 website/               static site, data module, ManimGX diagrams, GEO assets
 scripts/               extraction and verification tools
