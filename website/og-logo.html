@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; }
+  body { width: 512px; height: 512px; overflow: hidden; background: #0E1110; position: relative; }
+  .frame { position: absolute; inset: 20px; border: 1px solid #2C322E; }
+  .bars { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -58%); display: flex; gap: 28px; align-items: flex-end; }
+  .bars i { display: block; width: 72px; }
+  .bars i:nth-child(1) { height: 148px; background: #FF6B4A; }
+  .bars i:nth-child(2) { height: 224px; background: #4FD1C5; }
+  .bars i:nth-child(3) { height: 300px; background: #ECEDE6; }
+  .word { position: absolute; left: 0; right: 0; bottom: 62px; text-align: center;
+          font-family: "SF Mono", Menlo, monospace; font-size: 34px; font-weight: 700;
+          letter-spacing: .18em; color: #ECEDE6; }
+  .word em { color: #FF6B4A; font-style: normal; }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="bars"><i></i><i></i><i></i></div>
+  <div class="word">T4<em>-</em>BENCH</div>
+</body>
+</html>
