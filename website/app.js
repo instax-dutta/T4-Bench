@@ -89,7 +89,7 @@
       130, (it, i) => i === 0 ? hot : cool, v => v + ' tok/s');
     table('#llm-table', ['Model', 'Reply speed (tok/s)', 'Prompt speed (tok/s)', 'Graphics memory', 'GPUs'],
       llm.map(m => [m.model, m.decodeTokS, m.prefillTokS === null || m.prefillTokS === undefined ? 'n/a' : m.prefillTokS, m.vramGB + ' GB', m.gpus]));
-    $('#llm-verdict').textContent = 'LFM2.5-8B-A1B replies about 9× faster than the largest dense model, while using only one of the two GPUs.';
+    $('#llm-verdict').textContent = 'LFM2.5-8B-A1B replies about 9× faster than the largest dense model and about 4.6× faster than the looped multimodal 26B, while using only one of the two GPUs.';
 
     bars('#concurrency-bars', D.agentConcurrency.map(x => ({ label: x.agents + ' agent' + (x.agents > 1 ? 's' : ''), value: x.agents === 1 ? 71 : 108, extra: x.aggregate })),
       120, (it, i) => i ? green : cool, (v, it) => it.extra);

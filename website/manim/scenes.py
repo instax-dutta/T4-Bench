@@ -177,8 +177,9 @@ class LlmSpeed(m.Scene):
         header(self, "01 / CHAT MODELS", "Replies per second, warm model")
         hbars(self, [("LFM 8B A1B", 119, "119", VERM), ("Spark 1.7B", 100, "100", TEAL),
                      ("Qwen Coder 30B", 71, "71", GREEN), ("Spark 4B", 54, "54", TEAL),
+                     ("Inkling 26B MoE", 26.1, "26.1", AMBER),
                      ("Gemma 4 12B", 21, "21", INK), ("Qwen 27B", 13, "13", MUTED)],
-              130, note="higher is better · one or two T4s")
+              130, y0=1.15, step=0.72, note="higher is better · one or two T4s")
 
 
 class ToolEval(m.Scene):

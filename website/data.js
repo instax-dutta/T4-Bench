@@ -357,6 +357,14 @@ window.BENCH_DATA = {
       "decodeTokS": 13.0,
       "prefillTokS": 52.0,
       "gpus": "2x T4 split"
+    },
+    {
+      "model": "Inkling-2-Mini AD-IQ2_M (multimodal)",
+      "sizeGB": 8.06,
+      "vramGB": 9.0,
+      "decodeTokS": 26.1,
+      "prefillTokS": 341.8,
+      "gpus": "1x T4"
     }
   ],
   "inkling": {

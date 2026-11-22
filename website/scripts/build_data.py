@@ -176,6 +176,19 @@ inkling_vision = [
      "peakVramMiB": 513, "result": "context creation out of memory"},
 ]
 
+# Build-time join: the recommended Inkling quant takes its place in the chat
+# leaderboard. The entry comes from the inkling-2-mini project's CSV at build
+# time; extracted.json (a completed project's artifact) is never edited.
+_ink_chat = next(m for m in inkling_single if "AD-IQ2_M" in m["id"])
+EXTRA["llmScoreboard"].append({
+    "model": "Inkling-2-Mini AD-IQ2_M (multimodal)",
+    "sizeGB": _ink_chat["sizeGiB"],
+    "vramGB": round(_ink_chat["peakVramMiB"] / 1024, 1),
+    "decodeTokS": _ink_chat["tg"],
+    "prefillTokS": _ink_chat["pp"],
+    "gpus": "1x T4",
+})
+
 data = {
     "generated": "2026-11-22",
     "server": {"gpus": 2, "gpu": "Tesla T4 15360 MiB", "arch": "sm_75 Turing",

@@ -31,6 +31,7 @@ Full report: https://github.com/instax-dutta/T4-Bench/blob/main/benchmarks/inkli
 | XHToken Spark-X2.5-1.7B | 100.0 | n/a | 1.3 | 1x T4 |
 | Qwen3-Coder-30B-A3B | 71.0 | 165.0 | 22.0 | 2x T4 split |
 | XHToken Spark-X2.5-4B | 54.0 | 1385.0 | 3.7 | 1x T4 |
+| Inkling-2-Mini AD-IQ2_M (multimodal) | 26.1 | 341.8 | 9.0 | 1x T4 |
 | google Gemma 4 12B IT | 21.0 | 144.0 | 8.1 | 1x T4 |
 | Qwen3.8-27B | 13.0 | 52.0 | 17.7 | 2x T4 split |
 
