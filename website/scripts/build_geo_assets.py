@@ -60,6 +60,37 @@ sections.append(("Inkling-2-Mini vision", ["Configuration", "Seconds per image c
 sections.append(("Inkling-2-Mini engines that fail on T4", ["Engine", "Observed failure"],
     D["inkling"]["negatives"]))
 
+# --- Inkling headline block (generated from data.js so it never drifts) ------
+ink = D["inkling"]
+fastest = max(ink["single"], key=lambda m: m["tg"])
+best = next(m for m in ink["single"] if "AD-IQ2_M" in m["id"])
+q3 = next(m for m in ink["single"] if "Q3_K_XL" in m["id"])
+vision_ok = next(v for v in ink["vision"] if v["result"] == "works")
+tgs = [m["tg"] for m in ink["single"]]
+ink_headline = [
+    "Inkling-2-Mini (thinkingmachines, 26.4B mixture-of-experts, 3.4B active,",
+    "looped transformer, multimodal) runs on ONE Tesla T4 via llama.cpp b12633",
+    f"(CUDA 12.8 prebuilt) with GGUF quants up to 12.7 GB:",
+    f"- Best all-round (recommended): {best['name']} ({best['sizeGiB']} GB) at {best['tg']} tok/s",
+    f"  generation, {best['pp']} tok/s prompt; vision works with the mmproj",
+    f"  projector at {vision_ok['wallS']} s per image chat"
+    f" ({round(vision_ok['peakVramMiB']/1024)} GB peak).",
+    f"- Fastest measured: {fastest['name']} at {fastest['tg']} tok/s, but 1-bit",
+    "  quality is far below the recommended tier.",
+    f"- Quality ceiling on one card: UD-Q3_K_XL ({q3['sizeGiB']} GB) at {q3['tg']} tok/s.",
+    f"- All six single-card quants measure {min(tgs)}-{max(tgs)} tok/s",
+    "  (512-token prompt, 256 generated, 3 repetitions).",
+    "- 4-bit quants (15.5-21.3 GB) do not fit one T4 and cannot be split across",
+    "  both: llama.cpp tensor-split is not implemented for this architecture;",
+    "  a GPU+CPU hybrid manages only 1.9-2.4 tok/s.",
+    "- Ollama (MLX-only official tag; bundled runner lacks the architecture),",
+    "  vLLM, SGLang and transformers all fail on this machine.",
+    "Full report: https://github.com/instax-dutta/T4-Bench/blob/main/benchmarks/inkling-2-mini/docs/BENCHMARK-RESULTS.md",
+]
+ink_html = ("<h2 style='font-family:Georgia,serif;margin-top:38px'>Inkling-2-Mini on Kaggle 2x T4</h2>"
+            + "<p style='color:#AAB3AB;line-height:1.7'>" + "<br>".join(ink_headline) + "</p>")
+ink_plain = "\n".join(["## Headline: Inkling-2-Mini on Kaggle 2x T4", ""] + ink_headline)
+
 html_parts = ["""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All benchmark data: T4-Bench</title>
@@ -70,7 +101,7 @@ html_parts = ["""<!doctype html>
 <script type="application/ld+json">""" + json.dumps({
   "@context": "https://schema.org", "@type": "Dataset",
   "name": "T4-Bench: Kaggle 2x Tesla T4 benchmark results",
-  "description": "Measured image, video, language, agent and fine-tuning benchmarks on two Kaggle Tesla T4 GPUs.",
+  "description": "Measured image, video, language, agent and fine-tuning benchmarks on two Kaggle Tesla T4 GPUs. Includes the Inkling-2-Mini engine sweep: 22-26 tokens/second single-card with GGUF quants up to 12.7 GB, vision at 37.3 s per image chat, no cross-GPU split for larger quants.",
   "url": BASE + "/benchmarks.html",
   "creator": {"@type": "Organization", "name": "T4-Bench", "url": BASE},
   "datePublished": "2026-11-22",
@@ -84,12 +115,14 @@ html_parts = ["""<!doctype html>
 for title, headers, rows in sections:
     html_parts.append(f"<h2 style='font-family:Georgia,serif;margin-top:38px'>{title}</h2>" + table(headers, rows))
 html_parts.append("</main></body></html>")
+html_parts.insert(1, ink_html)
 (ROOT / "benchmarks.html").write_text("\n".join(html_parts), encoding="utf-8")
 
 plain_parts = [f"# T4-Bench: full benchmark data\n", f"Source: {BASE}/benchmarks.html",
                "Hardware: Kaggle 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13.",
                "Source notes: https://blog.sdad.pro/",
-               "The figures come from saved runs on the same machine."]
+               "The figures come from saved runs on the same machine.",
+               ink_plain]
 for title, headers, rows in sections:
     plain_parts.append(plain(title, headers, rows))
 (ROOT / "llms-full.txt").write_text("\n".join(plain_parts) + "\n", encoding="utf-8")

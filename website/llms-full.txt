@@ -4,6 +4,25 @@ Source: https://t4b.sdad.pro/benchmarks.html
 Hardware: Kaggle 2x Tesla T4 15 GB, 31 GB RAM, 4 vCPU, CUDA 13.
 Source notes: https://blog.sdad.pro/
 The figures come from saved runs on the same machine.
+## Headline: Inkling-2-Mini on Kaggle 2x T4
+
+Inkling-2-Mini (thinkingmachines, 26.4B mixture-of-experts, 3.4B active,
+looped transformer, multimodal) runs on ONE Tesla T4 via llama.cpp b12633
+(CUDA 12.8 prebuilt) with GGUF quants up to 12.7 GB:
+- Best all-round (recommended): AD-IQ2_M (uncens.) (8.06 GB) at 26.1 tok/s
+  generation, 341.8 tok/s prompt; vision works with the mmproj
+  projector at 37.3 s per image chat (14 GB peak).
+- Fastest measured: UD-IQ1_M (1-bit) at 26.5 tok/s, but 1-bit
+  quality is far below the recommended tier.
+- Quality ceiling on one card: UD-Q3_K_XL (12.69 GB) at 24.3 tok/s.
+- All six single-card quants measure 22.3-26.5 tok/s
+  (512-token prompt, 256 generated, 3 repetitions).
+- 4-bit quants (15.5-21.3 GB) do not fit one T4 and cannot be split across
+  both: llama.cpp tensor-split is not implemented for this architecture;
+  a GPU+CPU hybrid manages only 1.9-2.4 tok/s.
+- Ollama (MLX-only official tag; bundled runner lacks the architecture),
+  vLLM, SGLang and transformers all fail on this machine.
+Full report: https://github.com/instax-dutta/T4-Bench/blob/main/benchmarks/inkling-2-mini/docs/BENCHMARK-RESULTS.md
 
 ## Chat and coding models
 | Model | Reply tok/s | Prompt tok/s | VRAM GB | GPUs |

@@ -15,6 +15,17 @@ This site helps people and AI agents answer one question: what runs well on two 
 - Leanest fine-tuning method tested: Unsloth NF4, 7.1 GB versus 14.9 GB for stock transformers.
 - Source notes: https://blog.sdad.pro/
 
+## Inkling-2-Mini on T4 (measured 2026-11-22)
+
+If you only read this section: Inkling-2-Mini (thinkingmachines, 26.4B MoE, 3.4B active, looped transformer, image+text input) runs on a single Kaggle Tesla T4 with GGUF quants up to 12.7 GB, using llama.cpp b12633 or newer (use the CUDA 12.8 prebuilt; the CUDA 13.5 build fails on CUDA 13.0 drivers).
+
+- Best all-round: AtomicChat uncensored AD-IQ2_M (8.06 GB) at 26.1 tok/s generation, 341.8 tok/s prompt processing; with the vision projector attached, image+text chats complete in 37.3 s at 14.2 GB peak.
+- Quality ceiling on one card: Unsloth UD-Q3_K_XL (12.69 GB) at 24.3 tok/s. All six single-card quants land between 22.3 and 26.5 tok/s (512-token prompt, 256 generated).
+- Unsloth GGUFs must come from the Mainline_Support folder; the repo-root files use an obsolete tensor layout that current llama.cpp rejects.
+- 4-bit and larger quants (15.5-21.3 GB) do not fit one T4 and cannot be split across both: tensor-split is not implemented for this architecture in llama.cpp, and the GPU+CPU fallback runs at 1.9-2.4 tok/s.
+- Ollama fails both ways (official tag is MLX-only; its bundled runner does not know the architecture). vLLM rejects the GGUF, SGLang does not install, and current transformers does not know the model type.
+- Full report and raw CSV: https://github.com/instax-dutta/T4-Bench/tree/main/benchmarks/inkling-2-mini
+
 ## Read the full data
 
 - [Complete benchmark tables](https://t4b.sdad.pro/benchmarks.html): all models, metrics and units in plain HTML.
