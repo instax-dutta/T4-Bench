@@ -60,16 +60,16 @@ fi
 # order: small -> large; single-GPU first, then 2-GPU splits
 #   file | repo | gpus | note
 SWEEP="
-UD-IQ1_M.gguf|$REPO|1|1-bit floor
+Inkling-2-Mini-UD-IQ1_M.gguf|$REPO|1|1-bit floor
 Inkling-2-Mini-Uncensored-AD-IQ2_M.gguf|$UNC|1|uncensored 2-bit
-UD-Q2_K_XL.gguf|$REPO|1|
-UD-IQ3_XXS.gguf|$REPO|1|
+Inkling-2-Mini-UD-Q2_K_XL.gguf|$REPO|1|
+Inkling-2-Mini-UD-IQ3_XXS.gguf|$REPO|1|
 Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf|$UNC|1|uncensored single-card target
-UD-Q3_K_XL.gguf|$REPO|1|tight, expect OOM at 8k
+Inkling-2-Mini-UD-Q3_K_XL.gguf|$REPO|1|tight, expect OOM at 8k
 Inkling-2-Mini-Uncensored-AD-Q4_K.gguf|$UNC|2|uncensored split
-UD-Q4_K_M.gguf|$REPO|2|
-UD-Q4_K_XL.gguf|$REPO|2|
-UD-Q8_K_XL.gguf|$REPO|2|reference
+Inkling-2-Mini-UD-Q4_K_M.gguf|$REPO|2|
+Inkling-2-Mini-UD-Q4_K_XL.gguf|$REPO|2|
+Inkling-2-Mini-UD-Q8_K_XL.gguf|$REPO|2|reference
 "
 while IFS='|' read -r f repo gpus note; do
   [ -z "$f" ] && continue
@@ -80,7 +80,7 @@ while IFS='|' read -r f repo gpus note; do
   hf download "$repo" "$f" --local-dir $W/quants >> $W/logs/dl.log 2>&1 || { echo "download failed $f"; continue; }
   python3 $B llamacpp $W/quants/$f $gpus 8192
   # Ollama comparison on two representative single-card quants
-  if [ "$gpus" = "1" ] && { [ "$f" = "UD-Q3_K_XL.gguf" ] || [ "$f" = "Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf" ]; }; then
+  if [ "$gpus" = "1" ] && { [ "$f" = "Inkling-2-Mini-UD-Q3_K_XL.gguf" ] || [ "$f" = "Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf" ]; }; then
     bash /workspace/ollama_import.sh "$tag" "$W/quants/$f" || true
     python3 $B ollama "$tag" 1 8192
     ollama rm "$tag" >> $W/logs/cleanup.log 2>&1  # blob copy doubles disk otherwise
@@ -105,7 +105,7 @@ fi
 MMPROJ=mmproj-F16.gguf
 disk_guard
 hf download $REPO "$MMPROJ" --local-dir $W/quants >> $W/logs/dl.log 2>&1
-for combo in "Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf|$UNC|1" "UD-Q4_K_XL.gguf|$REPO|2"; do
+for combo in "Inkling-2-Mini-Uncensored-AD-IQ3_S.gguf|$UNC|1" "Inkling-2-Mini-UD-Q4_K_XL.gguf|$REPO|2"; do
   IFS='|' read -r f repo gpus <<< "$combo"
   tag=$(echo "$f" | sed "s/\.gguf$//")
   done_row "llama.cpp-vision,$tag" && continue
