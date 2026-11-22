@@ -73,6 +73,14 @@ def row(**kw):
     r = [kw.get(k, "") for k in HEADER]
     with open(CSV, "a", newline="") as f:
         csv.writer(f).writerow(r)
+    # Kaggle storage gotcha: the writable overlay dies at its quota and takes
+    # CSV writes with it. /kaggle/working is a separate 20 GB loop that stayed
+    # writable last time the overlay flipped read-only, so mirror every row.
+    try:
+        subprocess.run(["cp", CSV, "/kaggle/working/inkling_results.csv"],
+                       timeout=30)
+    except Exception:
+        pass
     print("[row] " + ",".join(str(x) for x in r), flush=True)
 
 

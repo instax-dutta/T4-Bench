@@ -57,8 +57,17 @@ fetched and the sweep is staged.
 - Native NVFP4/MXFP8 checkpoint is arithmetic-infeasible on T4 (dequant
   ~53 GB bf16 vs 15 GB VRAM / 31 GB RAM; card recommends 32 GB+); recorded
   as an attempt row, never as a measured throughput.
-- Total quant downloads (~139 GB) exceed the ~96 GB writable-layer quota:
-  the sweep's download-bench-delete lifecycle is mandatory, not optional.
+- Total quant downloads (~139 GB) exceed the ~96 GB writable-layer quota
+  (verified 2026-11-21: the overlay flips read-only and kills every write,
+  including result CSVs). Three mandatory mitigations, all built into the
+  staged scripts: (1) download-bench-delete lifecycle, one quant file on
+  disk at a time; (2) the results CSV mirrors to /kaggle/working (separate
+  20 GB loop, stays writable after overlay death) after every row; (3)
+  `disk_guard` before every big write - require 25 GB free on /, reclaim
+  HF/xet chunk caches, pip caches and Ollama blobs first, abort loudly
+  rather than die mid-bench. Ollama blob copies are removed after each
+  bench (`ollama rm`), and vLLM/SGLang are pip-uninstalled after their
+  attempt rows.
 - Results land here as a report plus raw CSV, never merged into another
   project's CSV.
 
