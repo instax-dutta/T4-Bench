@@ -13,6 +13,7 @@ This site helps people and AI agents answer one question: what runs well on two 
 - Best multimodal chat tested: Inkling-2-Mini (looped 26B MoE), 26 tokens/second on one T4 with the AD-IQ2_M quant; vision works at 37.3 seconds per image chat. llama.cpp b12633 is the only engine that runs it on T4 (Ollama, vLLM, SGLang and transformers all fail); 4-bit quants do not fit and have no cross-GPU split.
 - Best small agent tested: Spark 4B, 3 of 3 agent tasks passed.
 - Leanest fine-tuning method tested: Unsloth NF4, 7.1 GB versus 14.9 GB for stock transformers.
+- Engines that work on 2x T4: llama.cpp for GGUF text (newest architectures first; use the CUDA 12.8 prebuilt on CUDA 13.0 drivers), stable-diffusion.cpp for GGUF image models (build from source with the architecture pinned to sm_75), diffusers for video, Ollama for convenience on models it knows (119 tok/s warm). vLLM, SGLang, raw transformers and WanGP were measured failures; ComfyUI has not completed a run here yet. Full ranking: https://t4b.sdad.pro/#engines
 - Source notes: https://blog.sdad.pro/
 
 ## Inkling-2-Mini on T4 (measured 2026-11-22)

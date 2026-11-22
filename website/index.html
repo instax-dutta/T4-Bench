@@ -78,6 +78,14 @@
     },
     {
       "@type": "Question",
+      "name": "Which inference engines work on Kaggle T4s?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "llama.cpp for GGUF text models (newest architectures first; use the CUDA 12.8 prebuilt on CUDA 13.0 drivers), stable-diffusion.cpp for GGUF image models (built from source with the architecture pinned to sm_75), diffusers for video pipelines, and Ollama for convenience on models it knows, measured at 119 tokens per second warm. vLLM, SGLang and raw transformers were measured failures on this box."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Where can I see all the numbers?",
       "acceptedAnswer": {
         "@type": "Answer",

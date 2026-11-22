@@ -101,12 +101,14 @@ GitHub repository metadata now includes description, homepage and topical tags. 
 
 ## Final pass addendum (2026-11-23)
 
-Re-audit after publishing the Inkling-2-Mini results. Everything the
-baseline remediation put in place still holds, and the Inkling data is now
-first-class on every AI-facing surface: a headline block at the top of
-`llms-full.txt` and `benchmarks.html`, a self-contained section in
-`llms.txt`, a FAQ question in the homepage JSON-LD, and a dedicated website
-chapter with static tables mirroring its charts.
+Re-audit after publishing the Inkling-2-Mini results and the engines
+chapter. Everything the baseline remediation put in place still holds, and
+the new data is first-class on every AI-facing surface: a headline block at
+the top of `llms-full.txt` and `benchmarks.html`, a self-contained section
+in `llms.txt`, FAQ questions for Inkling and for the engine ranking in the
+homepage JSON-LD, a dedicated website chapter with static tables mirroring
+its charts, the recommended quant folded into the chat leaderboard, and a
+full engines chapter ranked from measured results across all projects.
 
 Fixes applied in this pass:
 
@@ -120,10 +122,19 @@ Fixes applied in this pass:
 - `sitemap.xml` lastmod dates advanced to 2026-11-23 for all four URLs.
 - Dataset JSON-LD `variableMeasured` gained "seconds per image chat"
   (the vision metric) on both pages that carry it.
-- Verified: all six sitemap-served paths return 200 locally, every
-  JSON-LD block parses, the no-JS static hero contains the Inkling
-  banner, and screenshots report no console errors or overflow.
+- Purpose-built social assets replace the reused video poster: a 1200x630
+  og:image card and a 512x512 og:logo, both rendered from in-repo HTML in
+  the site design system (regenerable, no hand-drawn assets).
+- `llms.txt` carries an engines key-fact line; the FAQPage gained "Which
+  inference engines work on Kaggle T4s?"; `llms-full.txt` and
+  `benchmarks.html` render the ranked inference and fine-tuning engine
+  tables generated from data.js.
 
-Projected score after this pass: ~80/100. The Brand Authority gap
+Verified: all served paths return 200 locally (including the new og
+assets), every JSON-LD block parses, the no-JS static hero contains the
+Inkling banner, screenshots report no console errors or overflow at
+1280 and 390, and the engines chapter fits a single 900px viewport.
+
+Projected score after this pass: ~82/100. The Brand Authority gap
 (third-party mentions) remains the only material limitation, as in the
 baseline.
