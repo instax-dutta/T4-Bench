@@ -33,12 +33,14 @@ reads:
 and writes `data.js`. Re-run it if the source data changes.
 
 ## Animations
-Source scenes are in `manim/scenes.py` (eight diagrams covering every chart category). Render with the local virtual environment:
+Source scenes are in `manim/scenes.py` (ten diagrams covering every chart category). Render with the local virtual environment:
 ```
 cd manim
 ../.venv/bin/manimgx render scenes.py ImageRace -r 960x540 -o ../assets/image-race.mp4
 ../.venv/bin/manimgx render scenes.py VideoRace -r 960x540 -o ../assets/video-race.mp4
 ../.venv/bin/manimgx render scenes.py MemoryWall -r 960x540 -o ../assets/memory-wall.mp4
+../.venv/bin/manimgx render scenes.py InklingSpeed -r 960x540 -o ../assets/inkling-speed.mp4
+../.venv/bin/manimgx render scenes.py InklingWall -r 960x540 -o ../assets/inkling-wall.mp4
 ```
 Posters are extracted from the final frame with ffmpeg.
 

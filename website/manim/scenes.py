@@ -209,3 +209,57 @@ class TuneMemory(m.Scene):
         hbars(self, [("Unsloth", 7.1, "7.1 GB", GREEN), ("Soup + Unsloth", 7.1, "7.1 GB", TEAL),
                      ("Stock transformers", 14.9, "14.9 GB", MUTED), ("Stock, blocked", 14.8, "OOM", VERM)],
               16, note="same model, data and settings")
+
+
+class InklingSpeed(m.Scene):
+    def construct(self):
+        header(self, "02 / INKLING-2-MINI", "Reply speed by quant, one T4")
+        hbars(self, [("IQ1_M (1-bit)", 26.5, "26.5", TEAL),
+                     ("AD-IQ2_M (recommended)", 26.1, "26.1", VERM),
+                     ("Q2_K_XL", 25.1, "25.1", TEAL),
+                     ("Q3_K_XL (best quality that fits)", 24.3, "24.3", GREEN),
+                     ("IQ3_XXS", 23.0, "23.0", TEAL),
+                     ("AD-IQ3_S", 22.3, "22.3", AMBER)],
+              30, note="tokens per second · higher is better")
+
+
+class InklingWall(m.Scene):
+    def construct(self):
+        header(self, "02 / INKLING-2-MINI", "Quant file size versus one T4")
+        items = [("IQ1_M", 7.46, TEAL), ("AD-IQ2", 8.06, TEAL), ("Q2_K_XL", 8.51, TEAL),
+                 ("IQ3_XXS", 10.86, TEAL), ("AD-IQ3_S", 12.43, TEAL), ("Q3_K_XL", 12.69, GREEN),
+                 ("AD-Q4_K", 15.46, VERM), ("Q4_K_M", 15.46, VERM),
+                 ("Q4_K_XL", 16.42, VERM), ("Q8_K_XL", 21.30, VERM)]
+        maxv = 24
+        baseline = -1.9
+        bars, labels, nums = [], [], []
+        for i, (name, val, col) in enumerate(items):
+            h = val / maxv * 3.2
+            x = -5.0 + i * 1.11
+            r = m.Rectangle(width=0.82, height=h, color=col, fill_color=col,
+                            fill_opacity=1, stroke_width=0)
+            r.move_to([x, baseline + h / 2, 0])
+            bars.append(r)
+            lab = m.Text(name, font_size=15, weight="BOLD").set_color(MUTED)
+            lab.move_to([x, baseline - 0.36, 0])
+            labels.append(lab)
+            num = m.Text(f"{val:g}", font_size=19, weight="BOLD").set_color(INK)
+            if val > 15:  # over the wall: lift the number above the bar top
+                num.move_to([x, baseline + h + 0.26, 0])
+            else:         # fits: keep it inside the bar, clear of the line
+                num.move_to([x, baseline + h - 0.26, 0])
+            nums.append(num)
+        axis = m.Line([-5.6, baseline, 0], [5.6, baseline, 0], color=MUTED, stroke_width=1.5)
+        self.add(axis)
+        limit_y = baseline + 15.0 / maxv * 3.2
+        limit = m.DashedLine([-5.6, limit_y, 0], [5.6, limit_y, 0], color=VERM, stroke_width=2)
+        llab = m.Text("15 GB VRAM", font_size=17, weight="BOLD").set_color(VERM)
+        llab.move_to([-3.6, limit_y - 0.34, 0])
+        self.play(m.LaggedStart(*[m.GrowFromEdge(b, m.DOWN) for b in bars], lag_ratio=0.08))
+        self.add(*labels)
+        self.play(m.Create(limit), m.FadeIn(llab))
+        self.play(m.LaggedStart(*[m.FadeIn(n, shift=m.DOWN * 0.12) for n in nums], lag_ratio=0.06))
+        note = m.Text("green fits one card · red needs a split that does not exist", font_size=16).set_color(MUTED)
+        note.to_corner(m.DR, buff=0.5)
+        self.play(m.FadeIn(note))
+        self.wait(0.6)
