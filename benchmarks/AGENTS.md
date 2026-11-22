@@ -8,7 +8,7 @@ Hold the completed benchmark projects intact, sorted by subject, with their orig
 - `benchmarks/video-generation/**` - CogVideoX-2b, LTX 2B distilled and the abandoned LTX 13B attempt. Owned by its nested `AGENTS.md`.
 - `benchmarks/longcat-video-avatar/**` - PENDING: staged tooling and resume plan for LongCat-Video-Avatar-1.6 on 2x T4; paused on VM storage quota, no measured results yet. Owned by its nested `AGENTS.md`.
 - `benchmarks/inkling-2-mini/**` - PENDING: staged full engine-x-quant sweep for Inkling-2-Mini on 2x T4 (llama.cpp/Ollama quants, attempt rows for vLLM/SGLang/transformers), no measured results yet. Owned by its nested `AGENTS.md`.
-- `benchmarks/kromoss/**` - QUEUED: staged MOSS-Image 5B DiT sweep (diffusers 50-step and 8-step LoRA configs, ComfyUI bf16 and int8 W8A8), runs after the Inkling sweep on the VM. Owned by its nested `AGENTS.md`.
+- `benchmarks/kromoss/**` - QUEUED: staged MOSS-Image 5B DiT sweep (diffusers 50-step and 8-step LoRA configs, ComfyUI bf16 and int8 W8A8); started 2026-11-22, aborted before first result when the VM session closed, to run on a future session. Owned by its nested `AGENTS.md`.
 
 ## Local Contracts
 - Do not edit files inside a project without first reading that project's AGENTS.md chain.

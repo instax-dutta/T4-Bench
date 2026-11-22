@@ -24,8 +24,11 @@ Do not rely on memory. Re-read the applicable DOX chain in the current session b
 
 QUEUED benchmark of `lodestones/Kromoss` (MOSS-Image 5B DiT text-to-image,
 Qwen3.5-9B text encoder, 8-step DMD2 turbo LoRA, int8 W8A8 ComfyUI variant)
-on the Kaggle 2x Tesla T4 machine. Runs after the Inkling-2-Mini sweep
-completes on the VM. No measured results yet.
+on the Kaggle 2x Tesla T4 machine. **Not yet run**: the sweep was started
+on 2026-11-22 right after the Inkling sweep finished, and was aborted during
+its first weight download before any result row was produced, when the VM
+session was closed. Run it on a future VM session; the tooling is complete
+and uploadable as-is.
 
 ## Ownership
 
