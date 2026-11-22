@@ -725,5 +725,89 @@ window.BENCH_DATA = {
     "Most timings include a fresh model load. Rows marked warm or batched reuse a model that is already loaded.",
     "Inkling speeds are token generation with a 512-token prompt and 256 generated tokens. The looped model cannot fully disable its reasoning, so per-answer time is longer than tokens-per-second suggests.",
     "Inkling 4-bit quants were only measured in a GPU-plus-CPU hybrid at 1.9-2.4 tokens per second, because llama.cpp has no way to split this architecture across both T4s."
-  ]
+  ],
+  "engines": {
+    "inference": [
+      {
+        "rank": 1,
+        "engine": "llama.cpp (GGUF text)",
+        "status": "works",
+        "best": "26.5 tok/s on Inkling-2-Mini with vision at 37.3 s per image chat; 22.9 tok/s on Ternary 27B across both T4s",
+        "runs": "newest architectures first; also the runner inside Ollama. Use a build matching your driver (the CUDA 12.8 prebuilt works on CUDA 13.0 drivers; the 13.5 flavor does not)"
+      },
+      {
+        "rank": 2,
+        "engine": "stable-diffusion.cpp (GGUF image)",
+        "status": "works",
+        "best": "374 images/hour (FLUX.2 klein); native 4096px H3 at 5.5 images/hour",
+        "runs": "all four image models and every measured H3 track; build from source with -DCMAKE_CUDA_ARCHITECTURES=75 to skip years of compile time for other GPUs"
+      },
+      {
+        "rank": 3,
+        "engine": "diffusers (video and native pipelines)",
+        "status": "works",
+        "best": "LTX 2B distilled at 27.6 s per warm clip; CogVideoX-2b at 1053 s",
+        "runs": "the video project; no FP4/FP8 checkpoints on T4 (Inkling's native needs ~53 GB dequant)"
+      },
+      {
+        "rank": 4,
+        "engine": "Ollama",
+        "status": "works, lags new archs",
+        "best": "119 tok/s on LiquidAI LFM2.5-8B-A1B (warm server)",
+        "runs": "the chat leaderboard; fails on inkling2_loop and on MLX-only official tags"
+      },
+      {
+        "rank": 5,
+        "engine": "ComfyUI",
+        "status": "attempted, not completed",
+        "best": "",
+        "runs": "H3 track: needs a GGUF-aware workflow and a nonstandard text-encoder type; queued as an engine for the Kromoss int8 W8A8 sweep"
+      },
+      {
+        "rank": 6,
+        "engine": "vLLM",
+        "status": "failed",
+        "best": "",
+        "runs": "rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75"
+      },
+      {
+        "rank": 7,
+        "engine": "SGLang",
+        "status": "failed",
+        "best": "",
+        "runs": "does not install on this box (Python 3.13, CUDA 13); excluded in the H3 plan for sm_75"
+      },
+      {
+        "rank": 8,
+        "engine": "raw transformers",
+        "status": "limited",
+        "best": "",
+        "runs": "component library behind diffusers; unknown model type on the newest architectures"
+      },
+      {
+        "rank": 9,
+        "engine": "WanGP",
+        "status": "not benchmarkable",
+        "best": "",
+        "runs": "interactive Gradio launcher requiring manual model selection; no headless reproducible call"
+      }
+    ],
+    "finetuning": [
+      {
+        "rank": 1,
+        "engine": "Unsloth",
+        "status": "works",
+        "best": "6.9 GB peak, loss 0.829, 8.65 s per step",
+        "runs": "the 8B QLoRA fine-tune; the model-soup variant lands at the same 6.9 GB with loss 0.8044"
+      },
+      {
+        "rank": 2,
+        "engine": "transformers Trainer",
+        "status": "limited",
+        "best": "14.5 GB peak, loss 0.8058",
+        "runs": "2.1x Unsloth's memory; runs out of memory at 14.5 GB when the import path is blocked"
+      }
+    ],
+    "verdict": "On this box: llama.cpp for GGUF text and the newest architectures, stable-diffusion.cpp for GGUF image models, diffusers for video and native pipelines, Ollama for convenience on models it knows, and Unsloth for fine-tuning at half the memory of the stock trainer."
+  }
 };

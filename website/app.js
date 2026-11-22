@@ -160,6 +160,15 @@
         Math.round(v.peakVramMiB / 1024) + ' GB', v.result]));
     $('#inkling-verdict').textContent = inkData.engine + '. One T4 runs every quant up to 12.7 GB at 22-26 tok/s; ' + inkData.hybridNote;
 
+    // Engines (last content chapter)
+    if (D.engines) {
+      table('#engines-table', ['#', 'Engine', 'Status on 2x T4', 'Best measured here', 'What it ran'],
+        D.engines.inference.map(e => [e.rank, e.engine, e.status, e.best || 'n/a', e.runs]));
+      table('#engines-ft-table', ['#', 'Fine-tuning engine', 'Status on 2x T4', 'Best measured here', 'What it ran'],
+        D.engines.finetuning.map(e => [e.rank, e.engine, e.status, e.best || 'n/a', e.runs]));
+      $('#engines-verdict').textContent = D.engines.verdict;
+    }
+
     $('#verdicts').textContent = 'Smaller models often win here. A 6B image model outruns the 33B one, an 8B mixture-of-experts chat model outruns a 27B dense one, a smaller text encoder is what lets the video model run at all, and a looped 26B fits one T4 only below 4-bit.';
     $('#limits').innerHTML = '';
     D.limitations.forEach(t => { const li = el('li', '', t); $('#limits').append(li); });

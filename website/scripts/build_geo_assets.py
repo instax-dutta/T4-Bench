@@ -91,6 +91,13 @@ ink_html = ("<h2 style='font-family:Georgia,serif;margin-top:38px'>Inkling-2-Min
             + "<p style='color:#AAB3AB;line-height:1.7'>" + "<br>".join(ink_headline) + "</p>")
 ink_plain = "\n".join(["## Headline: Inkling-2-Mini on Kaggle 2x T4", ""] + ink_headline)
 
+sections.append(("Inference engines on 2x T4", ["#", "Engine", "Status", "Best measured", "What it ran"],
+    [[e["rank"], e["engine"], e["status"], e["best"] if e["best"] else "n/a", e["runs"]]
+     for e in D["engines"]["inference"]]))
+sections.append(("Fine-tuning engines on 2x T4", ["#", "Engine", "Status", "Best measured", "What it ran"],
+    [[e["rank"], e["engine"], e["status"], e["best"] if e["best"] else "n/a", e["runs"]]
+     for e in D["engines"]["finetuning"]]))
+
 html_parts = ["""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All benchmark data: T4-Bench</title>

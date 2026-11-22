@@ -100,6 +100,8 @@
     <a href="#image">Images</a>
     <a href="#video">Video</a>
     <a href="#inkling">Inkling</a>
+    <a href="#h3">Memory</a>
+    <a href="#engines">Engines</a>
     <a href="benchmarks.html">Data</a>
     <a href="#method">Method</a>
   </nav>
@@ -240,8 +242,16 @@
   <div class="table-wrap"><table id="h3-table"></table></div>
 </section>
 
+<section class="chapter" id="engines">
+  <div class="chapter-head"><span class="num">08</span><div><h2>The engines</h2><p>Every inference and fine-tuning engine we measured on this box, ranked by what actually ran.</p></div></div>
+  <div class="table-wrap"><table id="engines-table"></table></div>
+  <div class="table-wrap"><table id="engines-ft-table"></table></div>
+  <p class="verdict" id="engines-verdict"></p>
+  <p class="caption">Ranks reflect measured status on this 2x T4 box, not general quality. vLLM, SGLang and raw transformers were only attempted on the newest model; their rows quote the observed failure.</p>
+</section>
+
 <section class="chapter" id="method">
-  <div class="chapter-head"><span class="num">08</span><div><h2>How to read this</h2><p>Every number in these tables comes from a saved run.</p></div></div>
+  <div class="chapter-head"><span class="num">09</span><div><h2>How to read this</h2><p>Every number in these tables comes from a saved run.</p></div></div>
   <div class="grid-2">
     <div class="panel"><h3>What we learned</h3><p id="verdicts">Small and clever beats big on this machine: a 6B image model outruns a 33B one, and an 8B mixture-of-experts chat model outruns a 27B dense one.</p></div>
     <div class="panel"><h3>Important limits</h3><ul id="limits"></ul></div>

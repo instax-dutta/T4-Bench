@@ -238,6 +238,71 @@ data = {
     ],
 }
 
+# --- engines (ranked from measured results across all projects) --------------
+_ink_best = max(inkling_single, key=lambda m: m["tg"])
+_vision_ok = next(v for v in inkling_vision if v["result"] == "works")
+_llm_best = max(EXTRA["llmScoreboard"], key=lambda m: m["decodeTokS"])
+_tern_dual = EXTRA["ternary"]["dualT4"][0]
+_h3_wall = data["h3"]["native4096"][0]["wall"]
+_ft = EXTRA["fineTuning"]["results"]
+_ft_unsloth = next(r for r in _ft if "unsloth_native" in r["arm"])
+_ft_soup_u = next(r for r in _ft if "backend: unsloth" in r["arm"])
+_ft_tr_ok = next(r for r in _ft if "unsloth installed" in r["arm"])
+_ft_tr_oom = next(r for r in _ft if "unsloth blocked" in r["arm"])
+_ft_step = next(s for s in EXTRA["fineTuning"]["steps"] if "unsloth_native" in s["arm"])
+
+data["engines"] = {
+    "inference": [
+        {"rank": 1, "engine": "llama.cpp (GGUF text)",
+         "status": "works",
+         "best": (f"{_ink_best['tg']} tok/s on Inkling-2-Mini with vision at "
+                  f"{_vision_ok['wallS']} s per image chat; {_tern_dual['tg128']} tok/s on Ternary 27B across both T4s"),
+         "runs": ("newest architectures first; also the runner inside Ollama. Use a build matching "
+                  "your driver (the CUDA 12.8 prebuilt works on CUDA 13.0 drivers; the 13.5 flavor does not)")},
+        {"rank": 2, "engine": "stable-diffusion.cpp (GGUF image)",
+         "status": "works",
+         "best": (f"{data['winners']['imageThroughput']} images/hour (FLUX.2 klein); "
+                  f"native 4096px H3 at {round(3600 / _h3_wall, 1)} images/hour"),
+         "runs": ("all four image models and every measured H3 track; build from source with "
+                  "-DCMAKE_CUDA_ARCHITECTURES=75 to skip years of compile time for other GPUs")},
+        {"rank": 3, "engine": "diffusers (video and native pipelines)",
+         "status": "works",
+         "best": (f"LTX 2B distilled at {data['winners']['steadyClipSeconds']:g} s per warm clip; "
+                  f"CogVideoX-2b at {round(data['winners']['cogSeconds'])} s"),
+         "runs": "the video project; no FP4/FP8 checkpoints on T4 (Inkling's native needs ~53 GB dequant)"},
+        {"rank": 4, "engine": "Ollama", "status": "works, lags new archs",
+         "best": f"{_llm_best['decodeTokS']:g} tok/s on {_llm_best['model']} (warm server)",
+         "runs": "the chat leaderboard; fails on inkling2_loop and on MLX-only official tags"},
+        {"rank": 5, "engine": "ComfyUI", "status": "attempted, not completed",
+         "best": "",
+         "runs": ("H3 track: needs a GGUF-aware workflow and a nonstandard text-encoder type; "
+                  "queued as an engine for the Kromoss int8 W8A8 sweep")},
+        {"rank": 6, "engine": "vLLM", "status": "failed", "best": "",
+         "runs": "rejects the Inkling GGUF at config validation; excluded in the H3 plan for sm_75"},
+        {"rank": 7, "engine": "SGLang", "status": "failed", "best": "",
+         "runs": "does not install on this box (Python 3.13, CUDA 13); excluded in the H3 plan for sm_75"},
+        {"rank": 8, "engine": "raw transformers", "status": "limited", "best": "",
+         "runs": "component library behind diffusers; unknown model type on the newest architectures"},
+        {"rank": 9, "engine": "WanGP", "status": "not benchmarkable", "best": "",
+         "runs": "interactive Gradio launcher requiring manual model selection; no headless reproducible call"},
+    ],
+    "finetuning": [
+        {"rank": 1, "engine": "Unsloth", "status": "works",
+         "best": (f"{round(_ft_unsloth['peakMiB'] / 1024, 1)} GB peak, loss {_ft_unsloth['loss']}, "
+                  f"{_ft_step['step'].replace('**', '')} per step"),
+         "runs": (f"the 8B QLoRA fine-tune; the model-soup variant lands at the same "
+                  f"{round(_ft_soup_u['peakMiB'] / 1024, 1)} GB with loss {_ft_soup_u['loss']}")},
+        {"rank": 2, "engine": "transformers Trainer", "status": "limited",
+         "best": f"{round(_ft_tr_ok['peakMiB'] / 1024, 1)} GB peak, loss {_ft_tr_ok['loss']}",
+         "runs": (f"2.1x Unsloth's memory; runs out of memory at "
+                  f"{round(_ft_tr_oom['peakMiB'] / 1024, 1)} GB when the import path is blocked")},
+    ],
+    "verdict": ("On this box: llama.cpp for GGUF text and the newest architectures, "
+                "stable-diffusion.cpp for GGUF image models, diffusers for video and native "
+                "pipelines, Ollama for convenience on models it knows, and Unsloth for "
+                "fine-tuning at half the memory of the stock trainer."),
+}
+
 OUT.write_text("window.BENCH_DATA = " + json.dumps(data, indent=2, ensure_ascii=False) + ";\n", encoding="utf-8")
 print(f"wrote {OUT} ({OUT.stat().st_size} bytes)")
 print("image models:", [(m["name"], m["bestThroughput"], m["clip"]) for m in image_models])
