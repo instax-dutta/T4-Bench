@@ -4,4 +4,7 @@ __pycache__/
 .DS_Store
 *.zip
 benchmarks/media/**/*.png
+benchmarks/media/image-model-bench/
+benchmarks/media/minimax-h3-bench/
+benchmarks/media/video-gen-bench/
 website/shots/*.png

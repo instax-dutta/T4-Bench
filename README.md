@@ -45,7 +45,7 @@ docs/                  cross-project index
 GEO-AUDIT-REPORT.md    generative-engine-optimization audit
 ```
 
-Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs. Generated media is preserved under `benchmarks/media/`; stills use lossless WebP with decoded pixels identical to the originals, keeping the Git pack about half the size. See `DATA-INVENTORY.md` and `benchmarks/media/MANIFEST.json`.
+Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs. Generated media lives in `benchmarks/media/benchmark-media.tar.gz`: 112 logical files deduplicated to 63 unique payloads, with lossless WebP stills and original decoded pixels preserved. Extract only when needed with `python3 benchmarks/media/extract.py`. See `DATA-INVENTORY.md` and `benchmarks/media/MANIFEST.json`.
 
 ## Run the site locally
 

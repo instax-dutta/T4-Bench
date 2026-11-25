@@ -80,7 +80,7 @@ When the user requests a durable behavior change, record it here or in the relev
 
 ## Child DOX Index
 
-- `benchmarks/AGENTS.md` - the preserved benchmark projects plus pending/queued staging folders and the lossless media archive, sorted by subject
+- `benchmarks/AGENTS.md` - the preserved benchmark projects plus pending/queued staging folders and the compressed media archive, sorted by subject
 - `docs/AGENTS.md` - the cross-project index and comparison notes
 - `scripts/AGENTS.md` - verification oracles reused across projects
 - `website/AGENTS.md` - static benchmark visualisation site and its evidence

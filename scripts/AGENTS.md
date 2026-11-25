@@ -6,9 +6,11 @@ Repository-owned verification oracles copied from the benchmark projects so the 
 - `scripts/verify-dox.mjs` - DOX structure check for this root
 - `scripts/verify-math.mjs` - model weight-memory recomputation
 - `scripts/verify-sweep.mjs` - four-model sweep result check
+- `scripts/archive_local_data.py` - rebuild the deduplicated benchmark media archive and manifest from sibling source folders
 
 ## Local Contracts
-- Node ESM, standard library only, no network, no writes.
+- Verification oracles are Node ESM, standard library only, no network, no writes.
+- `archive_local_data.py` is the explicit exception: it writes the media archive and inventory, requires Pillow and cwebp, and reads only sibling benchmark source folders.
 - Exit 0 only after all assertions pass, printing a success-only marker.
 - Keep these oracles portable; nested projects keep their own copies.
 
