@@ -45,7 +45,7 @@ docs/                  cross-project index
 GEO-AUDIT-REPORT.md    generative-engine-optimization audit
 ```
 
-Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs. Generated media is preserved under `benchmarks/media/`. See `DATA-INVENTORY.md` for the complete list.
+Each benchmark folder keeps its authoritative CSV/JSON tables, reports and archived server logs. Generated media is preserved under `benchmarks/media/`; stills use lossless WebP with decoded pixels identical to the originals, keeping the Git pack about half the size. See `DATA-INVENTORY.md` and `benchmarks/media/MANIFEST.json`.
 
 ## Run the site locally
 

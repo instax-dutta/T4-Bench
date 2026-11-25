@@ -33,7 +33,8 @@ for (const child of children) {
   const rel = relative(root, child);
   // A nested project root is a DOX rail, not a leaf contract: it must carry the
   // framework header and a filled child index, not the six leaf sections.
-  const isProjectRail = /^benchmarks\/[^/]+\/AGENTS\.md$/.test(rel);
+  // benchmarks/media is a data leaf, not a benchmark project rail.
+  const isProjectRail = /^benchmarks\/[^/]+\/AGENTS\.md$/.test(rel) && rel !== 'benchmarks/media/AGENTS.md';
   if (isProjectRail) {
     rails++;
     if (!t.includes('# DOX framework')) failures.push(`${rel} missing # DOX framework`);
